@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>日常</title>
+  
+  <subtitle>ニチジョウ</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://nichijou.me/"/>
+  <updated>2020-03-29T10:51:42.580Z</updated>
+  <id>https://nichijou.me/</id>
+  
+  <author>
+    <name>Sinute</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关闭SELinux</title>
+    <link href="https://nichijou.me/2020/03/29/%E5%85%B3%E9%97%ADSELinux/"/>
+    <id>https://nichijou.me/2020/03/29/%E5%85%B3%E9%97%ADSELinux/</id>
+    <published>2020-03-29T09:45:27.000Z</published>
+    <updated>2020-03-29T10:51:42.580Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>临时关闭：</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure><p><strong>永久关闭：</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/SELINUX=enforcing/SELINUX=disabled/'</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;临时关闭：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="SELinux" scheme="https://nichijou.me/tags/SELinux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>防止Mac合盖休眠</title>
+    <link href="https://nichijou.me/2020/02/11/%E9%98%B2%E6%AD%A2Mac%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0/"/>
+    <id>https://nichijou.me/2020/02/11/%E9%98%B2%E6%AD%A2Mac%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0/</id>
+    <published>2020-02-11T07:07:02.000Z</published>
+    <updated>2020-03-29T10:51:42.572Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁止显示器睡眠</span></span><br><span class="line">caffeinate -d</span><br><span class="line"><span class="comment"># 禁止系统睡眠</span></span><br><span class="line">caffeinate -is</span><br><span class="line"><span class="comment"># 当1000号进程存在时不睡眠</span></span><br><span class="line">caffeinate -w 1000</span><br><span class="line"><span class="comment"># 1小时内不睡眠</span></span><br><span class="line">caffeinate -t 3600</span><br></pre></td></tr></table></figure><h2 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># man caffeinate</span></span><br><span class="line"></span><br><span class="line">CAFFEINATE(8)             BSD System Manager<span class="string">'s Manual            CAFFEINATE(8)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">NAME</span></span><br><span class="line"><span class="string">     caffeinate -- prevent the system from sleeping on behalf of a utility</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SYNOPSIS</span></span><br><span class="line"><span class="string">     caffeinate [-disu] [-t timeout] [-w pid] [utility arguments...]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">DESCRIPTION</span></span><br><span class="line"><span class="string">     caffeinate creates assertions to alter system sleep behavior.  If no assertion flags are specified, caffeinate creates an assertion to prevent idle sleep.  If a utility is specified, caffeinate creates the assertions on the utility'</span>s behalf, and those assertions will persist <span class="keyword">for</span> the duration of the</span><br><span class="line">     utility<span class="string">'s execution. Otherwise, caffeinate creates the assertions directly, and those assertions will persist until caffeinate exits.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Available options:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -d      Create an assertion to prevent the display from sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -i      Create an assertion to prevent the system from idle sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -m      Create an assertion to prevent the disk from idle sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -s      Create an assertion to prevent the system from sleeping. This assertion is valid only when system is running on AC power.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -u      Create an assertion to declare that user is active. If the display is off, this option turns the display on and prevents the display from going into idle sleep. If a timeout is not specified with '</span>-t<span class="string">' option, then this assertion is taken with a default of 5 second timeout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -t      Specifies the timeout value in seconds for which this assertion has to be valid. The assertion is dropped after the specified timeout. Timeout value is not used when an utility is invoked with this command.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -w      Waits for the process with the specified pid to exit. Once the the process exits, the assertion is also released.  This option is ignored when used with utility option.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EXAMPLE</span></span><br><span class="line"><span class="string">     caffeinate -i make</span></span><br><span class="line"><span class="string">        caffeinate forks a process, execs "make" in it, and holds an assertion that prevents idle sleep as long as that process is running.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SEE ALSO</span></span><br><span class="line"><span class="string">     pmset(1)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">LOCATION</span></span><br><span class="line"><span class="string">     /usr/bin/caffeinate</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Darwin                         November 9, 2012                         Darwin</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;用法&quot;&gt;&lt;a href=&quot;#用法&quot; class=&quot;headerlink&quot; title=&quot;用法&quot;&gt;&lt;/a&gt;用法&lt;/h2&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cla
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="Mac" scheme="https://nichijou.me/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL分区使用</title>
+    <link href="https://nichijou.me/2019/12/31/MySQL%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8/"/>
+    <id>https://nichijou.me/2019/12/31/MySQL%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8/</id>
+    <published>2019-12-31T03:39:23.000Z</published>
+    <updated>2020-03-29T10:51:42.577Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p><strong>LIST分区</strong></p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'date'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`date`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">LIST</span> (<span class="string">`date`</span>)</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">PARTITION</span> P_20191201 <span class="keyword">VALUES</span> <span class="keyword">IN</span> (<span class="number">20191201</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure><p><strong>RANGE分区</strong></p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'date'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`date`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="string">`date`</span>)</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">PARTITION</span> P_20191201 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">20191202</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure><p><strong>HASH分区</strong></p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'date'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`date`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">HASH</span> (<span class="string">`date`</span>)</span><br><span class="line"><span class="keyword">PARTITIONS</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure><h2 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> <span class="keyword">ADD</span> <span class="keyword">PARTITION</span> (</span><br><span class="line">  <span class="keyword">PARTITION</span> P_20191202 <span class="keyword">VALUES</span> <span class="keyword">IN</span> (<span class="number">20191202</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> <span class="keyword">DROP</span> <span class="keyword">PARTITION</span> P_20191202;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;创建&quot;&gt;&lt;a href=&quot;#创建&quot; class=&quot;headerlink&quot; title=&quot;创建&quot;&gt;&lt;/a&gt;创建&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;LIST分区&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="mysql" scheme="https://nichijou.me/tags/mysql/"/>
+    
+      <category term="partition" scheme="https://nichijou.me/tags/partition/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux下各项代理设置</title>
+    <link href="https://nichijou.me/2019/12/31/Linux%E4%B8%8B%E5%90%84%E9%A1%B9%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/"/>
+    <id>https://nichijou.me/2019/12/31/Linux%E4%B8%8B%E5%90%84%E9%A1%B9%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/</id>
+    <published>2019-12-31T02:59:01.000Z</published>
+    <updated>2020-03-29T10:51:42.578Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h2><p><strong>设置</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只对github生效</span></span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="comment"># 对所有生效</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:8118</span><br><span class="line">git config --global https.proxy http://127.0.0.1:8118</span><br></pre></td></tr></table></figure><p><strong>取消</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只对github生效</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.https://github.com.proxy</span><br><span class="line"><span class="comment"># 对所有生效</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure><h2 id="WGET"><a href="#WGET" class="headerlink" title="WGET"></a>WGET</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat ~/.wgetrc</span></span><br><span class="line">use_proxy=yes</span><br><span class="line">http_proxy=http://127.0.0.1:8118</span><br><span class="line">https_proxy=http://127.0.0.1:8118</span><br><span class="line">no_proxy=<span class="string">".local"</span></span><br></pre></td></tr></table></figure><h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><p><strong>设置</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://127.0.0.1:8118</span><br><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:8118</span><br><span class="line"><span class="built_in">export</span> no_proxy=<span class="string">".local"</span></span><br></pre></td></tr></table></figure><p><strong>取消</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> http_proxy</span><br><span class="line"><span class="built_in">unset</span> https_proxy</span><br><span class="line"><span class="built_in">unset</span> no_proxy</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;GIT&quot;&gt;&lt;a href=&quot;#GIT&quot; class=&quot;headerlink&quot; title=&quot;GIT&quot;&gt;&lt;/a&gt;GIT&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;设置&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;t
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="linux" scheme="https://nichijou.me/tags/linux/"/>
+    
+      <category term="proxy" scheme="https://nichijou.me/tags/proxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Golang中使用Protobuf</title>
+    <link href="https://nichijou.me/2019/12/22/Golang%E4%B8%AD%E4%BD%BF%E7%94%A8Protobuf/"/>
+    <id>https://nichijou.me/2019/12/22/Golang%E4%B8%AD%E4%BD%BF%E7%94%A8Protobuf/</id>
+    <published>2019-12-22T07:58:46.000Z</published>
+    <updated>2020-03-29T10:51:42.576Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装protoc"><a href="#安装protoc" class="headerlink" title="安装protoc"></a>安装protoc</h2><p><code>https://github.com/protocolbuffers/protobuf/releases</code> 下载对应版本的protoc</p><h2 id="安装protoc-gen-go"><a href="#安装protoc-gen-go" class="headerlink" title="安装protoc-gen-go"></a>安装protoc-gen-go</h2><blockquote><p><a href="https://godoc.org/github.com/golang/protobuf/protoc-gen-go" target="_blank" rel="noopener">https://godoc.org/github.com/golang/protobuf/protoc-gen-go</a></p></blockquote><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/golang/protobuf/protoc-gen-go</span><br></pre></td></tr></table></figure><h2 id="生成go文件"><a href="#生成go文件" class="headerlink" title="生成go文件"></a>生成go文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --go_out=output_directory input_directory/file.proto</span><br></pre></td></tr></table></figure><h2 id="proto文件编写"><a href="#proto文件编写" class="headerlink" title="proto文件编写"></a>proto文件编写</h2><p><a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="noopener">原文</a><br><a href="https://blog.csdn.net/u011518120/article/details/54604615" target="_blank" rel="noopener">译文</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;安装protoc&quot;&gt;&lt;a href=&quot;#安装protoc&quot; class=&quot;headerlink&quot; title=&quot;安装protoc&quot;&gt;&lt;/a&gt;安装protoc&lt;/h2&gt;&lt;p&gt;&lt;code&gt;https://github.com/protocolbuffers/proto
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="golang" scheme="https://nichijou.me/tags/golang/"/>
+    
+      <category term="protobuf" scheme="https://nichijou.me/tags/protobuf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>公钥私钥对生成</title>
+    <link href="https://nichijou.me/2019/10/30/%E9%80%9A%E8%BF%87%E7%A7%81%E9%92%A5%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/"/>
+    <id>https://nichijou.me/2019/10/30/%E9%80%9A%E8%BF%87%E7%A7%81%E9%92%A5%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/</id>
+    <published>2019-10-30T13:31:50.000Z</published>
+    <updated>2020-03-29T10:51:42.574Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="生成公钥私钥对"><a href="#生成公钥私钥对" class="headerlink" title="生成公钥私钥对"></a>生成公钥私钥对</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure><h2 id="通过私钥生成公钥"><a href="#通过私钥生成公钥" class="headerlink" title="通过私钥生成公钥"></a>通过私钥生成公钥</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -y -f id_rsa &gt; id_rsa.pub</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;生成公钥私钥对&quot;&gt;&lt;a href=&quot;#生成公钥私钥对&quot; class=&quot;headerlink&quot; title=&quot;生成公钥私钥对&quot;&gt;&lt;/a&gt;生成公钥私钥对&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=
+      
+    
+    </summary>
+    
+    
+    
+      <category term="ssh" scheme="https://nichijou.me/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP调用curl设置CURLOPT_TIMEOUT_MS小于1秒时无效</title>
+    <link href="https://nichijou.me/2019/05/13/PHP%E8%B0%83%E7%94%A8curl%E8%AE%BE%E7%BD%AECURLOPT-TIMEOUT-MS%E5%B0%8F%E4%BA%8E1%E7%A7%92%E6%97%B6%E6%97%A0%E6%95%88/"/>
+    <id>https://nichijou.me/2019/05/13/PHP%E8%B0%83%E7%94%A8curl%E8%AE%BE%E7%BD%AECURLOPT-TIMEOUT-MS%E5%B0%8F%E4%BA%8E1%E7%A7%92%E6%97%B6%E6%97%A0%E6%95%88/</id>
+    <published>2019-05-13T08:41:04.000Z</published>
+    <updated>2020-03-29T10:51:42.581Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天使用php调用curl时碰到一个奇怪的问题，现象为当CURLOPT_TIMEOUT_MS小于1000时，直接返回错误</p><p>代码如下：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$ch = curl_init(<span class="string">'https://nichijou.me/'</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">// curl_setopt($ch, CURLOPT_NOSIGNAL, 1);</span></span><br><span class="line">curl_setopt($ch, CURLOPT_TIMEOUT_MS, <span class="number">200</span>);</span><br><span class="line">$data = curl_exec($ch);</span><br><span class="line">$curl_errno = curl_errno($ch);</span><br><span class="line">$curl_error = curl_error($ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($curl_errno &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"cURL Error ($curl_errno): $curl_error\n"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Data received: $data\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// cURL Error (28): Timeout was reached</span></span><br></pre></td></tr></table></figure><p>翻了一下文档</p><blockquote><p><a href="https://www.php.net/manual/zh/function.curl-setopt.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/function.curl-setopt.php</a></p></blockquote><table><thead><tr><th><strong>选项</strong></th><th>将 <code>value</code> 设置为</th><th><strong>备注</strong></th></tr></thead><tbody><tr><td>CURLOPT_TIMEOUT_MS</td><td>设置cURL允许执行的最长毫秒数。 如果 libcurl 编译时使用系统标准的名称解析器（ standard system name resolver），那部分的连接仍旧使用以秒计的超时解决方案，最小超时时间还是一秒钟。</td><td>在 cURL 7.16.2 中被加入。从 PHP 5.2.3 起可使用。</td></tr></tbody></table><p>查解决办法的时候发现鸟哥早在14年就描述过这个问题</p><blockquote><p><a href="http://www.laruence.com/2014/01/21/2939.html" target="_blank" rel="noopener">http://www.laruence.com/2014/01/21/2939.html</a></p></blockquote><p>解决这个问题的几种方式: </p><ol><li>设置 <code>curl_setopt($ch, CURLOPT_NOSIGNAL, 1);</code>，但是会导致DNS解析不受控，万一DNS服务器出问题，可能会导致服务超时</li><li>升级libcurl版本到7.19及以上</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天使用php调用curl时碰到一个奇怪的问题，现象为当CURLOPT_TIMEOUT_MS小于1000时，直接返回错误&lt;/p&gt;
+&lt;p&gt;代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="php" scheme="https://nichijou.me/tags/php/"/>
+    
+      <category term="curl" scheme="https://nichijou.me/tags/curl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac外接2k显示器开启HiDPI支持</title>
+    <link href="https://nichijou.me/2019/05/13/Mac%E5%A4%96%E6%8E%A52k%E6%98%BE%E7%A4%BA%E5%99%A8%E5%BC%80%E5%90%AFHiDPI%E6%94%AF%E6%8C%81/"/>
+    <id>https://nichijou.me/2019/05/13/Mac%E5%A4%96%E6%8E%A52k%E6%98%BE%E7%A4%BA%E5%99%A8%E5%BC%80%E5%90%AFHiDPI%E6%94%AF%E6%8C%81/</id>
+    <published>2019-05-13T03:48:37.000Z</published>
+    <updated>2020-03-29T10:51:42.576Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="关闭SIP-System-Integrity-Protection"><a href="#关闭SIP-System-Integrity-Protection" class="headerlink" title="关闭SIP(System Integrity Protection)"></a>关闭SIP(System Integrity Protection)</h2><ol><li>关机</li><li>按住 <code>command+R</code> 开机</li><li>实用工具 -&gt; 终端</li><li>输入 <code>csrutil disable</code>，回车</li><li>重启系统</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-bash-3.2<span class="comment"># csrutil disable</span></span><br><span class="line">Successfully disabled System Integrity Protection. Please restart the machine <span class="keyword">for</span> the changes to take effect.</span><br></pre></td></tr></table></figure><h2 id="获取显示器DisplayVendorID和DisplayProductID"><a href="#获取显示器DisplayVendorID和DisplayProductID" class="headerlink" title="获取显示器DisplayVendorID和DisplayProductID"></a>获取显示器DisplayVendorID和DisplayProductID</h2><p>终端执行</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ioreg -l | grep <span class="string">"DisplayVendorID"</span></span><br><span class="line">ioreg -l | grep <span class="string">"DisplayProductID"</span></span><br></pre></td></tr></table></figure><p>记下 <code>DisplayVendorID</code> 和 <code>DisplayProductID</code></p><h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><blockquote><p><a href="https://comsysto.github.io/Display-Override-PropertyList-File-Parser-and-Generator-with-HiDPI-Support-For-Scaled-Resolutions/" target="_blank" rel="noopener">https://comsysto.github.io/Display-Override-PropertyList-File-Parser-and-Generator-with-HiDPI-Support-For-Scaled-Resolutions/</a></p></blockquote><p>在上面的地址填上刚才得到的 <code>DisplayVendorID</code> 和 <code>DisplayProductID</code>，得到配置和文件路径，把配置放到对应的路径</p><p><img src="https://img.nichijou.me/20191231003626.png" alt=""></p><h2 id="开启SIP-System-Integrity-Protection"><a href="#开启SIP-System-Integrity-Protection" class="headerlink" title="开启SIP(System Integrity Protection)"></a>开启SIP(System Integrity Protection)</h2><ol><li>关机</li><li>按住 <code>command+R</code> 开机</li><li>实用工具 -&gt; 终端</li><li>输入 <code>csrutil enable</code>，回车</li><li>重启系统</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-bash-3.2<span class="comment"># csrutil enable</span></span><br><span class="line">Successfully enabled System Integrity Protection. Please restart the machine <span class="keyword">for</span> the changes to take effect.</span><br></pre></td></tr></table></figure><h2 id="下载RDM"><a href="#下载RDM" class="headerlink" title="下载RDM"></a>下载RDM</h2><blockquote><p><a href="http://avi.alkalay.net/software/RDM/" target="_blank" rel="noopener">http://avi.alkalay.net/software/RDM/</a></p></blockquote><p>打开并选择需要的分辨率即可</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;关闭SIP-System-Integrity-Protection&quot;&gt;&lt;a href=&quot;#关闭SIP-System-Integrity-Protection&quot; class=&quot;headerlink&quot; title=&quot;关闭SIP(System Integrity Pro
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Mac" scheme="https://nichijou.me/tags/Mac/"/>
+    
+      <category term="HiDPI" scheme="https://nichijou.me/tags/HiDPI/"/>
+    
+      <category term="2k" scheme="https://nichijou.me/tags/2k/"/>
+    
+      <category term="分辨率" scheme="https://nichijou.me/tags/%E5%88%86%E8%BE%A8%E7%8E%87/"/>
+    
+      <category term="显示器" scheme="https://nichijou.me/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在PHP单元测试中Mock time 以及 date 等预置函数</title>
+    <link href="https://nichijou.me/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
+    <id>https://nichijou.me/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/</id>
+    <published>2019-05-07T06:04:36.000Z</published>
+    <updated>2020-03-29T10:51:42.574Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在单元测试时，有时候会碰到代码中使用了 <code>time</code>， <code>date</code> 等函数，然后根据这些函数的返回执行不同的分支。</p><p>这种情况下想要覆盖到所有分支，可以通过在相同命名空间下定义同名函数，来达到mock的目的</p><p>例：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 待测代码</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (time() &gt;= strtotime(<span class="string">'2019-01-01'</span>)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单元测试</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> strtotime(<span class="string">'2018-01-01'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>参考 <a href="https://stackoverflow.com/a/5337635" target="_blank" rel="noopener">https://stackoverflow.com/a/5337635</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在单元测试时，有时候会碰到代码中使用了 &lt;code&gt;time&lt;/code&gt;， &lt;code&gt;date&lt;/code&gt; 等函数，然后根据这些函数的
+      
+    
+    </summary>
+    
+    
+    
+      <category term="phpunit" scheme="https://nichijou.me/tags/phpunit/"/>
+    
+      <category term="单元测试" scheme="https://nichijou.me/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="mock" scheme="https://nichijou.me/tags/mock/"/>
+    
+      <category term="date" scheme="https://nichijou.me/tags/date/"/>
+    
+      <category term="time" scheme="https://nichijou.me/tags/time/"/>
+    
+      <category term="预置函数" scheme="https://nichijou.me/tags/%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="php" scheme="https://nichijou.me/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Golang中的break label</title>
+    <link href="https://nichijou.me/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/"/>
+    <id>https://nichijou.me/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/</id>
+    <published>2019-04-20T06:33:21.000Z</published>
+    <updated>2020-03-29T10:51:42.576Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Golang中，支持通过 <code>break</code> 的方式跳出循环。如果需要跳出多层循环，可以使用 <code>break label</code> 的方式实现。</p><p>不同于 <code>goto label</code>， <code>break label</code> 会在循环的下一条语句处开始继续执行，而 <code>goto label</code> 则会从 <code>label</code> 处继续往下执行。如果在下面的例子中把 <code>break label</code> 换成 <code>goto label</code>，则会导致再次进入循环。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">TestLabelBreak:</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">fmt.Println(i)</span><br><span class="line"><span class="keyword">if</span> i == <span class="number">3</span> &#123;</span><br><span class="line"><span class="keyword">break</span> TestLabelBreak</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">"end for"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// end for</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在Golang中，支持通过 &lt;code&gt;break&lt;/code&gt; 的方式跳出循环。如果需要跳出多层循环，可以使用 &lt;code&gt;break label&lt;/code&gt; 的方式实现。&lt;/p&gt;
+&lt;p&gt;不同于 &lt;code&gt;goto label&lt;/code&gt;， &lt;code&gt;break 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="golang" scheme="https://nichijou.me/tags/golang/"/>
+    
+      <category term="label" scheme="https://nichijou.me/tags/label/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP实现18位社会统一信用码验证</title>
+    <link href="https://nichijou.me/2019/04/17/PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/"/>
+    <id>https://nichijou.me/2019/04/17/PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/</id>
+    <published>2019-04-17T07:05:35.000Z</published>
+    <updated>2020-03-29T10:51:42.575Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是社会统一信用码"><a href="#什么是社会统一信用码" class="headerlink" title="什么是社会统一信用码"></a>什么是社会统一信用码</h2><p><a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener"><strong>统一社会信用代码</strong></a>是中国的法人和其他组织，在全国范围内唯一的、终身不变的18位法定身份识别码，旨在统一过去各部门下发的不同机构代码，由全国组织机构统一社会信用代码数据服务中心（NACAO，隶属<a href="https://zh.wikipedia.org/wiki/%E5%9B%BD%E5%AE%B6%E5%B8%82%E5%9C%BA%E7%9B%91%E7%9D%A3%E7%AE%A1%E7%90%86%E6%80%BB%E5%B1%80" target="_blank" rel="noopener">国家市场监督管理总局</a>）负责管理。</p><p>2015年6月11日国务院下发《国务院关于批转发展改革委等部门法人和其他组织统一社会信用代码制度建设总体方案的通知》（国发〔2015〕33号）后开始实施。</p><h2 id="信用码构成"><a href="#信用码构成" class="headerlink" title="信用码构成"></a>信用码构成</h2><p><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E5%AE%B6%E6%A0%87%E5%87%86" target="_blank" rel="noopener">中华人民共和国国家标准</a><a href="https://zh.wikisource.org/wiki/GB_32100-2015_%E6%B3%95%E4%BA%BA%E5%92%8C%E5%85%B6%E4%BB%96%E7%BB%84%E7%BB%87%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A0%81%E8%A7%84%E5%88%99" target="_blank" rel="noopener">GB 32100-2015 法人和其他组织统一社会信用代码编码规则</a>中规定：统一代码由十八位的阿拉伯数字或大写英文字母（不使用I、O、Z、S、V）组成。</p><p>18位数字字母组合的方式是：</p><p><img src="https://img.nichijou.me/20190417230234.png" alt=""></p><ul><li><strong>登记管理部门码</strong>表示登记管理部分，使用阿拉伯数字或大写英文字母表示，1代表机构编制、5代表民政、9代表工商、Y代表其他。</li><li><strong>机构类别码</strong>表示登记机构的类别。</li><li><strong>登记管理机关行政区划码</strong>指的是登记机构所地的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">行政区划代码</a>，如350100是福建省福州市。</li><li><strong>主体标识码（组织机构代码）</strong>是旧的组织机构代码，按照<a href="https://zh.wikisource.org/wiki/GB_11714-1997_%E5%85%A8%E5%9B%BD%E7%BB%84%E7%BB%87%E6%9C%BA%E6%9E%84%E4%BB%A3%E7%A0%81%E7%BC%96%E5%88%B6%E8%A7%84%E5%88%99" target="_blank" rel="noopener">GB 11714</a>编码。</li><li>最后一位是<strong>校验码</strong>，校验码计算方法参照GB/T 17710（采ISO 7064）。</li></ul><h2 id="编码规则"><a href="#编码规则" class="headerlink" title="编码规则"></a>编码规则</h2><p><a href="https://zh.wikisource.org/zh-hans/GB_32100-2015_法人和其他组织统一社会信用代码编码规则" target="_blank" rel="noopener">GB_32100-2015</a></p><h2 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// https://zh.wikisource.org/zh-hans/GB_32100-2015_法人和其他组织统一社会信用代码编码规则</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validateUnifiedSocialCreditIdentifier</span><span class="params">($code)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'~^[0-9ABCDEFGHJKLMNPQRTUWXY]&#123;18&#125;$~'</span>, $code)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $code = strtoupper($code);</span><br><span class="line">    <span class="comment">// 18位统一社会信用代码不使用I、O、Z、S、V这五个英文字母</span></span><br><span class="line">    $alphaMap = [</span><br><span class="line">        <span class="string">'0'</span> =&gt; <span class="number">0</span>, <span class="string">'1'</span>  =&gt; <span class="number">1</span>, <span class="string">'2'</span>  =&gt; <span class="number">2</span>, <span class="string">'3'</span>  =&gt; <span class="number">3</span>, <span class="string">'4'</span>  =&gt; <span class="number">4</span>,</span><br><span class="line">        <span class="string">'5'</span> =&gt; <span class="number">5</span>, <span class="string">'6'</span>  =&gt; <span class="number">6</span>, <span class="string">'7'</span>  =&gt; <span class="number">7</span>, <span class="string">'8'</span>  =&gt; <span class="number">8</span>, <span class="string">'9'</span>  =&gt; <span class="number">9</span>,</span><br><span class="line">        <span class="string">'A'</span> =&gt; <span class="number">10</span>, <span class="string">'B'</span> =&gt; <span class="number">11</span>, <span class="string">'C'</span> =&gt; <span class="number">12</span>, <span class="string">'D'</span> =&gt; <span class="number">13</span>, <span class="string">'E'</span> =&gt; <span class="number">14</span>,</span><br><span class="line">        <span class="string">'F'</span> =&gt; <span class="number">15</span>, <span class="string">'G'</span> =&gt; <span class="number">16</span>, <span class="string">'H'</span> =&gt; <span class="number">17</span>, <span class="string">'J'</span> =&gt; <span class="number">18</span>, <span class="string">'K'</span> =&gt; <span class="number">19</span>,</span><br><span class="line">        <span class="string">'L'</span> =&gt; <span class="number">20</span>, <span class="string">'M'</span> =&gt; <span class="number">21</span>, <span class="string">'N'</span> =&gt; <span class="number">22</span>, <span class="string">'P'</span> =&gt; <span class="number">23</span>, <span class="string">'Q'</span> =&gt; <span class="number">24</span>,</span><br><span class="line">        <span class="string">'R'</span> =&gt; <span class="number">25</span>, <span class="string">'T'</span> =&gt; <span class="number">26</span>, <span class="string">'U'</span> =&gt; <span class="number">27</span>, <span class="string">'W'</span> =&gt; <span class="number">28</span>, <span class="string">'X'</span> =&gt; <span class="number">29</span>,</span><br><span class="line">        <span class="string">'Y'</span> =&gt; <span class="number">30</span>,</span><br><span class="line">    ];</span><br><span class="line">    $weight = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">27</span>, <span class="number">19</span>, <span class="number">26</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">20</span>, <span class="number">29</span>, <span class="number">25</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">24</span>, <span class="number">10</span>, <span class="number">30</span>, <span class="number">28</span>];</span><br><span class="line">    $chrs   = str_split($code);</span><br><span class="line">    $sum    = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (array_slice($chrs, <span class="number">0</span>, <span class="number">17</span>) <span class="keyword">as</span> $index =&gt; $chr) &#123;</span><br><span class="line">        $sum += $alphaMap[$chr] * $weight[$index];</span><br><span class="line">    &#125;</span><br><span class="line">    $checkNum     = <span class="number">31</span> - ($sum % <span class="number">31</span>);</span><br><span class="line">    $checkNum     = $checkNum == <span class="number">31</span> ? <span class="number">0</span> : $checkNum;</span><br><span class="line">    $flipAlphaMap = array_flip($alphaMap);</span><br><span class="line">    <span class="keyword">return</span> $chrs[<span class="number">17</span>] === (string) $flipAlphaMap[$checkNum];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310000736228569K')); // true</span></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310115MA1K3M5G6H')); // true</span></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310112MA1GBEGY17')); // true</span></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310000MA1FL5DR4T')); // true</span></span><br><span class="line"><span class="comment">// var_dump(false === validateUnifiedSocialCreditIdentifier('11310000MA1FL5DR4T')); // true</span></span><br></pre></td></tr></table></figure><h2 id="错码问题"><a href="#错码问题" class="headerlink" title="错码问题"></a>错码问题</h2><p><strong>实际情况中存在少量社会统一信用码错码问题，比如：</strong></p><blockquote><p>福建思企互联网信息服务有限公司 (91350103M0001JFDX6)</p></blockquote><p><img src="https://img.nichijou.me/20190417230913.png" alt=""></p><blockquote><p>福州禾力顺电子商务有限公司 (91350102M0001PU72B)</p></blockquote><p><img src="https://img.nichijou.me/20190417231030.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;什么是社会统一信用码&quot;&gt;&lt;a href=&quot;#什么是社会统一信用码&quot; class=&quot;headerlink&quot; title=&quot;什么是社会统一信用码&quot;&gt;&lt;/a&gt;什么是社会统一信用码&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki
+      
+    
+    </summary>
+    
+    
+    
+      <category term="PHP" scheme="https://nichijou.me/tags/PHP/"/>
+    
+      <category term="社会统一信用码" scheme="https://nichijou.me/tags/%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81/"/>
+    
+      <category term="验证" scheme="https://nichijou.me/tags/%E9%AA%8C%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UML类图关系</title>
+    <link href="https://nichijou.me/2019/04/15/UML%E7%B1%BB%E5%9B%BE%E5%85%B3%E7%B3%BB/"/>
+    <id>https://nichijou.me/2019/04/15/UML%E7%B1%BB%E5%9B%BE%E5%85%B3%E7%B3%BB/</id>
+    <published>2019-04-14T16:19:33.000Z</published>
+    <updated>2020-03-29T10:51:42.577Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="成员"><a href="#成员" class="headerlink" title="成员"></a>成员</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+公共</span><br><span class="line">-私有</span><br><span class="line">#保护</span><br><span class="line">~包（即对包内其他成员可见）</span><br><span class="line">&#x2F;推導（即由其他屬性推導得出，不需要直接給定其值）</span><br><span class="line">_静态</span><br></pre></td></tr></table></figure><h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><h4 id="泛化"><a href="#泛化" class="headerlink" title="泛化"></a>泛化</h4><p>泛化（Generalization），即继承的反方向，指的是一个类（称为父类、父接口）具有另外的一个（或一些）类（称为子类、子接口）的共有功能。子类可视为其父类的特例，并可以增加新功能。用带空心三角形箭头的实线表示。</p><p><img src="https://img.nichijou.me/20190417231427.png" alt=""></p><h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>实现（Realization）指的是一个class类实现interface接口（可以是多个）的功能；在Java中此类关系通过关键字implements明确标识。用带空心三角形箭头的虚线表示。</p><p><img src="https://img.nichijou.me/20190417231508.png" alt=""></p><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>依赖关系（Dependency）可以简单的理解为一个类A使用到了另一个类B，” … uses a …”，被依赖的对象只是作为一种工具在使用，而并不持有对它的引用。而这种使用关系是具有偶然性、临时性的、非常弱的，但是B类的变化会影响到A；表现在代码层面，为类B作为参数被类A在某个method（方法）中使用。用带燕尾箭头的虚线表示。表示一个类依赖于另外一个类的定义；依赖关系仅仅描述了类与类之间的一种使用与被使用的关系。</p><p><img src="https://img.nichijou.me/20190417231534.png" alt=""></p><h4 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h4><p>一个关联（Association）代表一个家族的联系。关联可以命名，可以饰以角色名称，有权指针，多重性，可视性，以及其他属性（如相互关联和有方向的（带燕尾箭头的实线表示）关联）。在语义上是两个类之间、或类与接口之间一种强依赖关系，是一种长期的稳定的关系，” … has a …” 。关联关系使一个类知道另外一个类的属性和方法；通常含有“知道”、“了解”的含义。某个对象会长期的持有另一个对象的引用，关联的两个对象彼此间没有任何强制性的约束，只要二者同意，可以随时解除关系或是进行关联，它们在生命期问题上没有任何约定。被关联的对象还可以再被别的对象关联，所以关联是可以共享的。 在代码层面上，被关联类以类属性的形式出现在关联类中，也可能是关联类引用了一个类型为被关联类的全局变量。当前定义有五种不同类型的关联。双向（Bi-directional）和单向（uni-directional）的关联是最常见的。</p><p><img src="https://img.nichijou.me/20190417231558.png" alt=""></p><h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p>聚合（Aggregate）是表示整体与部分的一类特殊的关联关系，是“弱”的包含（” … owns a …” ）关系，成分类可以不依靠聚合类而单独存在，可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享（sharable）。例如，池塘与（池塘中的）鸭子。再例如教授与课程就是一种聚合关系。又例如图书馆包含(owns a) 学生和书籍。即使没有图书馆，学生亦可以存在，学生和图书馆之间的关系是聚集。聚集可能不涉及两个以上的类。图形以空心的菱形箭尾与实线来表示。</p><p><img src="https://img.nichijou.me/20190417231628.png" alt=""></p><h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><p>组成（Composition）关系，是一类“强”的整体与部分的包含关系（” … is a part of …”）。成分类必须依靠合成类而存在。整体与部分是不可分的，整体的生命周期结束也就意味着部分的生命周期结束。合成类别完全拥有成分类别，负责创建、销毁成分类别。例如汽车与化油器，又例如公司与公司部门就是一种组成关系。图形以实心的菱形箭尾与实线表示。</p><p><img src="https://img.nichijou.me/20190417231647.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://en.wikipedia.org/wiki/Class_diagram" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Class_diagram</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;成员&quot;&gt;&lt;a href=&quot;#成员&quot; class=&quot;headerlink&quot; title=&quot;成员&quot;&gt;&lt;/a&gt;成员&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="UML" scheme="https://nichijou.me/tags/UML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>命令行处理图片</title>
+    <link href="https://nichijou.me/2019/04/09/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/"/>
+    <id>https://nichijou.me/2019/04/09/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/</id>
+    <published>2019-04-09T08:03:19.000Z</published>
+    <updated>2020-03-29T10:51:42.577Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum install imagemagick jpegoptim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按比例调整尺寸</span></span><br><span class="line">convert -resize 85%x85% test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按长宽调整尺寸</span></span><br><span class="line">convert -resize 1920x1080 test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按长宽调整尺寸，保持原始比例</span></span><br><span class="line">convert -resize 1920x test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩图片质量 (80%)</span></span><br><span class="line">jpegoptim --max=80 --dest=test_opt.jpg test.jpg </span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩到指定大小 (512kb)</span></span><br><span class="line">jpegoptim --size=512 --dest=test_opt.jpg test.jpg</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l
+      
+    
+    </summary>
+    
+    
+    
+      <category term="图片" scheme="https://nichijou.me/tags/%E5%9B%BE%E7%89%87/"/>
+    
+      <category term="处理" scheme="https://nichijou.me/tags/%E5%A4%84%E7%90%86/"/>
+    
+      <category term="命令行" scheme="https://nichijou.me/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SVN迁移到GIT</title>
+    <link href="https://nichijou.me/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/"/>
+    <id>https://nichijou.me/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/</id>
+    <published>2019-04-02T11:53:33.000Z</published>
+    <updated>2020-03-29T10:51:42.573Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一个使用svn做版本控制的老业务需要迁移到git，原有业务和其他多个业务一同放在一个大的svn仓库中，本次仅需要迁移该业务。目标是迁移到git后保留历史的提交信息，不需要保留svn分支，也不需要保留svn标签。</p><p>网上查阅了一些资料后发现git官方已经提供了<a href="https://git-scm.com/book/zh/v1/Git-%E4%B8%8E%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F-%E8%BF%81%E7%A7%BB%E5%88%B0-Git" target="_blank" rel="noopener">迁移教程</a></p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote><p>以 <a href="https://sourceforge.net/p/keepass/code/HEAD/tree/" target="_blank" rel="noopener">https://sourceforge.net/p/keepass/code/HEAD/tree/</a> 这个项目为例，迁移 <code>trunk</code> 下 <code>Plugins</code> 仓库</p></blockquote><h4 id="安装git-svn"><a href="#安装git-svn" class="headerlink" title="安装git-svn"></a>安装git-svn</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git-svn</span><br></pre></td></tr></table></figure><h4 id="创建svn和git的用户映射关系"><a href="#创建svn和git的用户映射关系" class="headerlink" title="创建svn和git的用户映射关系"></a>创建svn和git的用户映射关系</h4><p>推荐的做法是先从svn的log中导出所有用户，然后再编辑每个用户到git的映射关系</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先检出仓库</span></span><br><span class="line">svn checkout https://svn.code.sf.net/p/keepass/code/trunk/Plugins keepass-code-plugins.svn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出所有用户</span></span><br><span class="line">svn <span class="built_in">log</span> keepass-code-plugins.svn --xml | grep -P <span class="string">"^&lt;author"</span> | sort -u | perl -pe <span class="string">'s/&lt;author&gt;(.*?)&lt;\/author&gt;/$1 = /'</span> &gt; users.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据导出的users.txt编辑每个用户的映射关系</span></span><br><span class="line"><span class="comment"># 原始文件</span></span><br><span class="line">&gt; cat users.txt</span><br><span class="line">bill-rubin =</span><br><span class="line">eyebex =</span><br><span class="line"><span class="comment"># 映射后</span></span><br><span class="line">&gt; cat users.txt</span><br><span class="line">bill-rubin = <span class="built_in">test</span> &lt;<span class="built_in">test</span>@test.com&gt;</span><br><span class="line">eyebex = test2 &lt;test2@test.com&gt;</span><br></pre></td></tr></table></figure><h4 id="导入git"><a href="#导入git" class="headerlink" title="导入git"></a>导入git</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git svn <span class="built_in">clone</span> https://svn.code.sf.net/p/keepass/code/trunk/Plugins --authors-file=users.txt --no-metadata keepass-code-plugins.git</span><br></pre></td></tr></table></figure><h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git <span class="keyword">for</span>-each-ref refs/remotes | cut -d / -f 3- | grep -v @ | <span class="keyword">while</span> <span class="built_in">read</span> branchname; <span class="keyword">do</span> git --git-dir=keepass-code-plugins.git/.git branch <span class="string">"<span class="variable">$branchname</span>"</span> <span class="string">"refs/remotes/<span class="variable">$branchname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -r -d <span class="string">"<span class="variable">$branchname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -d <span class="string">"<span class="variable">$branchname</span>"</span> ; <span class="keyword">done</span></span><br></pre></td></tr></table></figure><h4 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a>删除标签</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git <span class="keyword">for</span>-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | <span class="keyword">while</span> <span class="built_in">read</span> tagname; <span class="keyword">do</span> git --git-dir=keepass-code-plugins.git/.git tag <span class="string">"<span class="variable">$tagname</span>"</span> <span class="string">"tags/<span class="variable">$tagname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -r -d <span class="string">"tags/<span class="variable">$tagname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -d <span class="string">"tags/<span class="variable">$tagname</span>"</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure><h4 id="对比差异"><a href="#对比差异" class="headerlink" title="对比差异"></a>对比差异</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff -x <span class="string">'.git'</span> -x <span class="string">'.svn'</span> -r keepass-code-plugins.svn keepass-code-plugins.git</span><br></pre></td></tr></table></figure><h4 id="设置远端仓库"><a href="#设置远端仓库" class="headerlink" title="设置远端仓库"></a>设置远端仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git remote add origin git@github.com:Sinute/keepass-code-plugins.git</span><br></pre></td></tr></table></figure><h4 id="推送到远端"><a href="#推送到远端" class="headerlink" title="推送到远端"></a>推送到远端</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git push -u origin master</span><br></pre></td></tr></table></figure><h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><p>在git中空目录无法被追踪，如果svn仓库中存在空目录（比如log目录），需要视情况添加 <code>.gitignore</code> 或 <code>.gitkeep</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;一个使用svn做版本控制的老业务需要迁移到git，原有业务和其他多个业务一同放在一个大的svn仓库中，本次仅需要迁移该业务。目标是迁移到gi
+      
+    
+    </summary>
+    
+    
+    
+      <category term="git" scheme="https://nichijou.me/tags/git/"/>
+    
+      <category term="svn" scheme="https://nichijou.me/tags/svn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL自定义函数</title>
+    <link href="https://nichijou.me/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/"/>
+    <id>https://nichijou.me/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/</id>
+    <published>2018-04-04T02:28:00.000Z</published>
+    <updated>2020-03-29T10:51:42.570Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> myFunc $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> myFunc(<span class="keyword">str</span> <span class="built_in">varchar</span>(<span class="number">255</span>),<span class="built_in">number</span> <span class="built_in">bigint</span> <span class="keyword">unsigned</span>)</span><br><span class="line"><span class="keyword">RETURNS</span> <span class="built_in">bigint</span>(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DECLARE</span> x <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">SET</span> x = (</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'test'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">1</span> <span class="keyword">THEN</span> <span class="number">233</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'hello'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">2</span> <span class="keyword">THEN</span> <span class="number">123</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="built_in">number</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">);</span><br><span class="line">RETURN x;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line"></span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> myFunc(<span class="string">'test'</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="MySQL" scheme="https://nichijou.me/tags/MySQL/"/>
+    
+      <category term="函数" scheme="https://nichijou.me/tags/%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库主从同步</title>
+    <link href="https://nichijou.me/2018/02/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
+    <id>https://nichijou.me/2018/02/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</id>
+    <published>2018-02-03T10:42:56.000Z</published>
+    <updated>2020-03-29T10:51:42.577Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>环境</strong><br>CentOS 8<br>MariaDB 10.3.17</p></blockquote><h1 id="主库操作"><a href="#主库操作" class="headerlink" title="主库操作"></a>主库操作</h1><h2 id="修改主库配置"><a href="#修改主库配置" class="headerlink" title="修改主库配置"></a>修改主库配置</h2><blockquote><p>/etc/my.cnf.d/mariadb-server.cnf</p></blockquote><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启binlog</span></span><br><span class="line">[mysqld]</span><br><span class="line">server-id = 1</span><br><span class="line">binlog_format = mixed</span><br><span class="line"><span class="built_in">log</span>-bin = mysql-bin</span><br></pre></td></tr></table></figure><h2 id="重启数据库"><a href="#重启数据库" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mariadb restart</span><br></pre></td></tr></table></figure><h2 id="创建同步账户"><a href="#创建同步账户" class="headerlink" title="创建同步账户"></a>创建同步账户</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'user'</span>@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'password'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure><h2 id="备份主库"><a href="#备份主库" class="headerlink" title="备份主库"></a>备份主库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump --routines --single_transaction --master-data=2 --databases xxx &gt; backup.sql</span><br></pre></td></tr></table></figure><h1 id="从库操作"><a href="#从库操作" class="headerlink" title="从库操作"></a>从库操作</h1><h2 id="修改从库配置"><a href="#修改从库配置" class="headerlink" title="修改从库配置"></a>修改从库配置</h2><blockquote><p>/etc/my.cnf.d/mariadb-server.cnf</p></blockquote><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">server-id = 2</span><br><span class="line">relay-log = relay-bin</span><br><span class="line">read_only = on</span><br><span class="line"><span class="comment"># binlog_do_db = db1</span></span><br><span class="line"><span class="comment"># binlog_do_db = db2</span></span><br><span class="line">binlog_ignore_db=mysql</span><br><span class="line">binlog_ignore_db=performance_schema</span><br><span class="line">binlog_ignore_db=information_schema</span><br></pre></td></tr></table></figure><h2 id="重启数据库-1"><a href="#重启数据库-1" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mariadb restart</span><br></pre></td></tr></table></figure><h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql &lt; backup.sql</span><br></pre></td></tr></table></figure><h2 id="确认同步位置"><a href="#确认同步位置" class="headerlink" title="确认同步位置"></a>确认同步位置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n50 backup.sql</span><br></pre></td></tr></table></figure><p>找到类似 <code>CHANGE MASTER TO MASTER_LOG_FILE=&#39;mysql-bin.000025&#39;, MASTER_LOG_POS=1244342;</code></p><h2 id="设置同步账户密码以及同步位置"><a href="#设置同步账户密码以及同步位置" class="headerlink" title="设置同步账户密码以及同步位置"></a>设置同步账户密码以及同步位置</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span></span><br><span class="line">master_host=<span class="string">'master_host'</span>,</span><br><span class="line">master_user=<span class="string">'user'</span>,</span><br><span class="line">master_password=<span class="string">'password'</span>,</span><br><span class="line">master_port=<span class="number">3306</span>,</span><br><span class="line">master_log_file=<span class="string">'mysql-bin.000025'</span>,</span><br><span class="line">master_log_pos=<span class="number">1244342</span>;</span><br></pre></td></tr></table></figure><h2 id="启动同步"><a href="#启动同步" class="headerlink" title="启动同步"></a>启动同步</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br></pre></td></tr></table></figure><h2 id="检查同步状态"><a href="#检查同步状态" class="headerlink" title="检查同步状态"></a>检查同步状态</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>;</span><br></pre></td></tr></table></figure><p>确认 <code>Slave_IO_Running</code> 以及 <code>Slave_SQL_Running</code> 是否都为 <code>Yes</code></p><h1 id="其他问题排除"><a href="#其他问题排除" class="headerlink" title="其他问题排除"></a>其他问题排除</h1><ul><li>出现 <code>Slave_IO_Running: Connecting</code>，且 <code>Last_IO_Errno: 2003</code></li></ul><ol><li>网络是否正常</li><li>密码是否正确</li><li>MASTER_LOG_POS是否正确</li><li>是否被SELinux策略阻止</li></ol><p>1和2可以在从库服务器上直接通过手动使用同步账号连接主库，检查是否可以登陆<br>3需要确认 <code>backup.sql</code> 中的位置和设置同步时的位置是否相同<br>4可以通过 <code>setenforce 0</code> 临时关闭SELinux，永久关闭修改 <code>/etc/selinux/config</code> 中，<code>SELINUX=disabled</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;&lt;br&gt;CentOS 8&lt;br&gt;MariaDB 10.3.17&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;主库操作&quot;&gt;&lt;a href=&quot;#主库操作&quot; class=&quot;headerlink&quot; title=
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据库" scheme="https://nichijou.me/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="MySQL" scheme="https://nichijou.me/tags/MySQL/"/>
+    
+      <category term="主从" scheme="https://nichijou.me/tags/%E4%B8%BB%E4%BB%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>创建第一个PHP扩展</title>
+    <link href="https://nichijou.me/2017/01/24/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AAPHP%E6%89%A9%E5%B1%95/"/>
+    <id>https://nichijou.me/2017/01/24/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AAPHP%E6%89%A9%E5%B1%95/</id>
+    <published>2017-01-24T07:00:38.000Z</published>
+    <updated>2020-03-29T10:51:42.571Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础 &gt; <a href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3.html">PHP-5.3.13开发环境编译</a></strong></p></blockquote><p>推荐的教程 <a href="https://github.com/walu/phpbook" target="_blank" rel="noopener">https://github.com/walu/phpbook</a></p><h1 id="编写第一个扩展"><a href="#编写第一个扩展" class="headerlink" title="编写第一个扩展"></a>编写第一个扩展</h1><h3 id="创建文件config-m4"><a href="#创建文件config-m4" class="headerlink" title="创建文件config.m4"></a>创建文件config.m4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PHP_ARG_ENABLE(</span><br><span class="line">    helloworld,</span><br><span class="line">    [Whether to enable the &quot;helloworld&quot; extension],</span><br><span class="line">    [enable-helloworld        Enable &quot;helloworld&quot; extension support]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if test $PHP_HELLOWORLD !&#x3D; &quot;no&quot;; then</span><br><span class="line">    PHP_SUBST(HELLOWORLD_SHARED_LIBADD)</span><br><span class="line">    PHP_NEW_EXTENSION(helloworld, helloworld.c, $ext_shared)</span><br><span class="line">fi</span><br></pre></td></tr></table></figure><h3 id="创建helloworld-h"><a href="#创建helloworld-h" class="headerlink" title="创建helloworld.h"></a>创建helloworld.h</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HELLOWORLD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HELLOWORLD_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载config.h，如果配置了的话</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> HAVE_CONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"config.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载php头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"php.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> phpext_helloworld_ptr &amp;helloworld_module_entry</span></span><br><span class="line"><span class="keyword">extern</span> zend_module_entry helloworld_module_entry;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure><h3 id="创建helloworld-c"><a href="#创建helloworld-c" class="headerlink" title="创建helloworld.c"></a>创建helloworld.c</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"helloworld.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这边定义了hello_world</span></span><br><span class="line">ZEND_FUNCTION(hello_world)</span><br><span class="line">&#123;</span><br><span class="line">    php_printf(<span class="string">"Hello World!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> zend_function_entry helloworld_functions[] = &#123;</span><br><span class="line">    ZEND_FE(hello_world, <span class="literal">NULL</span>) <span class="comment">// 第一个参数为函数名, 第二个参数为arg_info</span></span><br><span class="line">    <span class="comment">// 可以继续添加</span></span><br><span class="line">    &#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//module entry</span></span><br><span class="line">zend_module_entry helloworld_module_entry = &#123;</span><br><span class="line">#<span class="keyword">if</span> ZEND_MODULE_API_NO &gt;= <span class="number">20010901</span></span><br><span class="line">     STANDARD_MODULE_HEADER,</span><br><span class="line">#endif</span><br><span class="line">    <span class="string">"helloworld"</span>, <span class="comment">//这个地方是扩展名称，往往我们会在这个地方使用一个宏。</span></span><br><span class="line">    helloworld_functions, <span class="comment">/* Functions */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MINIT */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MSHUTDOWN */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* RINIT */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* RSHUTDOWN */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MINFO */</span></span><br><span class="line">#<span class="keyword">if</span> ZEND_MODULE_API_NO &gt;= <span class="number">20010901</span></span><br><span class="line">    <span class="string">"1.0"</span>, <span class="comment">//这个地方是我们扩展的版本</span></span><br><span class="line">#endif</span><br><span class="line">    STANDARD_MODULE_PROPERTIES</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> COMPILE_DL_HELLOWORLD</span></span><br><span class="line">ZEND_GET_MODULE(helloworld)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure><h1 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h1><blockquote><p>phpize<br>./configure<br>make</p></blockquote><p>然后就可以在 modules 目录下找到对应的 <code>helloworld.so</code></p><h1 id="加载扩展"><a href="#加载扩展" class="headerlink" title="加载扩展"></a>加载扩展</h1><p>在 <code>php.ini</code> 中加入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extension_dir&#x3D;PATH&#x2F;TO&#x2F;EXTENSION</span><br><span class="line">extension&#x3D;helloworld.so</span><br></pre></td></tr></table></figure><h1 id="检查是否成功"><a href="#检查是否成功" class="headerlink" title="检查是否成功"></a>检查是否成功</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">'hello_world();'</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;下面使用的工具和源码都以PHP-5.3.13作为基础 &amp;gt; &lt;a href=&quot;/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3.html&quot;&gt;PHP-
+      
+    
+    </summary>
+    
+    
+    
+      <category term="PHP" scheme="https://nichijou.me/tags/PHP/"/>
+    
+      <category term="扩展" scheme="https://nichijou.me/tags/%E6%89%A9%E5%B1%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从源码编译PHP-5.3</title>
+    <link href="https://nichijou.me/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/"/>
+    <id>https://nichijou.me/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/</id>
+    <published>2017-01-24T02:20:04.000Z</published>
+    <updated>2020-03-29T10:51:42.578Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础</strong></p></blockquote><h1 id="需要准备的工具"><a href="#需要准备的工具" class="headerlink" title="需要准备的工具"></a>需要准备的工具</h1><p>官网上的需求:</p><blockquote><p>autoconf: 2.13+ (for PHP &lt; 5.4.0), 2.59+ (for PHP &gt;= 5.4.0)<br>automake: 1.4+<br>libtool: 1.4.x+ (except 1.4.2)<br>re2c: Version 0.13.4 or newer<br>flex: Version 2.5.4 (for PHP &lt;= 5.2)<br>bison:<br>PHP 5.4: 1.28, 1.35, 1.75, 1.875, 2.0, 2.1, 2.2, 2.3, 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.4<br>PHP 5.5: 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.3, 2.6.4, 2.6.5, 2.7<br>PHP 5.6: 2.4 or later, excluding 3.0 only (3.0.1 and later are OK)<br>PHP 7.0: 2.4 or later</p></blockquote><p>本次使用:</p><ul><li><a href="https://ftp.gnu.org/gnu/autoconf/" target="_blank" rel="noopener">autoconf 2.13</a></li><li><a href="https://ftp.gnu.org/gnu/automake/" target="_blank" rel="noopener">automake 1.4</a></li><li><a href="https://ftp.gnu.org/gnu/libtool/" target="_blank" rel="noopener">libtool 1.4</a></li><li><a href="http://re2c.org/install/install.html" target="_blank" rel="noopener">re2c 0.13.6</a></li></ul><h3 id="安装autoconf"><a href="#安装autoconf" class="headerlink" title="安装autoconf"></a>安装autoconf</h3><blockquote><p>wget <a href="https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz</a><br>tar -zxvf autoconf-2.13.tar.gz<br>cd autoconf-2.13<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p></blockquote><h3 id="安装automake"><a href="#安装automake" class="headerlink" title="安装automake"></a>安装automake</h3><blockquote><p>wget <a href="https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz</a><br>tar -zxvf automake-1.4.tar.gz<br>cd automake-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p></blockquote><h3 id="安装libtool"><a href="#安装libtool" class="headerlink" title="安装libtool"></a>安装libtool</h3><blockquote><p>wget <a href="https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz</a><br>tar -zxvf libtool-1.4.tar.gz<br>cd libtool-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p></blockquote><h3 id="安装re2c"><a href="#安装re2c" class="headerlink" title="安装re2c"></a>安装re2c</h3><blockquote><p>wget <a href="https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz" target="_blank" rel="noopener">https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz</a><br>tar -zxvf re2c-0.13.6.tar.gz<br>cd re2c-0.13.6<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p></blockquote><p>最后 export PATH=/Users/Sinute/local:$PATH</p><h1 id="编译PHP"><a href="#编译PHP" class="headerlink" title="编译PHP"></a>编译PHP</h1><p>从 <a href="http://php.net/releases/" target="_blank" rel="noopener">http://php.net/releases/</a> 下载PHP源代码</p><blockquote><p>wget <a href="http://museum.php.net/php5/php-5.3.13.tar.gz" target="_blank" rel="noopener">http://museum.php.net/php5/php-5.3.13.tar.gz</a><br>tar -zxvf php-5.3.13.tar.gz<br>cd php-5.3.13<br>./configure –prefix=/Users/Sinute/local –enable-debug –enable-maintainer-zts –enable-fpm<br>make<br>make install</p></blockquote><p><em>这里带上了–enable-debug, 便于后续开发</em></p><p>编译的时候会报 <code>make: *** [ext/dom/node.lo] Error 1</code></p><p>解决方法:</p><blockquote><p>curl -o php-5.3.13.patch <a href="https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt" target="_blank" rel="noopener">https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt</a><br>patch -p0 -b &lt; php-5.3.13.patch</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;下面使用的工具和源码都以PHP-5.3.13作为基础&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;需要准备的工具&quot;&gt;&lt;a href=&quot;#需要准备的工具&quot; class=&quot;headerlink&quot; title=&quot;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="PHP" scheme="https://nichijou.me/tags/PHP/"/>
+    
+      <category term="编译" scheme="https://nichijou.me/tags/%E7%BC%96%E8%AF%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu禁用ctrl+p快捷键</title>
+    <link href="https://nichijou.me/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://nichijou.me/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/</id>
+    <published>2016-10-21T03:18:43.000Z</published>
+    <updated>2020-03-29T10:51:42.572Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>安装 <code>dconf-tools</code></li><li>打开 <code>dconf-editor</code> , org -&gt; gnome -&gt; settings-daemon -&gt; plugins -&gt; xrandr</li><li>取消 active</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;安装 &lt;code&gt;dconf-tools&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;打开 &lt;code&gt;dconf-editor&lt;/code&gt; , org -&amp;gt; gnome -&amp;gt; settings-daemon -&amp;gt; plugins -&amp;gt; xrand
+      
+    
+    </summary>
+    
+    
+    
+      <category term="ubuntu" scheme="https://nichijou.me/tags/ubuntu/"/>
+    
+      <category term="快捷键" scheme="https://nichijou.me/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>solr入门系列3-使用DataImport构建索引</title>
+    <link href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/"/>
+    <id>https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/</id>
+    <published>2016-09-03T11:00:47.000Z</published>
+    <updated>2020-03-29T10:51:42.579Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>在 <a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">上一篇</a> 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据<br>在本篇中, 我们将会使用DataImport来构建我们的数据</p></blockquote><h1 id="solrconfig-xml"><a href="#solrconfig-xml" class="headerlink" title="solrconfig.xml"></a>solrconfig.xml</h1><p>还记得上一篇 <code>conf</code> 中另一个配置文件 <code>solrconfig.xml</code> 吗<br>在其中加入</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入dataimporthandler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lib</span> <span class="attr">dir</span>=<span class="string">"$&#123;solr.install.dir:../../../..&#125;/dist/"</span> <span class="attr">regex</span>=<span class="string">"solr-dataimporthandler-.*\.jar"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="data-config-xml"><a href="#data-config-xml" class="headerlink" title="data-config.xml"></a>data-config.xml</h1><p>在 <code>conf</code> 目录下, 创建 <code>data-config.xml</code>, 写入数据源信息, 以及如何构建数据</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span> <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">url</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/dmhy"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"admin"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">document</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"publish"</span> <span class="attr">transformer</span>=<span class="string">"DateFormatTransformer"</span> <span class="attr">query</span>=<span class="string">"SELECT publish.id, publish.title, fansub.name as fansub_name, fansub.id as fansub_id FROM publish LEFT JOIN fansub ON (publish.fansub_id = fansub.id) WHERE publish.id &gt;= $&#123;dataimporter.request.id&#125;"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_name"</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_id"</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"title"</span> <span class="attr">name</span>=<span class="string">"title"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">entity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">document</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></span><br></pre></td></tr></table></figure><p>对应数据表</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 动画记录表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`publish`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`category_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`fansub_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`link`</span> <span class="built_in">varchar</span>(<span class="number">250</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  <span class="string">`download_link`</span> <span class="built_in">varchar</span>(<span class="number">20000</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`file_size`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publisher_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publish_time`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`link`</span> (<span class="string">`link`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字幕组表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`fansub`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br></pre></td></tr></table></figure><p><strong>重启core</strong></p><h1 id="DataImport"><a href="#DataImport" class="headerlink" title="DataImport"></a>DataImport</h1><p>在solrAdmin中, 打开DataImport, 点击执行</p><p><img src="//ww3.sinaimg.cn/large/6ca13d2cgw1f7hs1rim28j20ue0dcacv.jpg" alt=""></p><p>导入成功后, 应该可以正常搜索</p><p><img src="//ww4.sinaimg.cn/large/6ca13d2cgw1f7hs5bgbrkj20wm0nfgsw.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;在 &lt;a href=&quot;/2016/09/03/solr入门系列2-创建自己的搜索引擎.html&quot;&gt;上一篇&lt;/a&gt; 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据&lt;br&gt;在本篇中, 我们将会使用DataImport来构建我们的数据&lt;/p
+      
+    
+    </summary>
+    
+    
+    
+      <category term="solr" scheme="https://nichijou.me/tags/solr/"/>
+    
+      <category term="入门" scheme="https://nichijou.me/tags/%E5%85%A5%E9%97%A8/"/>
+    
+  </entry>
+  
+</feed>
