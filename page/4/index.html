@@ -200,6 +200,222 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/09/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/09/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">命令行处理图片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-09 16:03:19" itemprop="dateCreated datePublished" datetime="2019-04-09T16:03:19+08:00">2019-04-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum install imagemagick jpegoptim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按比例调整尺寸</span></span><br><span class="line">convert -resize 85%x85% test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按长宽调整尺寸</span></span><br><span class="line">convert -resize 1920x1080 test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按长宽调整尺寸，保持原始比例</span></span><br><span class="line">convert -resize 1920x test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩图片质量 (80%)</span></span><br><span class="line">jpegoptim --max=80 --dest=test_opt.jpg test.jpg </span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩到指定大小 (512kb)</span></span><br><span class="line">jpegoptim --size=512 --dest=test_opt.jpg test.jpg</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/" class="post-title-link" itemprop="url">SVN迁移到GIT</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-02 19:53:33" itemprop="dateCreated datePublished" datetime="2019-04-02T19:53:33+08:00">2019-04-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一个使用svn做版本控制的老业务需要迁移到git，原有业务和其他多个业务一同放在一个大的svn仓库中，本次仅需要迁移该业务。目标是迁移到git后保留历史的提交信息，不需要保留svn分支，也不需要保留svn标签。</p>
+<p>网上查阅了一些资料后发现git官方已经提供了<a href="https://git-scm.com/book/zh/v1/Git-%E4%B8%8E%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F-%E8%BF%81%E7%A7%BB%E5%88%B0-Git" target="_blank" rel="noopener">迁移教程</a></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
+<p>以 <a href="https://sourceforge.net/p/keepass/code/HEAD/tree/" target="_blank" rel="noopener">https://sourceforge.net/p/keepass/code/HEAD/tree/</a> 这个项目为例，迁移 <code>trunk</code> 下 <code>Plugins</code> 仓库</p>
+</blockquote>
+<h4 id="安装git-svn"><a href="#安装git-svn" class="headerlink" title="安装git-svn"></a>安装git-svn</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git-svn</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建svn和git的用户映射关系"><a href="#创建svn和git的用户映射关系" class="headerlink" title="创建svn和git的用户映射关系"></a>创建svn和git的用户映射关系</h4><p>推荐的做法是先从svn的log中导出所有用户，然后再编辑每个用户到git的映射关系</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先检出仓库</span></span><br><span class="line">svn checkout https://svn.code.sf.net/p/keepass/code/trunk/Plugins keepass-code-plugins.svn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出所有用户</span></span><br><span class="line">svn <span class="built_in">log</span> keepass-code-plugins.svn --xml | grep -P <span class="string">"^&lt;author"</span> | sort -u | perl -pe <span class="string">'s/&lt;author&gt;(.*?)&lt;\/author&gt;/$1 = /'</span> &gt; users.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据导出的users.txt编辑每个用户的映射关系</span></span><br><span class="line"><span class="comment"># 原始文件</span></span><br><span class="line">&gt; cat users.txt</span><br><span class="line">bill-rubin =</span><br><span class="line">eyebex =</span><br><span class="line"><span class="comment"># 映射后</span></span><br><span class="line">&gt; cat users.txt</span><br><span class="line">bill-rubin = <span class="built_in">test</span> &lt;<span class="built_in">test</span>@test.com&gt;</span><br><span class="line">eyebex = test2 &lt;test2@test.com&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="导入git"><a href="#导入git" class="headerlink" title="导入git"></a>导入git</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git svn <span class="built_in">clone</span> https://svn.code.sf.net/p/keepass/code/trunk/Plugins --authors-file=users.txt --no-metadata keepass-code-plugins.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git <span class="keyword">for</span>-each-ref refs/remotes | cut -d / -f 3- | grep -v @ | <span class="keyword">while</span> <span class="built_in">read</span> branchname; <span class="keyword">do</span> git --git-dir=keepass-code-plugins.git/.git branch <span class="string">"<span class="variable">$branchname</span>"</span> <span class="string">"refs/remotes/<span class="variable">$branchname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -r -d <span class="string">"<span class="variable">$branchname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -d <span class="string">"<span class="variable">$branchname</span>"</span> ; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a>删除标签</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git <span class="keyword">for</span>-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | <span class="keyword">while</span> <span class="built_in">read</span> tagname; <span class="keyword">do</span> git --git-dir=keepass-code-plugins.git/.git tag <span class="string">"<span class="variable">$tagname</span>"</span> <span class="string">"tags/<span class="variable">$tagname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -r -d <span class="string">"tags/<span class="variable">$tagname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -d <span class="string">"tags/<span class="variable">$tagname</span>"</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="对比差异"><a href="#对比差异" class="headerlink" title="对比差异"></a>对比差异</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff -x <span class="string">'.git'</span> -x <span class="string">'.svn'</span> -r keepass-code-plugins.svn keepass-code-plugins.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置远端仓库"><a href="#设置远端仓库" class="headerlink" title="设置远端仓库"></a>设置远端仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git remote add origin git@github.com:Sinute/keepass-code-plugins.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="推送到远端"><a href="#推送到远端" class="headerlink" title="推送到远端"></a>推送到远端</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><p>在git中空目录无法被追踪，如果svn仓库中存在空目录（比如log目录），需要视情况添加 <code>.gitignore</code> 或 <code>.gitkeep</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">MySQL自定义函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-04 10:28:00" itemprop="dateCreated datePublished" datetime="2018-04-04T10:28:00+08:00">2018-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> myFunc $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> myFunc(<span class="keyword">str</span> <span class="built_in">varchar</span>(<span class="number">255</span>),<span class="built_in">number</span> <span class="built_in">bigint</span> <span class="keyword">unsigned</span>)</span><br><span class="line"><span class="keyword">RETURNS</span> <span class="built_in">bigint</span>(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DECLARE</span> x <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">SET</span> x = (</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'test'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">1</span> <span class="keyword">THEN</span> <span class="number">233</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'hello'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">2</span> <span class="keyword">THEN</span> <span class="number">123</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="built_in">number</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">);</span><br><span class="line">RETURN x;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line"></span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> myFunc(<span class="string">'test'</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2018/02/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -384,257 +600,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/" class="post-title-link" itemprop="url">从源码编译PHP-5.3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-01-24 10:20:04" itemprop="dateCreated datePublished" datetime="2017-01-24T10:20:04+08:00">2017-01-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础</strong></p>
-</blockquote>
-<h1 id="需要准备的工具"><a href="#需要准备的工具" class="headerlink" title="需要准备的工具"></a>需要准备的工具</h1><p>官网上的需求:</p>
-<blockquote>
-<p>autoconf: 2.13+ (for PHP &lt; 5.4.0), 2.59+ (for PHP &gt;= 5.4.0)<br>automake: 1.4+<br>libtool: 1.4.x+ (except 1.4.2)<br>re2c: Version 0.13.4 or newer<br>flex: Version 2.5.4 (for PHP &lt;= 5.2)<br>bison:<br>PHP 5.4: 1.28, 1.35, 1.75, 1.875, 2.0, 2.1, 2.2, 2.3, 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.4<br>PHP 5.5: 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.3, 2.6.4, 2.6.5, 2.7<br>PHP 5.6: 2.4 or later, excluding 3.0 only (3.0.1 and later are OK)<br>PHP 7.0: 2.4 or later</p>
-</blockquote>
-<p>本次使用:</p>
-<ul>
-<li><a href="https://ftp.gnu.org/gnu/autoconf/" target="_blank" rel="noopener">autoconf 2.13</a></li>
-<li><a href="https://ftp.gnu.org/gnu/automake/" target="_blank" rel="noopener">automake 1.4</a></li>
-<li><a href="https://ftp.gnu.org/gnu/libtool/" target="_blank" rel="noopener">libtool 1.4</a></li>
-<li><a href="http://re2c.org/install/install.html" target="_blank" rel="noopener">re2c 0.13.6</a></li>
-</ul>
-<h3 id="安装autoconf"><a href="#安装autoconf" class="headerlink" title="安装autoconf"></a>安装autoconf</h3><blockquote>
-<p>wget <a href="https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz</a><br>tar -zxvf autoconf-2.13.tar.gz<br>cd autoconf-2.13<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<h3 id="安装automake"><a href="#安装automake" class="headerlink" title="安装automake"></a>安装automake</h3><blockquote>
-<p>wget <a href="https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz</a><br>tar -zxvf automake-1.4.tar.gz<br>cd automake-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<h3 id="安装libtool"><a href="#安装libtool" class="headerlink" title="安装libtool"></a>安装libtool</h3><blockquote>
-<p>wget <a href="https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz</a><br>tar -zxvf libtool-1.4.tar.gz<br>cd libtool-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<h3 id="安装re2c"><a href="#安装re2c" class="headerlink" title="安装re2c"></a>安装re2c</h3><blockquote>
-<p>wget <a href="https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz" target="_blank" rel="noopener">https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz</a><br>tar -zxvf re2c-0.13.6.tar.gz<br>cd re2c-0.13.6<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<p>最后 export PATH=/Users/Sinute/local:$PATH</p>
-<h1 id="编译PHP"><a href="#编译PHP" class="headerlink" title="编译PHP"></a>编译PHP</h1><p>从 <a href="http://php.net/releases/" target="_blank" rel="noopener">http://php.net/releases/</a> 下载PHP源代码</p>
-<blockquote>
-<p>wget <a href="http://museum.php.net/php5/php-5.3.13.tar.gz" target="_blank" rel="noopener">http://museum.php.net/php5/php-5.3.13.tar.gz</a><br>tar -zxvf php-5.3.13.tar.gz<br>cd php-5.3.13<br>./configure –prefix=/Users/Sinute/local –enable-debug –enable-maintainer-zts –enable-fpm<br>make<br>make install</p>
-</blockquote>
-<p><em>这里带上了–enable-debug, 便于后续开发</em></p>
-<p>编译的时候会报 <code>make: *** [ext/dom/node.lo] Error 1</code></p>
-<p>解决方法:</p>
-<blockquote>
-<p>curl -o php-5.3.13.patch <a href="https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt" target="_blank" rel="noopener">https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt</a><br>patch -p0 -b &lt; php-5.3.13.patch</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">ubuntu禁用ctrl+p快捷键</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-10-21 11:18:43" itemprop="dateCreated datePublished" datetime="2016-10-21T11:18:43+08:00">2016-10-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>安装 <code>dconf-tools</code></li>
-<li>打开 <code>dconf-editor</code> , org -&gt; gnome -&gt; settings-daemon -&gt; plugins -&gt; xrandr</li>
-<li>取消 active</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">solr入门系列3-使用DataImport构建索引</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-09-03 19:00:47" itemprop="dateCreated datePublished" datetime="2016-09-03T19:00:47+08:00">2016-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>在 <a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">上一篇</a> 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据<br>在本篇中, 我们将会使用DataImport来构建我们的数据</p>
-</blockquote>
-<h1 id="solrconfig-xml"><a href="#solrconfig-xml" class="headerlink" title="solrconfig.xml"></a>solrconfig.xml</h1><p>还记得上一篇 <code>conf</code> 中另一个配置文件 <code>solrconfig.xml</code> 吗<br>在其中加入</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入dataimporthandler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lib</span> <span class="attr">dir</span>=<span class="string">"$&#123;solr.install.dir:../../../..&#125;/dist/"</span> <span class="attr">regex</span>=<span class="string">"solr-dataimporthandler-.*\.jar"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="data-config-xml"><a href="#data-config-xml" class="headerlink" title="data-config.xml"></a>data-config.xml</h1><p>在 <code>conf</code> 目录下, 创建 <code>data-config.xml</code>, 写入数据源信息, 以及如何构建数据</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span> <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">url</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/dmhy"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"admin"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">document</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"publish"</span> <span class="attr">transformer</span>=<span class="string">"DateFormatTransformer"</span> <span class="attr">query</span>=<span class="string">"SELECT publish.id, publish.title, fansub.name as fansub_name, fansub.id as fansub_id FROM publish LEFT JOIN fansub ON (publish.fansub_id = fansub.id) WHERE publish.id &gt;= $&#123;dataimporter.request.id&#125;"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_name"</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_id"</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"title"</span> <span class="attr">name</span>=<span class="string">"title"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">entity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">document</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>对应数据表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 动画记录表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`publish`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`category_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`fansub_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`link`</span> <span class="built_in">varchar</span>(<span class="number">250</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  <span class="string">`download_link`</span> <span class="built_in">varchar</span>(<span class="number">20000</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`file_size`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publisher_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publish_time`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`link`</span> (<span class="string">`link`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字幕组表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`fansub`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br></pre></td></tr></table></figure>
-
-<p><strong>重启core</strong></p>
-<h1 id="DataImport"><a href="#DataImport" class="headerlink" title="DataImport"></a>DataImport</h1><p>在solrAdmin中, 打开DataImport, 点击执行</p>
-<p><img src="//ww3.sinaimg.cn/large/6ca13d2cgw1f7hs1rim28j20ue0dcacv.jpg" alt=""></p>
-<p>导入成功后, 应该可以正常搜索</p>
-<p><img src="//ww4.sinaimg.cn/large/6ca13d2cgw1f7hs5bgbrkj20wm0nfgsw.jpg" alt=""></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -707,7 +672,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -720,7 +685,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

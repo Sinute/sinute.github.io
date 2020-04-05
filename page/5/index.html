@@ -200,6 +200,257 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/" class="post-title-link" itemprop="url">从源码编译PHP-5.3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-01-24 10:20:04" itemprop="dateCreated datePublished" datetime="2017-01-24T10:20:04+08:00">2017-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础</strong></p>
+</blockquote>
+<h1 id="需要准备的工具"><a href="#需要准备的工具" class="headerlink" title="需要准备的工具"></a>需要准备的工具</h1><p>官网上的需求:</p>
+<blockquote>
+<p>autoconf: 2.13+ (for PHP &lt; 5.4.0), 2.59+ (for PHP &gt;= 5.4.0)<br>automake: 1.4+<br>libtool: 1.4.x+ (except 1.4.2)<br>re2c: Version 0.13.4 or newer<br>flex: Version 2.5.4 (for PHP &lt;= 5.2)<br>bison:<br>PHP 5.4: 1.28, 1.35, 1.75, 1.875, 2.0, 2.1, 2.2, 2.3, 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.4<br>PHP 5.5: 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.3, 2.6.4, 2.6.5, 2.7<br>PHP 5.6: 2.4 or later, excluding 3.0 only (3.0.1 and later are OK)<br>PHP 7.0: 2.4 or later</p>
+</blockquote>
+<p>本次使用:</p>
+<ul>
+<li><a href="https://ftp.gnu.org/gnu/autoconf/" target="_blank" rel="noopener">autoconf 2.13</a></li>
+<li><a href="https://ftp.gnu.org/gnu/automake/" target="_blank" rel="noopener">automake 1.4</a></li>
+<li><a href="https://ftp.gnu.org/gnu/libtool/" target="_blank" rel="noopener">libtool 1.4</a></li>
+<li><a href="http://re2c.org/install/install.html" target="_blank" rel="noopener">re2c 0.13.6</a></li>
+</ul>
+<h3 id="安装autoconf"><a href="#安装autoconf" class="headerlink" title="安装autoconf"></a>安装autoconf</h3><blockquote>
+<p>wget <a href="https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz</a><br>tar -zxvf autoconf-2.13.tar.gz<br>cd autoconf-2.13<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
+</blockquote>
+<h3 id="安装automake"><a href="#安装automake" class="headerlink" title="安装automake"></a>安装automake</h3><blockquote>
+<p>wget <a href="https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz</a><br>tar -zxvf automake-1.4.tar.gz<br>cd automake-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
+</blockquote>
+<h3 id="安装libtool"><a href="#安装libtool" class="headerlink" title="安装libtool"></a>安装libtool</h3><blockquote>
+<p>wget <a href="https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz</a><br>tar -zxvf libtool-1.4.tar.gz<br>cd libtool-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
+</blockquote>
+<h3 id="安装re2c"><a href="#安装re2c" class="headerlink" title="安装re2c"></a>安装re2c</h3><blockquote>
+<p>wget <a href="https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz" target="_blank" rel="noopener">https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz</a><br>tar -zxvf re2c-0.13.6.tar.gz<br>cd re2c-0.13.6<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
+</blockquote>
+<p>最后 export PATH=/Users/Sinute/local:$PATH</p>
+<h1 id="编译PHP"><a href="#编译PHP" class="headerlink" title="编译PHP"></a>编译PHP</h1><p>从 <a href="http://php.net/releases/" target="_blank" rel="noopener">http://php.net/releases/</a> 下载PHP源代码</p>
+<blockquote>
+<p>wget <a href="http://museum.php.net/php5/php-5.3.13.tar.gz" target="_blank" rel="noopener">http://museum.php.net/php5/php-5.3.13.tar.gz</a><br>tar -zxvf php-5.3.13.tar.gz<br>cd php-5.3.13<br>./configure –prefix=/Users/Sinute/local –enable-debug –enable-maintainer-zts –enable-fpm<br>make<br>make install</p>
+</blockquote>
+<p><em>这里带上了–enable-debug, 便于后续开发</em></p>
+<p>编译的时候会报 <code>make: *** [ext/dom/node.lo] Error 1</code></p>
+<p>解决方法:</p>
+<blockquote>
+<p>curl -o php-5.3.13.patch <a href="https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt" target="_blank" rel="noopener">https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt</a><br>patch -p0 -b &lt; php-5.3.13.patch</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">ubuntu禁用ctrl+p快捷键</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-10-21 11:18:43" itemprop="dateCreated datePublished" datetime="2016-10-21T11:18:43+08:00">2016-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>安装 <code>dconf-tools</code></li>
+<li>打开 <code>dconf-editor</code> , org -&gt; gnome -&gt; settings-daemon -&gt; plugins -&gt; xrandr</li>
+<li>取消 active</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">solr入门系列3-使用DataImport构建索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-09-03 19:00:47" itemprop="dateCreated datePublished" datetime="2016-09-03T19:00:47+08:00">2016-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>在 <a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">上一篇</a> 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据<br>在本篇中, 我们将会使用DataImport来构建我们的数据</p>
+</blockquote>
+<h1 id="solrconfig-xml"><a href="#solrconfig-xml" class="headerlink" title="solrconfig.xml"></a>solrconfig.xml</h1><p>还记得上一篇 <code>conf</code> 中另一个配置文件 <code>solrconfig.xml</code> 吗<br>在其中加入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入dataimporthandler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lib</span> <span class="attr">dir</span>=<span class="string">"$&#123;solr.install.dir:../../../..&#125;/dist/"</span> <span class="attr">regex</span>=<span class="string">"solr-dataimporthandler-.*\.jar"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="data-config-xml"><a href="#data-config-xml" class="headerlink" title="data-config.xml"></a>data-config.xml</h1><p>在 <code>conf</code> 目录下, 创建 <code>data-config.xml</code>, 写入数据源信息, 以及如何构建数据</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span> <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">url</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/dmhy"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"admin"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">document</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"publish"</span> <span class="attr">transformer</span>=<span class="string">"DateFormatTransformer"</span> <span class="attr">query</span>=<span class="string">"SELECT publish.id, publish.title, fansub.name as fansub_name, fansub.id as fansub_id FROM publish LEFT JOIN fansub ON (publish.fansub_id = fansub.id) WHERE publish.id &gt;= $&#123;dataimporter.request.id&#125;"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_name"</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_id"</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"title"</span> <span class="attr">name</span>=<span class="string">"title"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">entity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">document</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对应数据表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 动画记录表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`publish`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`category_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`fansub_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`link`</span> <span class="built_in">varchar</span>(<span class="number">250</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  <span class="string">`download_link`</span> <span class="built_in">varchar</span>(<span class="number">20000</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`file_size`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publisher_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publish_time`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`link`</span> (<span class="string">`link`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字幕组表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`fansub`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br></pre></td></tr></table></figure>
+
+<p><strong>重启core</strong></p>
+<h1 id="DataImport"><a href="#DataImport" class="headerlink" title="DataImport"></a>DataImport</h1><p>在solrAdmin中, 打开DataImport, 点击执行</p>
+<p><img src="//ww3.sinaimg.cn/large/6ca13d2cgw1f7hs1rim28j20ue0dcacv.jpg" alt=""></p>
+<p>导入成功后, 应该可以正常搜索</p>
+<p><img src="//ww4.sinaimg.cn/large/6ca13d2cgw1f7hs5bgbrkj20wm0nfgsw.jpg" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%972-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -366,305 +617,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/08/02/%E4%BD%BF%E7%94%A8Behat%E8%BF%9B%E8%A1%8C%E8%A1%8C%E4%B8%BA%E9%A9%B1%E5%8A%A8%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/08/02/%E4%BD%BF%E7%94%A8Behat%E8%BF%9B%E8%A1%8C%E8%A1%8C%E4%B8%BA%E9%A9%B1%E5%8A%A8%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">使用Behat进行行为驱动测试</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-08-02 14:02:05" itemprop="dateCreated datePublished" datetime="2016-08-02T14:02:05+08:00">2016-08-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是Behat"><a href="#什么是Behat" class="headerlink" title="什么是Behat"></a>什么是Behat</h1><p>Behat 是一个开源的行为驱动开发框架</p>
-<h3 id="何为行为驱动"><a href="#何为行为驱动" class="headerlink" title="何为行为驱动"></a>何为行为驱动</h3><p>它提供了一个简单语意化的方式, 让非程序员也可以使用类似自然语言的方式编写测试用例来参与到测试过程中<br>另外行为驱动更偏向于描述软件的行为, 相对于单元测试来说, 它更关心整体功能是否可以交付而不关心代码的具体细节</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>clone源代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; git <span class="built_in">clone</span> https://github.com/Behat/Behat.git</span><br><span class="line">&gt; <span class="built_in">cd</span> Behat</span><br><span class="line">&gt; composer install -vvv</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以通过以下方式执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/behat</span><br></pre></td></tr></table></figure>
-
-<h1 id="如何开始"><a href="#如何开始" class="headerlink" title="如何开始"></a>如何开始</h1><h3 id="三种基础关键字"><a href="#三种基础关键字" class="headerlink" title="三种基础关键字"></a>三种基础关键字</h3><p><code>Given</code> , <code>When</code> , <code>Then</code></p>
-<p>例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Given there is a &quot;Sith Lord Lightsaber&quot;, which costs £5</span><br><span class="line">When there is a &quot;Sith Lord Lightsaber&quot;, which costs £10</span><br><span class="line">Then there is an &quot;Anakin Lightsaber&quot;, which costs £10</span><br></pre></td></tr></table></figure>
-
-<h3 id="初始化环境文件"><a href="#初始化环境文件" class="headerlink" title="初始化环境文件"></a>初始化环境文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; behat --init</span><br></pre></td></tr></table></figure>
-
-<p>可以看到在 <code>features/bootstrap</code> 下生成了 <code>FeatureContext.php</code> 文件</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Behat</span>\<span class="title">Behat</span>\<span class="title">Context</span>\<span class="title">Context</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Behat</span>\<span class="title">Behat</span>\<span class="title">Context</span>\<span class="title">SnippetAcceptingContext</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Behat</span>\<span class="title">Gherkin</span>\<span class="title">Node</span>\<span class="title">PyStringNode</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Behat</span>\<span class="title">Gherkin</span>\<span class="title">Node</span>\<span class="title">TableNode</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Defines application features from the specific context.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FeatureContext</span> <span class="keyword">implements</span> <span class="title">Context</span>, <span class="title">SnippetAcceptingContext</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Initializes context.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Every scenario gets its own context instance.</span></span><br><span class="line"><span class="comment">     * You can also pass arbitrary arguments to the</span></span><br><span class="line"><span class="comment">     * context constructor through behat.yml.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在环境文件中, 我们可以定义如何解析基础步骤</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Given</span> there is a(n) :arg1, which costs £:arg2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">thereIsAWhichCostsPs</span><span class="params">($arg1, $arg2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> PendingException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>或者通过正则的方式</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Given</span> /there is an? \"([^\"]+)\", which costs £([\d\.]+)/</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">thereIsAWhichCostsPs</span><span class="params">($arg1, $arg2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> PendingException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="编写特性文件"><a href="#编写特性文件" class="headerlink" title="编写特性文件"></a>编写特性文件</h3><p>特性文件是一个由几个关键词组成的.feature文件</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Feature: Some terse yet descriptive text of what is desired</span><br><span class="line">  In order to realize a named business value</span><br><span class="line">  <span class="keyword">As</span> an explicit system actor</span><br><span class="line">  I want to gain some beneficial outcome which furthers the goal</span><br><span class="line"></span><br><span class="line">  Additional text...</span><br><span class="line"></span><br><span class="line">  Scenario: Some determinable business situation</span><br><span class="line">    Given some precondition</span><br><span class="line">    <span class="keyword">And</span> some other precondition</span><br><span class="line">    When some action by the actor</span><br><span class="line">    <span class="keyword">And</span> some other action</span><br><span class="line">    <span class="keyword">And</span> yet another action</span><br><span class="line">    Then some testable outcome is achieved</span><br><span class="line">    <span class="keyword">And</span> something <span class="keyword">else</span> we can check happens too</span><br><span class="line"></span><br><span class="line">  Scenario: A different situation</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p><code>Feature</code> 描述了这个测试的作用和目的<br><code>Scenario</code> 描述了测试的过程</p>
-<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>你可以在根目录下创建 <code>behat.yml</code> 来自定义你的配置<br>包括:</p>
-<ul>
-<li>设置自动载入</li>
-<li>管理套件</li>
-<li>设置过滤器</li>
-<li>设置环境变量</li>
-<li>格式化工具</li>
-<li>其他扩展</li>
-</ul>
-<p>一个简单的例子</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">default:</span></span><br><span class="line">    <span class="attr">suites:</span></span><br><span class="line">        <span class="attr">user:</span></span><br><span class="line">            <span class="attr">paths:</span>    <span class="string">[</span> <span class="string">%paths.base%/features/user</span> <span class="string">]</span></span><br><span class="line">            <span class="attr">contexts:</span> <span class="string">[</span> <span class="string">MyBehatTest\Context\UserContext</span> <span class="string">]</span></span><br><span class="line">        <span class="attr">admin:</span></span><br><span class="line">            <span class="attr">paths:</span>    <span class="string">[</span> <span class="string">%paths.base%/features/admin</span> <span class="string">]</span></span><br><span class="line">            <span class="attr">contexts:</span> <span class="string">[</span> <span class="string">MyBehatTest\Context\AdminContext</span> <span class="string">]</span></span><br><span class="line">        <span class="attr">api:</span></span><br><span class="line">            <span class="attr">paths:</span>    <span class="string">[</span> <span class="string">%paths.base%/features/api</span> <span class="string">]</span></span><br><span class="line">            <span class="attr">contexts:</span> <span class="string">[</span> <span class="string">MyBehatTest\Context\ApiContext</span> <span class="string">]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; behat -s user <span class="comment"># 指定执行user套件</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="结合composer使用"><a href="#结合composer使用" class="headerlink" title="结合composer使用"></a>结合composer使用</h1><p>如果你想使用第三方包或者使用composer的autoload来引入你的代码<br>你只需要简单的创建composer.json</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"require"</span>: &#123;</span><br><span class="line">        <span class="attr">"behat/behat"</span>: <span class="string">"~3.1.0"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"autoload"</span>: &#123;</span><br><span class="line">        <span class="attr">"psr-4"</span>: &#123;</span><br><span class="line">            <span class="attr">"MyBehatTest\\"</span>: <span class="string">"src/"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后和平时一样执行 install 即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; composer install</span><br></pre></td></tr></table></figure>
-
-<p>安装完毕后, 使用以下命令执行测试</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ./vendor/bin/behat</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/07/15/PHP7-Throwable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/07/15/PHP7-Throwable/" class="post-title-link" itemprop="url">PHP7 Throwable</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-07-15 15:54:24" itemprop="dateCreated datePublished" datetime="2016-07-15T15:54:24+08:00">2016-07-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h1><p><a href="http://php.net/manual/en/class.throwable.php" target="_blank" rel="noopener">Throwable</a> 是PHP7中新增的一个基础接口, 实现这个接口的类可以通过 <a href="http://php.net/manual/en/language.exceptions.php" target="_blank" rel="noopener">throw</a> 抛出, <a href="http://php.net/manual/en/class.error.php" target="_blank" rel="noopener">Error</a> 和 <a href="http://php.net/manual/en/class.exception.php" target="_blank" rel="noopener">Exception</a> 都实现了这个接口</p>
-<blockquote>
-<p>需要注意的是, 这个接口不能直接被实现, 而是需要通过继承 <a href="http://php.net/manual/en/class.exception.php" target="_blank" rel="noopener">Exception</a> 来实现</p>
-</blockquote>
-<h1 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h1><p><a href="http://php.net/manual/en/class.error.php" target="_blank" rel="noopener">Error</a> 是PHP7中新增的一个基础类</p>
-<p>它的方法以及行为和 <a href="http://php.net/manual/en/class.exception.php" target="_blank" rel="noopener">Exception</a> 非常相似</p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> NOTEXISTSCLASS;</span><br><span class="line">&#125; <span class="keyword">catch</span> (Throwable $e) &#123;</span><br><span class="line">    <span class="keyword">echo</span> get_class($e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 5.6: Fatal error: Class 'NOTEXISTSCLASS' not found</span></span><br><span class="line"><span class="comment">// 7.0: Error</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="可能产生的影响"><a href="#可能产生的影响" class="headerlink" title="可能产生的影响"></a>可能产生的影响</h1><ol>
-<li>如果你曾经在全局命名空间下定义了 Error 类, 那么会产生一个重定义的错误</li>
-<li>如果你在异常处理中约束了参数类型为 <a href="http://php.net/manual/en/class.exception.php" target="_blank" rel="noopener">Exception</a> , 需要修改为 <a href="http://php.net/manual/en/class.throwable.php" target="_blank" rel="noopener">Throwable</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/07/08/in_array%E7%9A%84%E8%AF%A1%E5%BC%82%E8%A1%8C%E4%B8%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/07/08/in_array%E7%9A%84%E8%AF%A1%E5%BC%82%E8%A1%8C%E4%B8%BA/" class="post-title-link" itemprop="url">in_array的诡异行为</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-07-08 15:23:59" itemprop="dateCreated datePublished" datetime="2016-07-08T15:23:59+08:00">2016-07-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录之前在使用laravel5的验证时踩到的一个坑</p>
-<h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Validator::make(</span><br><span class="line">    [<span class="string">'name'</span> =&gt; <span class="string">'Dayle'</span>],</span><br><span class="line">    [<span class="string">'name'</span> =&gt; <span class="string">'in:Peter, Dayle'</span>]</span><br><span class="line">);</span><br><span class="line"><span class="comment">// The selected name is invalid.</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="in的实现"><a href="#in的实现" class="headerlink" title="in的实现"></a>in的实现</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in的实现</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validateIn</span><span class="params">($attribute, $value, $parameters)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> in_array((string) $value, $parameters);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// $parameters的获取</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseParameters</span><span class="params">($rule, $parameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (strtolower($rule) == <span class="string">'regex'</span>) <span class="keyword">return</span> <span class="keyword">array</span>($parameter);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> str_getcsv($parameter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到in的验证就是简单的调用了in_array方法</p>
-<p>而参数的获取则是调用了str_getcsv</p>
-<p>则原因在于逗号之后的空格导致参数被拆分成了 <code>Peter</code> 和 <code>Dayle</code> (注意Dayle前面有空格)</p>
-<p>Dayle前面多了一个空格导致in_array判断失败</p>
-<h2 id="异象"><a href="#异象" class="headerlink" title="异象"></a>异象</h2><p>回想一下之前的用法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Validator::make(</span><br><span class="line">    [<span class="string">'id'</span> =&gt; <span class="string">'1'</span>],</span><br><span class="line">    [<span class="string">'id'</span> =&gt; <span class="string">'in:1, 2, 3'</span>]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>竟然没问题!?</p>
-<p><img src="//ww2.sinaimg.cn/mw690/6ca13d2cgw1f5uo2t2je7j20b40ar3yu.jpg" alt=""></p>
-<p>看起来原因在传入的值为数字还是字符上</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>为了空格能显示得更清楚, 这边的空格用_代替, 下同</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var_dump(in_array(<span class="string">'1'</span>, [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>])); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(in_array(<span class="string">'1'</span>, [<span class="string">'1_'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>])); <span class="comment">// bool(false)</span></span><br><span class="line">var_dump(in_array(<span class="string">'1'</span>, [<span class="string">'_1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>])); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(in_array(<span class="number">1</span>, [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>])); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(in_array(<span class="number">1</span>, [<span class="string">'1_'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>])); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(in_array(<span class="number">1</span>, [<span class="string">'_1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>])); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(in_array(<span class="string">'a'</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(in_array(<span class="string">'a'</span>, [<span class="string">'a_'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])); <span class="comment">// bool(false)</span></span><br><span class="line">var_dump(in_array(<span class="string">'a'</span>, [<span class="string">'_a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])); <span class="comment">// bool(false)</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>从结果上来看:</p>
-<blockquote>
-<ol>
-<li>string类型数字可以前置空格</li>
-<li>int类型可以前置/后置空格</li>
-<li>非数字字符严格匹配</li>
-</ol>
-</blockquote>
-<p>根据PHP的官方文档:</p>
-<blockquote>
-<p>如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换为数值并且比较按照数值来进行。</p>
-</blockquote>
-<p>可以解释 2 和 3 的结论</p>
-<p><strong>但是</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var_dump(<span class="string">'1'</span>== <span class="string">'_1'</span>); <span class="comment">// bool(true)</span></span><br><span class="line">var_dump(<span class="string">'1'</span>== <span class="string">'1_'</span>); <span class="comment">// bool(false)</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="//ww2.sinaimg.cn/mw690/6ca13d2cgw1f5upb6446qj20c80as0tk.jpg" alt=""></p>
-<p>喵喵喵?</p>
-<p>说好的转换呢?</p>
-<p>反过来对于in的验证</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Validator::make(</span><br><span class="line">    [<span class="string">'id'</span> =&gt; <span class="string">'1'</span>],</span><br><span class="line">    [<span class="string">'id'</span> =&gt; <span class="string">'in:1 ,2 ,3'</span>]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>将导致验证失败</p>
-<p>所以对于使用laravel的in做验证时, 最好写成</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Validator::make(</span><br><span class="line">    [<span class="string">'id'</span> =&gt; <span class="string">'1'</span>],</span><br><span class="line">    [<span class="string">'id'</span> =&gt; <span class="string">'in:1,2,3'</span>]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>#少给自己挖坑#</p>
-<p><em>为自己以前的写法捏把汗</em></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -737,7 +689,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -750,7 +702,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

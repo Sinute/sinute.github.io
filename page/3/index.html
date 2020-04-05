@@ -200,6 +200,240 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/05/13/Mac%E5%A4%96%E6%8E%A52k%E6%98%BE%E7%A4%BA%E5%99%A8%E5%BC%80%E5%90%AFHiDPI%E6%94%AF%E6%8C%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/13/Mac%E5%A4%96%E6%8E%A52k%E6%98%BE%E7%A4%BA%E5%99%A8%E5%BC%80%E5%90%AFHiDPI%E6%94%AF%E6%8C%81/" class="post-title-link" itemprop="url">Mac外接2k显示器开启HiDPI支持</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-13 11:48:37" itemprop="dateCreated datePublished" datetime="2019-05-13T11:48:37+08:00">2019-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="关闭SIP-System-Integrity-Protection"><a href="#关闭SIP-System-Integrity-Protection" class="headerlink" title="关闭SIP(System Integrity Protection)"></a>关闭SIP(System Integrity Protection)</h2><ol>
+<li>关机</li>
+<li>按住 <code>command+R</code> 开机</li>
+<li>实用工具 -&gt; 终端</li>
+<li>输入 <code>csrutil disable</code>，回车</li>
+<li>重启系统</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-bash-3.2<span class="comment"># csrutil disable</span></span><br><span class="line">Successfully disabled System Integrity Protection. Please restart the machine <span class="keyword">for</span> the changes to take effect.</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取显示器DisplayVendorID和DisplayProductID"><a href="#获取显示器DisplayVendorID和DisplayProductID" class="headerlink" title="获取显示器DisplayVendorID和DisplayProductID"></a>获取显示器DisplayVendorID和DisplayProductID</h2><p>终端执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ioreg -l | grep <span class="string">"DisplayVendorID"</span></span><br><span class="line">ioreg -l | grep <span class="string">"DisplayProductID"</span></span><br></pre></td></tr></table></figure>
+
+<p>记下 <code>DisplayVendorID</code> 和 <code>DisplayProductID</code></p>
+<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><blockquote>
+<p><a href="https://comsysto.github.io/Display-Override-PropertyList-File-Parser-and-Generator-with-HiDPI-Support-For-Scaled-Resolutions/" target="_blank" rel="noopener">https://comsysto.github.io/Display-Override-PropertyList-File-Parser-and-Generator-with-HiDPI-Support-For-Scaled-Resolutions/</a></p>
+</blockquote>
+<p>在上面的地址填上刚才得到的 <code>DisplayVendorID</code> 和 <code>DisplayProductID</code>，得到配置和文件路径，把配置放到对应的路径</p>
+<p><img src="https://img.nichijou.me/20191231003626.png" alt=""></p>
+<h2 id="开启SIP-System-Integrity-Protection"><a href="#开启SIP-System-Integrity-Protection" class="headerlink" title="开启SIP(System Integrity Protection)"></a>开启SIP(System Integrity Protection)</h2><ol>
+<li>关机</li>
+<li>按住 <code>command+R</code> 开机</li>
+<li>实用工具 -&gt; 终端</li>
+<li>输入 <code>csrutil enable</code>，回车</li>
+<li>重启系统</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-bash-3.2<span class="comment"># csrutil enable</span></span><br><span class="line">Successfully enabled System Integrity Protection. Please restart the machine <span class="keyword">for</span> the changes to take effect.</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载RDM"><a href="#下载RDM" class="headerlink" title="下载RDM"></a>下载RDM</h2><blockquote>
+<p><a href="http://avi.alkalay.net/software/RDM/" target="_blank" rel="noopener">http://avi.alkalay.net/software/RDM/</a></p>
+</blockquote>
+<p>打开并选择需要的分辨率即可</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">在PHP单元测试中Mock time 以及 date 等预置函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-07 14:04:36" itemprop="dateCreated datePublished" datetime="2019-05-07T14:04:36+08:00">2019-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在单元测试时，有时候会碰到代码中使用了 <code>time</code>， <code>date</code> 等函数，然后根据这些函数的返回执行不同的分支。</p>
+<p>这种情况下想要覆盖到所有分支，可以通过在相同命名空间下定义同名函数，来达到mock的目的</p>
+<p>例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 待测代码</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (time() &gt;= strtotime(<span class="string">'2019-01-01'</span>)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单元测试</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> strtotime(<span class="string">'2018-01-01'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考 <a href="https://stackoverflow.com/a/5337635" target="_blank" rel="noopener">https://stackoverflow.com/a/5337635</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/" class="post-title-link" itemprop="url">Golang中的break label</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-20 14:33:21" itemprop="dateCreated datePublished" datetime="2019-04-20T14:33:21+08:00">2019-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Golang中，支持通过 <code>break</code> 的方式跳出循环。如果需要跳出多层循环，可以使用 <code>break label</code> 的方式实现。</p>
+<p>不同于 <code>goto label</code>， <code>break label</code> 会在循环的下一条语句处开始继续执行，而 <code>goto label</code> 则会从 <code>label</code> 处继续往下执行。如果在下面的例子中把 <code>break label</code> 换成 <code>goto label</code>，则会导致再次进入循环。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">TestLabelBreak:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">		<span class="keyword">if</span> i == <span class="number">3</span> &#123;</span><br><span class="line">			<span class="keyword">break</span> TestLabelBreak</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"end for"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// end for</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/17/PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -363,222 +597,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/09/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/09/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">命令行处理图片</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-09 16:03:19" itemprop="dateCreated datePublished" datetime="2019-04-09T16:03:19+08:00">2019-04-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum install imagemagick jpegoptim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按比例调整尺寸</span></span><br><span class="line">convert -resize 85%x85% test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按长宽调整尺寸</span></span><br><span class="line">convert -resize 1920x1080 test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按长宽调整尺寸，保持原始比例</span></span><br><span class="line">convert -resize 1920x test.jpg test_resize.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩图片质量 (80%)</span></span><br><span class="line">jpegoptim --max=80 --dest=test_opt.jpg test.jpg </span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩到指定大小 (512kb)</span></span><br><span class="line">jpegoptim --size=512 --dest=test_opt.jpg test.jpg</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/" class="post-title-link" itemprop="url">SVN迁移到GIT</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-02 19:53:33" itemprop="dateCreated datePublished" datetime="2019-04-02T19:53:33+08:00">2019-04-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一个使用svn做版本控制的老业务需要迁移到git，原有业务和其他多个业务一同放在一个大的svn仓库中，本次仅需要迁移该业务。目标是迁移到git后保留历史的提交信息，不需要保留svn分支，也不需要保留svn标签。</p>
-<p>网上查阅了一些资料后发现git官方已经提供了<a href="https://git-scm.com/book/zh/v1/Git-%E4%B8%8E%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F-%E8%BF%81%E7%A7%BB%E5%88%B0-Git" target="_blank" rel="noopener">迁移教程</a></p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
-<p>以 <a href="https://sourceforge.net/p/keepass/code/HEAD/tree/" target="_blank" rel="noopener">https://sourceforge.net/p/keepass/code/HEAD/tree/</a> 这个项目为例，迁移 <code>trunk</code> 下 <code>Plugins</code> 仓库</p>
-</blockquote>
-<h4 id="安装git-svn"><a href="#安装git-svn" class="headerlink" title="安装git-svn"></a>安装git-svn</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git-svn</span><br></pre></td></tr></table></figure>
-
-<h4 id="创建svn和git的用户映射关系"><a href="#创建svn和git的用户映射关系" class="headerlink" title="创建svn和git的用户映射关系"></a>创建svn和git的用户映射关系</h4><p>推荐的做法是先从svn的log中导出所有用户，然后再编辑每个用户到git的映射关系</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先检出仓库</span></span><br><span class="line">svn checkout https://svn.code.sf.net/p/keepass/code/trunk/Plugins keepass-code-plugins.svn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出所有用户</span></span><br><span class="line">svn <span class="built_in">log</span> keepass-code-plugins.svn --xml | grep -P <span class="string">"^&lt;author"</span> | sort -u | perl -pe <span class="string">'s/&lt;author&gt;(.*?)&lt;\/author&gt;/$1 = /'</span> &gt; users.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据导出的users.txt编辑每个用户的映射关系</span></span><br><span class="line"><span class="comment"># 原始文件</span></span><br><span class="line">&gt; cat users.txt</span><br><span class="line">bill-rubin =</span><br><span class="line">eyebex =</span><br><span class="line"><span class="comment"># 映射后</span></span><br><span class="line">&gt; cat users.txt</span><br><span class="line">bill-rubin = <span class="built_in">test</span> &lt;<span class="built_in">test</span>@test.com&gt;</span><br><span class="line">eyebex = test2 &lt;test2@test.com&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="导入git"><a href="#导入git" class="headerlink" title="导入git"></a>导入git</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git svn <span class="built_in">clone</span> https://svn.code.sf.net/p/keepass/code/trunk/Plugins --authors-file=users.txt --no-metadata keepass-code-plugins.git</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git <span class="keyword">for</span>-each-ref refs/remotes | cut -d / -f 3- | grep -v @ | <span class="keyword">while</span> <span class="built_in">read</span> branchname; <span class="keyword">do</span> git --git-dir=keepass-code-plugins.git/.git branch <span class="string">"<span class="variable">$branchname</span>"</span> <span class="string">"refs/remotes/<span class="variable">$branchname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -r -d <span class="string">"<span class="variable">$branchname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -d <span class="string">"<span class="variable">$branchname</span>"</span> ; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="删除标签"><a href="#删除标签" class="headerlink" title="删除标签"></a>删除标签</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git <span class="keyword">for</span>-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | <span class="keyword">while</span> <span class="built_in">read</span> tagname; <span class="keyword">do</span> git --git-dir=keepass-code-plugins.git/.git tag <span class="string">"<span class="variable">$tagname</span>"</span> <span class="string">"tags/<span class="variable">$tagname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -r -d <span class="string">"tags/<span class="variable">$tagname</span>"</span>; git --git-dir=keepass-code-plugins.git/.git branch -d <span class="string">"tags/<span class="variable">$tagname</span>"</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="对比差异"><a href="#对比差异" class="headerlink" title="对比差异"></a>对比差异</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff -x <span class="string">'.git'</span> -x <span class="string">'.svn'</span> -r keepass-code-plugins.svn keepass-code-plugins.git</span><br></pre></td></tr></table></figure>
-
-<h4 id="设置远端仓库"><a href="#设置远端仓库" class="headerlink" title="设置远端仓库"></a>设置远端仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git remote add origin git@github.com:Sinute/keepass-code-plugins.git</span><br></pre></td></tr></table></figure>
-
-<h4 id="推送到远端"><a href="#推送到远端" class="headerlink" title="推送到远端"></a>推送到远端</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --git-dir=keepass-code-plugins.git/.git push -u origin master</span><br></pre></td></tr></table></figure>
-
-<h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><p>在git中空目录无法被追踪，如果svn仓库中存在空目录（比如log目录），需要视情况添加 <code>.gitignore</code> 或 <code>.gitkeep</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">MySQL自定义函数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-04 10:28:00" itemprop="dateCreated datePublished" datetime="2018-04-04T10:28:00+08:00">2018-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> myFunc $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> myFunc(<span class="keyword">str</span> <span class="built_in">varchar</span>(<span class="number">255</span>),<span class="built_in">number</span> <span class="built_in">bigint</span> <span class="keyword">unsigned</span>)</span><br><span class="line"><span class="keyword">RETURNS</span> <span class="built_in">bigint</span>(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DECLARE</span> x <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">SET</span> x = (</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'test'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">1</span> <span class="keyword">THEN</span> <span class="number">233</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'hello'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">2</span> <span class="keyword">THEN</span> <span class="number">123</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="built_in">number</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">);</span><br><span class="line">RETURN x;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line"></span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> myFunc(<span class="string">'test'</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -651,7 +669,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -664,7 +682,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
