@@ -21,16 +21,16 @@
     var CONFIG = {"hostname":"nichijou.me","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"hide","offset":12,"onmobile":false,"dimmer":false,"padding":18},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="环境CentOS 8   https:&#x2F;&#x2F;kubernetes.io&#x2F;zh&#x2F;docs&#x2F;setup&#x2F;production-environment&#x2F;tools&#x2F;kubeadm&#x2F;install-kubeadm&#x2F;  安装 kubeadm123456789101112131415161718192021222324cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernet">
+  <meta name="description" content="环境CentOS 8Kubernetes 1.18.0   https:&#x2F;&#x2F;kubernetes.io&#x2F;zh&#x2F;docs&#x2F;setup&#x2F;production-environment&#x2F;tools&#x2F;kubeadm&#x2F;install-kubeadm&#x2F;  安装 kubeadm123456789101112131415161718192021222324cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernetes安装">
 <meta property="og:url" content="https://nichijou.me/2020/04/05/kubernetes%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="日常">
-<meta property="og:description" content="环境CentOS 8   https:&#x2F;&#x2F;kubernetes.io&#x2F;zh&#x2F;docs&#x2F;setup&#x2F;production-environment&#x2F;tools&#x2F;kubeadm&#x2F;install-kubeadm&#x2F;  安装 kubeadm123456789101112131415161718192021222324cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernet">
+<meta property="og:description" content="环境CentOS 8Kubernetes 1.18.0   https:&#x2F;&#x2F;kubernetes.io&#x2F;zh&#x2F;docs&#x2F;setup&#x2F;production-environment&#x2F;tools&#x2F;kubeadm&#x2F;install-kubeadm&#x2F;  安装 kubeadm123456789101112131415161718192021222324cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.nichijou.me/20200405202941.png">
 <meta property="article:published_time" content="2020-04-05T08:32:25.000Z">
-<meta property="article:modified_time" content="2020-04-05T12:29:48.971Z">
+<meta property="article:modified_time" content="2020-04-19T16:07:34.786Z">
 <meta property="article:author" content="Sinute">
 <meta property="article:tag" content="kubernetes">
 <meta name="twitter:card" content="summary">
@@ -208,7 +208,7 @@
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/04/05/kubernetes%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -227,10 +227,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-05 16:32:25 / 修改时间：20:29:48" itemprop="dateCreated datePublished" datetime="2020-04-05T16:32:25+08:00">2020-04-05</time>
+              <time title="创建时间：2020-04-05 16:32:25" itemprop="dateCreated datePublished" datetime="2020-04-05T16:32:25+08:00">2020-04-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-20 00:07:34" itemprop="dateModified" datetime="2020-04-20T00:07:34+08:00">2020-04-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -253,14 +259,14 @@
 
       
         <blockquote>
-<p><strong>环境</strong><br>CentOS 8</p>
+<p><strong>环境</strong><br>CentOS 8<br>Kubernetes 1.18.0</p>
 </blockquote>
 <blockquote>
 <p><a href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/" target="_blank" rel="noopener">https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/</a></p>
 </blockquote>
 <h1 id="安装-kubeadm"><a href="#安装-kubeadm" class="headerlink" title="安装 kubeadm"></a>安装 kubeadm</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br><span class="line"></span><br><span class="line">modprobe br_netfilter</span><br><span class="line">cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
 
-<h1 id="使用-kubeadm-创建单个控制面板节点"><a href="#使用-kubeadm-创建单个控制面板节点" class="headerlink" title="使用 kubeadm 创建单个控制面板节点"></a>使用 kubeadm 创建单个控制面板节点</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --pod-network-cidr=10.233.0.0/16 --control-plane-endpoint=&#123;your_host&#125;</span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+<h1 id="使用-kubeadm-创建单个控制面板节点"><a href="#使用-kubeadm-创建单个控制面板节点" class="headerlink" title="使用 kubeadm 创建单个控制面板节点"></a>使用 kubeadm 创建单个控制面板节点</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init \</span><br><span class="line">  --apiserver-advertise-address=&#123;your_host&#125; \</span><br><span class="line">  --apiserver-bind-port=6443 \</span><br><span class="line">  --pod-network-cidr=10.233.0.0/16 \</span><br><span class="line">  --service-cidr=10.96.0.0/12</span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
 
 <p>执行 <code>kubeadm init</code> 之后会输出类似</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">  sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">  sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line"></span><br><span class="line">You should now deploy a Pod network to the cluster.</span><br><span class="line">Run <span class="string">"kubectl apply -f [podnetwork].yaml"</span> with one of the options listed at:</span><br><span class="line">  /docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">You can now join any number of machines by running the following on each node</span><br><span class="line">as root:</span><br><span class="line"></span><br><span class="line">  kubeadm join &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;<span class="built_in">hash</span>&gt;</span><br></pre></td></tr></table></figure>
@@ -273,13 +279,19 @@
 <p>如果你忘了 <code>--discovery-token-ca-cert-hash</code> 的值，可以通过以下命令获取</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -pubkey -<span class="keyword">in</span> /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2&gt;/dev/null | \</span><br><span class="line">   openssl dgst -sha256 -hex | sed <span class="string">'s/^.* //'</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><blockquote>
+<p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank" rel="noopener">https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/</a></p>
+</blockquote>
+<p>默认情况下由于安全问题 pod 不会被调度到控制节点上，如果你只有一个用于测试的节点，可以执行以下命令放行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes --all node-role.kubernetes.io/master-</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装-Pod-network"><a href="#安装-Pod-network" class="headerlink" title="安装 Pod network"></a>安装 Pod network</h1><p>在控制节点上执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml</span><br></pre></td></tr></table></figure>
+
 <h1 id="加入节点"><a href="#加入节点" class="headerlink" title="加入节点"></a>加入节点</h1><p>在需要加入的机器上执行</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;<span class="built_in">hash</span>&gt;</span><br></pre></td></tr></table></figure>
 
 <p>加入后在控制节点上可以通过 <code>kubectl get nodes</code> 看到新加入的节点</p>
-<h1 id="安装-Pod-network"><a href="#安装-Pod-network" class="headerlink" title="安装 Pod network"></a>安装 Pod network</h1><p>在控制节点上执行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml</span><br></pre></td></tr></table></figure>
-
 <h1 id="安装Dashboard"><a href="#安装Dashboard" class="headerlink" title="安装Dashboard"></a>安装Dashboard</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc7/aio/deploy/recommended.yaml</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># recommended.yaml</span></span><br><span class="line">kind: Service</span><br><span class="line">apiVersion: v1</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    k8s-app: kubernetes-dashboard</span><br><span class="line">  name: kubernetes-dashboard</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">spec:</span><br><span class="line">  <span class="built_in">type</span>: NodePort <span class="comment"># 新增：修改为NodePort</span></span><br><span class="line">  ports:</span><br><span class="line">    - port: 443</span><br><span class="line">      targetPort: 8443</span><br><span class="line">      nodePort: 30001 <span class="comment"># 新增：映射到节点的30001端口</span></span><br><span class="line">  selector:</span><br><span class="line">    k8s-app: kubernetes-dashboard</span><br></pre></td></tr></table></figure>
@@ -317,7 +329,10 @@
     <a href="/2020/04/05/CentOS%E5%85%B3%E9%97%ADswap/" rel="prev" title="CentOS关闭swap">
       <i class="fa fa-chevron-left"></i> CentOS关闭swap
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/%E5%88%9B%E5%BB%BANFS%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" rel="next" title="创建NFS网络文件系统">
+      创建NFS网络文件系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -331,13 +346,6 @@
 
           </div>
           
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -384,14 +392,14 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-kubeadm"><span class="nav-number">1.</span> <span class="nav-text">安装 kubeadm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-kubeadm-创建单个控制面板节点"><span class="nav-number">2.</span> <span class="nav-text">使用 kubeadm 创建单个控制面板节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加入节点"><span class="nav-number">3.</span> <span class="nav-text">加入节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Pod-network"><span class="nav-number">4.</span> <span class="nav-text">安装 Pod network</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Dashboard"><span class="nav-number">5.</span> <span class="nav-text">安装Dashboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#清理节点"><span class="nav-number">6.</span> <span class="nav-text">清理节点</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-kubeadm"><span class="nav-number">1.</span> <span class="nav-text">安装 kubeadm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-kubeadm-创建单个控制面板节点"><span class="nav-number">2.</span> <span class="nav-text">使用 kubeadm 创建单个控制面板节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题"><span class="nav-number">2.1.</span> <span class="nav-text">其他问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Pod-network"><span class="nav-number">3.</span> <span class="nav-text">安装 Pod network</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加入节点"><span class="nav-number">4.</span> <span class="nav-text">加入节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Dashboard"><span class="nav-number">5.</span> <span class="nav-text">安装Dashboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#清理节点"><span class="nav-number">6.</span> <span class="nav-text">清理节点</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Sinute"
-      src="https://avatars1.githubusercontent.com/u/2202852">
+      src="https://img.nichijou.me/20200420001227.png">
   <p class="site-author-name" itemprop="name">Sinute</p>
   <div class="site-description" itemprop="description">- 碎碎念。</div>
 </div>
@@ -400,7 +408,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -413,7 +421,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -569,27 +577,6 @@ window.addEventListener('pjax:success', () => {
   
 
   
-
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://nichijou.me/2020/04/05/kubernetes%E5%AE%89%E8%A3%85/";
-    this.page.identifier = "2020/04/05/kubernetes安装/";
-    this.page.title = "kubernetes安装";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://nichijou.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
 
     </div>
 </body>

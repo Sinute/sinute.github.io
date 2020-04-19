@@ -200,10 +200,263 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/04/MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">MySQL自定义函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-04 10:28:00" itemprop="dateCreated datePublished" datetime="2018-04-04T10:28:00+08:00">2018-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> myFunc $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> myFunc(<span class="keyword">str</span> <span class="built_in">varchar</span>(<span class="number">255</span>),<span class="built_in">number</span> <span class="built_in">bigint</span> <span class="keyword">unsigned</span>)</span><br><span class="line"><span class="keyword">RETURNS</span> <span class="built_in">bigint</span>(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DECLARE</span> x <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">SET</span> x = (</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'test'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">1</span> <span class="keyword">THEN</span> <span class="number">233</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'hello'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">2</span> <span class="keyword">THEN</span> <span class="number">123</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="built_in">number</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">);</span><br><span class="line">RETURN x;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line"></span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> myFunc(<span class="string">'test'</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2018/02/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/" class="post-title-link" itemprop="url">数据库主从同步</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-03 18:42:56" itemprop="dateCreated datePublished" datetime="2018-02-03T18:42:56+08:00">2018-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>环境</strong><br>CentOS 8<br>MariaDB 10.3.17</p>
+</blockquote>
+<h1 id="主库操作"><a href="#主库操作" class="headerlink" title="主库操作"></a>主库操作</h1><h2 id="修改主库配置"><a href="#修改主库配置" class="headerlink" title="修改主库配置"></a>修改主库配置</h2><blockquote>
+<p>/etc/my.cnf.d/mariadb-server.cnf</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启binlog</span></span><br><span class="line">[mysqld]</span><br><span class="line">server-id = 1</span><br><span class="line">binlog_format = mixed</span><br><span class="line"><span class="built_in">log</span>-bin = mysql-bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启数据库"><a href="#重启数据库" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mariadb restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建同步账户"><a href="#创建同步账户" class="headerlink" title="创建同步账户"></a>创建同步账户</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'user'</span>@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'password'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="备份主库"><a href="#备份主库" class="headerlink" title="备份主库"></a>备份主库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump --routines --single_transaction --master-data=2 --databases xxx &gt; backup.sql</span><br></pre></td></tr></table></figure>
+
+<h1 id="从库操作"><a href="#从库操作" class="headerlink" title="从库操作"></a>从库操作</h1><h2 id="修改从库配置"><a href="#修改从库配置" class="headerlink" title="修改从库配置"></a>修改从库配置</h2><blockquote>
+<p>/etc/my.cnf.d/mariadb-server.cnf</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">server-id = 2</span><br><span class="line">relay-log = relay-bin</span><br><span class="line">read_only = on</span><br><span class="line"><span class="comment"># binlog_do_db = db1</span></span><br><span class="line"><span class="comment"># binlog_do_db = db2</span></span><br><span class="line">binlog_ignore_db=mysql</span><br><span class="line">binlog_ignore_db=performance_schema</span><br><span class="line">binlog_ignore_db=information_schema</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启数据库-1"><a href="#重启数据库-1" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mariadb restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql &lt; backup.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="确认同步位置"><a href="#确认同步位置" class="headerlink" title="确认同步位置"></a>确认同步位置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n50 backup.sql</span><br></pre></td></tr></table></figure>
+
+<p>找到类似 <code>CHANGE MASTER TO MASTER_LOG_FILE=&#39;mysql-bin.000025&#39;, MASTER_LOG_POS=1244342;</code></p>
+<h2 id="设置同步账户密码以及同步位置"><a href="#设置同步账户密码以及同步位置" class="headerlink" title="设置同步账户密码以及同步位置"></a>设置同步账户密码以及同步位置</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span></span><br><span class="line">master_host=<span class="string">'master_host'</span>,</span><br><span class="line">master_user=<span class="string">'user'</span>,</span><br><span class="line">master_password=<span class="string">'password'</span>,</span><br><span class="line">master_port=<span class="number">3306</span>,</span><br><span class="line">master_log_file=<span class="string">'mysql-bin.000025'</span>,</span><br><span class="line">master_log_pos=<span class="number">1244342</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动同步"><a href="#启动同步" class="headerlink" title="启动同步"></a>启动同步</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查同步状态"><a href="#检查同步状态" class="headerlink" title="检查同步状态"></a>检查同步状态</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>;</span><br></pre></td></tr></table></figure>
+
+<p>确认 <code>Slave_IO_Running</code> 以及 <code>Slave_SQL_Running</code> 是否都为 <code>Yes</code></p>
+<h1 id="其他问题排除"><a href="#其他问题排除" class="headerlink" title="其他问题排除"></a>其他问题排除</h1><ul>
+<li>出现 <code>Slave_IO_Running: Connecting</code>，且 <code>Last_IO_Errno: 2003</code></li>
+</ul>
+<ol>
+<li>网络是否正常</li>
+<li>密码是否正确</li>
+<li>MASTER_LOG_POS是否正确</li>
+<li>是否被SELinux策略阻止</li>
+</ol>
+<p>1和2可以在从库服务器上直接通过手动使用同步账号连接主库，检查是否可以登陆<br>3需要确认 <code>backup.sql</code> 中的位置和设置同步时的位置是否相同<br>4可以通过 <code>setenforce 0</code> 临时关闭SELinux，永久关闭修改 <code>/etc/selinux/config</code> 中，<code>SELINUX=disabled</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2017/01/24/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AAPHP%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/01/24/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AAPHP%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">创建第一个PHP扩展</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-01-24 15:00:38" itemprop="dateCreated datePublished" datetime="2017-01-24T15:00:38+08:00">2017-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础 &gt; <a href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3.html">PHP-5.3.13开发环境编译</a></strong></p>
+</blockquote>
+<p>推荐的教程 <a href="https://github.com/walu/phpbook" target="_blank" rel="noopener">https://github.com/walu/phpbook</a></p>
+<h1 id="编写第一个扩展"><a href="#编写第一个扩展" class="headerlink" title="编写第一个扩展"></a>编写第一个扩展</h1><h3 id="创建文件config-m4"><a href="#创建文件config-m4" class="headerlink" title="创建文件config.m4"></a>创建文件config.m4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PHP_ARG_ENABLE(</span><br><span class="line">    helloworld,</span><br><span class="line">    [Whether to enable the &quot;helloworld&quot; extension],</span><br><span class="line">    [enable-helloworld        Enable &quot;helloworld&quot; extension support]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if test $PHP_HELLOWORLD !&#x3D; &quot;no&quot;; then</span><br><span class="line">    PHP_SUBST(HELLOWORLD_SHARED_LIBADD)</span><br><span class="line">    PHP_NEW_EXTENSION(helloworld, helloworld.c, $ext_shared)</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建helloworld-h"><a href="#创建helloworld-h" class="headerlink" title="创建helloworld.h"></a>创建helloworld.h</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HELLOWORLD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HELLOWORLD_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载config.h，如果配置了的话</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> HAVE_CONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"config.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载php头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"php.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> phpext_helloworld_ptr &amp;helloworld_module_entry</span></span><br><span class="line"><span class="keyword">extern</span> zend_module_entry helloworld_module_entry;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建helloworld-c"><a href="#创建helloworld-c" class="headerlink" title="创建helloworld.c"></a>创建helloworld.c</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"helloworld.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这边定义了hello_world</span></span><br><span class="line">ZEND_FUNCTION(hello_world)</span><br><span class="line">&#123;</span><br><span class="line">    php_printf(<span class="string">"Hello World!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> zend_function_entry helloworld_functions[] = &#123;</span><br><span class="line">    ZEND_FE(hello_world, <span class="literal">NULL</span>) <span class="comment">// 第一个参数为函数名, 第二个参数为arg_info</span></span><br><span class="line">    <span class="comment">// 可以继续添加</span></span><br><span class="line">    &#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//module entry</span></span><br><span class="line">zend_module_entry helloworld_module_entry = &#123;</span><br><span class="line">#<span class="keyword">if</span> ZEND_MODULE_API_NO &gt;= <span class="number">20010901</span></span><br><span class="line">     STANDARD_MODULE_HEADER,</span><br><span class="line">#endif</span><br><span class="line">    <span class="string">"helloworld"</span>, <span class="comment">//这个地方是扩展名称，往往我们会在这个地方使用一个宏。</span></span><br><span class="line">    helloworld_functions, <span class="comment">/* Functions */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MINIT */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MSHUTDOWN */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* RINIT */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* RSHUTDOWN */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MINFO */</span></span><br><span class="line">#<span class="keyword">if</span> ZEND_MODULE_API_NO &gt;= <span class="number">20010901</span></span><br><span class="line">    <span class="string">"1.0"</span>, <span class="comment">//这个地方是我们扩展的版本</span></span><br><span class="line">#endif</span><br><span class="line">    STANDARD_MODULE_PROPERTIES</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> COMPILE_DL_HELLOWORLD</span></span><br><span class="line">ZEND_GET_MODULE(helloworld)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h1><blockquote>
+<p>phpize<br>./configure<br>make</p>
+</blockquote>
+<p>然后就可以在 modules 目录下找到对应的 <code>helloworld.so</code></p>
+<h1 id="加载扩展"><a href="#加载扩展" class="headerlink" title="加载扩展"></a>加载扩展</h1><p>在 <code>php.ini</code> 中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extension_dir&#x3D;PATH&#x2F;TO&#x2F;EXTENSION</span><br><span class="line">extension&#x3D;helloworld.so</span><br></pre></td></tr></table></figure>
+
+<h1 id="检查是否成功"><a href="#检查是否成功" class="headerlink" title="检查是否成功"></a>检查是否成功</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">'hello_world();'</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -231,7 +484,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
               </span>
 
           
@@ -304,7 +557,7 @@
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/10/21/ubuntu%E7%A6%81%E7%94%A8ctrl-p%E5%BF%AB%E6%8D%B7%E9%94%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -332,7 +585,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
               </span>
 
           
@@ -366,262 +619,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">solr入门系列3-使用DataImport构建索引</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-09-03 19:00:47" itemprop="dateCreated datePublished" datetime="2016-09-03T19:00:47+08:00">2016-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>在 <a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">上一篇</a> 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据<br>在本篇中, 我们将会使用DataImport来构建我们的数据</p>
-</blockquote>
-<h1 id="solrconfig-xml"><a href="#solrconfig-xml" class="headerlink" title="solrconfig.xml"></a>solrconfig.xml</h1><p>还记得上一篇 <code>conf</code> 中另一个配置文件 <code>solrconfig.xml</code> 吗<br>在其中加入</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入dataimporthandler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lib</span> <span class="attr">dir</span>=<span class="string">"$&#123;solr.install.dir:../../../..&#125;/dist/"</span> <span class="attr">regex</span>=<span class="string">"solr-dataimporthandler-.*\.jar"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="data-config-xml"><a href="#data-config-xml" class="headerlink" title="data-config.xml"></a>data-config.xml</h1><p>在 <code>conf</code> 目录下, 创建 <code>data-config.xml</code>, 写入数据源信息, 以及如何构建数据</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span> <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">url</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/dmhy"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"admin"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">document</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"publish"</span> <span class="attr">transformer</span>=<span class="string">"DateFormatTransformer"</span> <span class="attr">query</span>=<span class="string">"SELECT publish.id, publish.title, fansub.name as fansub_name, fansub.id as fansub_id FROM publish LEFT JOIN fansub ON (publish.fansub_id = fansub.id) WHERE publish.id &gt;= $&#123;dataimporter.request.id&#125;"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_name"</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_id"</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"title"</span> <span class="attr">name</span>=<span class="string">"title"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">entity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">document</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>对应数据表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 动画记录表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`publish`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`category_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`fansub_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`link`</span> <span class="built_in">varchar</span>(<span class="number">250</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  <span class="string">`download_link`</span> <span class="built_in">varchar</span>(<span class="number">20000</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`file_size`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publisher_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publish_time`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`link`</span> (<span class="string">`link`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字幕组表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`fansub`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br></pre></td></tr></table></figure>
-
-<p><strong>重启core</strong></p>
-<h1 id="DataImport"><a href="#DataImport" class="headerlink" title="DataImport"></a>DataImport</h1><p>在solrAdmin中, 打开DataImport, 点击执行</p>
-<p><img src="//ww3.sinaimg.cn/large/6ca13d2cgw1f7hs1rim28j20ue0dcacv.jpg" alt=""></p>
-<p>导入成功后, 应该可以正常搜索</p>
-<p><img src="//ww4.sinaimg.cn/large/6ca13d2cgw1f7hs5bgbrkj20wm0nfgsw.jpg" alt=""></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%972-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%972-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" class="post-title-link" itemprop="url">solr入门系列2-创建自己的搜索引擎</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-09-03 12:42:29" itemprop="dateCreated datePublished" datetime="2016-09-03T12:42:29+08:00">2016-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>在 <a href="/2016/09/03/solr入门系列1-安装.html">上一篇</a> 中, 我们安装并启动了solr服务器, 在这一篇中, 我们将从0开始创建我们自己的搜索服务<br>在本篇中, 将会介绍如何创建自己的搜索引擎, 并往其中插入索引数据</p>
-</blockquote>
-<h1 id="假设情景"><a href="#假设情景" class="headerlink" title="假设情景"></a>假设情景</h1><p>我们从动漫花园爬取了所有的动画分类数据, 然后需要一个搜索引擎, 来帮助我们索引数据</p>
-<h1 id="创建core"><a href="#创建core" class="headerlink" title="创建core"></a>创建core</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ./bin/solr create_core -c my_core</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在创建完core之后, 可以在 <code>server/solr</code> 下看到生成了一个名为 <code>my_core</code> 的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── conf</span><br><span class="line">│   ├── currency.xml</span><br><span class="line">│   ├── elevate.xml</span><br><span class="line">│   ├── lang</span><br><span class="line">│   ├── managed-schema</span><br><span class="line">│   ├── params.json</span><br><span class="line">│   ├── protwords.txt</span><br><span class="line">│   ├── solrconfig.xml</span><br><span class="line">│   ├── stopwords.txt</span><br><span class="line">│   └── synonyms.txt</span><br><span class="line">├── core.properties</span><br><span class="line">└── data</span><br><span class="line">    ├── index</span><br><span class="line">    ├── snapshot_metadata</span><br><span class="line">    └── tlog</span><br></pre></td></tr></table></figure>
-
-<p>其中最关键的2个文件为 <code>conf/managed-schema</code> 和 <code>conf/solrconfig.xml</code></p>
-<h3 id="managed-schema"><a href="#managed-schema" class="headerlink" title="managed-schema"></a>managed-schema</h3><p>在 <code>managed-schema</code> 中, 定义我们的数据类型, 记得 <strong>保存后重启core</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 记录id --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"int"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"true"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 字幕组名称 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 字幕组id --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span> <span class="attr">type</span>=<span class="string">"int"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 动画标题 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"fansub_name"</span> <span class="attr">dest</span>=<span class="string">"_text_"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"title"</span> <span class="attr">dest</span>=<span class="string">"_text_"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>几种属性解释</p>
-<ul>
-<li>type 对应字段类型</li>
-<li>indexed 是否需要索引数据, 如果为false则无法通过该字段检索</li>
-<li>stored 是否在solr中保存该值, 如果为false则搜索结果中不会返回该字段</li>
-<li>multiValued 是否为多值</li>
-</ul>
-<blockquote>
-<p>其中 <code>copyField</code> 字段的意思是将 <code>fansub_name</code> 和 <code>title</code> 放到 <code>_text_</code> 字段中去, 使得查询 <code>_text_</code> 字段时可以同时检索 <code>fansub_name</code> 和 <code>title</code></p>
-</blockquote>
-<h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "add": &#123;</span></span><br><span class="line"><span class="string">    "doc": &#123;</span></span><br><span class="line"><span class="string">      "id": 11243,</span></span><br><span class="line"><span class="string">      "title": "[澄空学园&amp;华盟字幕社] 四月是你的谎言 第01-22话 MKV 720p 简体外挂 合集 特典付",</span></span><br><span class="line"><span class="string">      "fansub_name": "澄空学园",</span></span><br><span class="line"><span class="string">      "fansub_id": 58</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "commitWithin": 1000,</span></span><br><span class="line"><span class="string">    "overwrite": true</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;'</span> <span class="string">"http://localhost:8983/solr/my_core/update/?wt=json"</span></span><br></pre></td></tr></table></figure>
-
-<p>使用solrAdmin查看, 应该可以看到刚才创建的记录</p>
-<p><img src="//ww1.sinaimg.cn/large/6ca13d2cgw1f7hr4os9m1j20v10h2adt.jpg" alt=""></p>
-<blockquote>
-<p><a href="/2016/09/03/solr入门系列3-使用DataImport构建索引.html">下一篇</a> 将介绍如何使用DataImport来构建索引</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%971-%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%971-%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">solr入门系列1-安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-09-03 11:45:30" itemprop="dateCreated datePublished" datetime="2016-09-03T11:45:30+08:00">2016-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是solr"><a href="#什么是solr" class="headerlink" title="什么是solr"></a>什么是solr</h1><blockquote>
-<p>Solr（读作“solar”）是Apache Lucene项目的开源企业搜索平台。其主要功能包括全文检索、命中标示[1]、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。Solr是高度可扩展的，并提供了分布式搜索和索引复制。Solr是最流行的企业级搜索引擎，Solr 4还增加了NoSQL支持。<br>– 摘自维基百科</p>
-</blockquote>
-<p>一句话概括: 一个搜索引擎</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h3 id="下载solr"><a href="#下载solr" class="headerlink" title="下载solr"></a>下载solr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wget http://apache.fayea.com/lucene/solr/6.2.0/solr-6.2.0.tgz</span><br><span class="line">&gt; tar -xvf solr-6.2.0.tgz</span><br></pre></td></tr></table></figure>
-
-<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> solr-6.2.0</span><br><span class="line">&gt; ./bin/solr start</span><br></pre></td></tr></table></figure>
-
-<p>打开 <a href="http://localhost:8983/solr/#/" target="_blank" rel="noopener">http://localhost:8983/solr/#/</a> 应该可以看到solr已经跑起来了 <img src="//ww3.sinaimg.cn/large/6ca13d2cgw1f7hfd8m8msj20tk0jaq6y.jpg" alt=""></p>
-<blockquote>
-<p><a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">下一篇</a> 将介绍如何创建自己的搜索引擎</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -680,7 +682,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Sinute"
-      src="https://avatars1.githubusercontent.com/u/2202852">
+      src="https://img.nichijou.me/20200420001227.png">
   <p class="site-author-name" itemprop="name">Sinute</p>
   <div class="site-description" itemprop="description">- 碎碎念。</div>
 </div>
@@ -689,7 +691,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -702,7 +704,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -858,7 +860,6 @@ window.addEventListener('pjax:success', () => {
   
 
   
-
 
     </div>
 </body>

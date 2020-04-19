@@ -200,10 +200,278 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/04/05/Prometheus-Grafana%E6%89%93%E9%80%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/05/Prometheus-Grafana%E6%89%93%E9%80%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Prometheus+Grafana打造监控系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-05 14:08:14 / 修改时间：15:30:43" itemprop="dateCreated datePublished" datetime="2020-04-05T14:08:14+08:00">2020-04-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>环境</strong><br>CentOS 8</p>
+</blockquote>
+<h1 id="什么是-Prometheus"><a href="#什么是-Prometheus" class="headerlink" title="什么是 Prometheus"></a>什么是 Prometheus</h1><p>Prometheus 是一套开源的系统监控报警框架。它启发于 Google 的 borgmon 监控系统，由工作在 SoundCloud 的 google 前员工在 2012 年创建，作为社区开源项目进行开发，并于 2015 年正式发布。2016 年，Prometheus 正式加入 Cloud Native Computing Foundation，成为受欢迎度仅次于 Kubernetes 的项目。</p>
+<p>作为新一代的监控框架，Prometheus 具有以下特点：</p>
+<p>强大的多维度数据模型：<br>时间序列数据通过 metric 名和键值对来区分。<br>所有的 metrics 都可以设置任意的多维标签。<br>数据模型更随意，不需要刻意设置为以点分隔的字符串。<br>可以对数据模型进行聚合，切割和切片操作。<br>支持双精度浮点类型，标签可以设为全 unicode。<br>灵活而强大的查询语句（PromQL）：在同一个查询语句，可以对多个 metrics 进行乘法、加法、连接、取分数位等操作。<br>易于管理： Prometheus server 是一个单独的二进制文件，可直接在本地工作，不依赖于分布式存储。<br>高效：平均每个采样点仅占 3.5 bytes，且一个 Prometheus server 可以处理数百万的 metrics。<br>使用 pull 模式采集时间序列数据，这样不仅有利于本机测试而且可以避免有问题的服务器推送坏的 metrics。<br>可以采用 push gateway 的方式把时间序列数据推送至 Prometheus server 端。<br>可以通过服务发现或者静态配置去获取监控的 targets。<br>有多种可视化图形界面。<br>易于伸缩。<br>需要指出的是，由于数据采集可能会有丢失，所以 Prometheus 不适用对采集数据要 100% 准确的情形。但如果用于记录时间序列数据，Prometheus 具有很大的查询优势，此外，Prometheus 适用于微服务的体系架构。</p>
+<h1 id="Prometheus-组成及架构"><a href="#Prometheus-组成及架构" class="headerlink" title="Prometheus 组成及架构"></a>Prometheus 组成及架构</h1><p>Prometheus 生态圈中包含了多个组件，其中许多组件是可选的：</p>
+<ul>
+<li><strong>Prometheus Server</strong>: 用于收集和存储时间序列数据。</li>
+<li><strong>Client Library</strong>: 客户端库，为需要监控的服务生成相应的 metrics 并暴露给 Prometheus server。当 Prometheus server 来 pull 时，直接返回实时状态的 metrics。</li>
+<li><strong>Push Gateway</strong>: 主要用于短期的 jobs。由于这类 jobs 存在时间较短，可能在 Prometheus 来 pull 之前就消失了。为此，这次 jobs 可以直接向 Prometheus server 端推送它们的 metrics。这种方式主要用于服务层面的 metrics，对于机器层面的 metrices，需要使用 node exporter。</li>
+<li><strong>Exporters</strong>: 用于暴露已有的第三方服务的 metrics 给 Prometheus。</li>
+<li><strong>Alertmanager</strong>: 从 Prometheus server 端接收到 alerts 后，会进行去除重复数据，分组，并路由到对收的接受方式，发出报警。常见的接收方式有：电子邮件，pagerduty，OpsGenie, webhook 等。</li>
+<li>一些其他的工具。</li>
+</ul>
+<p>图 1 为 Prometheus 官方文档中的架构图：</p>
+<h5 id="图-1-Prometheus-架构图"><a href="#图-1-Prometheus-架构图" class="headerlink" title="图 1. Prometheus 架构图"></a>图 1. Prometheus 架构图</h5><p><img src="https://img.nichijou.me/20200405010508.png" alt="img"></p>
+<p>从上图可以看出，Prometheus 的主要模块包括：Prometheus server, exporters, Pushgateway, PromQL, Alertmanager 以及图形界面。</p>
+<p>其大概的工作流程是：</p>
+<ol>
+<li>Prometheus server 定期从配置好的 jobs 或者 exporters 中拉 metrics，或者接收来自 Pushgateway 发过来的 metrics，或者从其他的 Prometheus server 中拉 metrics。</li>
+<li>Prometheus server 在本地存储收集到的 metrics，并运行已定义好的 alert.rules，记录新的时间序列或者向 Alertmanager 推送警报。</li>
+<li>Alertmanager 根据配置文件，对接收到的警报进行处理，发出告警。</li>
+<li>在图形界面中，可视化采集数据。</li>
+</ol>
+<h1 id="什么是-Grafana"><a href="#什么是-Grafana" class="headerlink" title="什么是 Grafana"></a>什么是 Grafana</h1><p>Grafana可以通过可视化的方式向你呈现数据。在Grafana中，你可以通过将Prometheus添加为数据源，来将Grafana作为前端的数据展示。</p>
+<hr>
+<h1 id="node-exporter-安装"><a href="#node-exporter-安装" class="headerlink" title="node_exporter 安装"></a>node_exporter 安装</h1><h2 id="获取-node-exporter"><a href="#获取-node-exporter" class="headerlink" title="获取 node_exporter"></a>获取 node_exporter</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf node_exporter-0.18.1.linux-amd64.tar.gz</span><br><span class="line">mkdir -p /usr/<span class="built_in">local</span>/prom</span><br><span class="line">mv node_exporter-0.18.1.linux-amd64 /usr/<span class="built_in">local</span>/prom/node_exporter</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认监听9100端口，可通过 <code>--web.listen-address=&quot;:9100&quot;</code> 修改</p>
+</blockquote>
+<h2 id="创建-Systemd"><a href="#创建-Systemd" class="headerlink" title="创建 Systemd"></a>创建 Systemd</h2><blockquote>
+<p>/etc/systemd/system/node_exporter.service</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=node_exporter</span><br><span class="line">After=network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=root</span><br><span class="line">Group=root</span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/prom/node_exporter/node_exporter --web.listen-address=<span class="string">":9100"</span></span><br><span class="line">Restart=on-failure</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> node_exporter</span><br><span class="line">systemctl start node_exporter</span><br></pre></td></tr></table></figure>
+
+<h1 id="Prometheus-安装"><a href="#Prometheus-安装" class="headerlink" title="Prometheus 安装"></a>Prometheus 安装</h1><blockquote>
+<p><a href="https://prometheus.io/download/" target="_blank" rel="noopener">https://prometheus.io/download/</a></p>
+</blockquote>
+<h2 id="获取-Prometheus"><a href="#获取-Prometheus" class="headerlink" title="获取 Prometheus"></a>获取 Prometheus</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/prometheus/prometheus/releases/download/v2.17.1/prometheus-2.17.1.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf prometheus-2.17.1.linux-amd64.tar.gz</span><br><span class="line">mv prometheus-2.17.1.linux-amd64 /usr/<span class="built_in">local</span>/prometheus</span><br><span class="line">mkdir -p /usr/<span class="built_in">local</span>/etc/prometheus</span><br><span class="line">cp /usr/<span class="built_in">local</span>/prometheus/prometheus.yml /usr/<span class="built_in">local</span>/etc/prometheus</span><br></pre></td></tr></table></figure>
+
+<h2 id="Prometheus-配置追加-node-exporter"><a href="#Prometheus-配置追加-node-exporter" class="headerlink" title="Prometheus 配置追加 node_exporter"></a>Prometheus 配置追加 node_exporter</h2><blockquote>
+<p>/usr/local/etc/prometheus</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:</span><br><span class="line">  - job_name: <span class="string">'node'</span></span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [<span class="string">'localhost:9100'</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-Systemd-1"><a href="#创建-Systemd-1" class="headerlink" title="创建 Systemd"></a>创建 Systemd</h2><blockquote>
+<p>/etc/systemd/system/prometheus.service</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=prometheus</span><br><span class="line">After=network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=root</span><br><span class="line">Group=root</span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/prometheus/prometheus --config.file=/usr/<span class="built_in">local</span>/etc/prometheus/prometheus.yml</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -HUP <span class="variable">$MAINPID</span></span><br><span class="line">Restart=on-failure</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> prometheus</span><br><span class="line">systemctl start prometheus</span><br></pre></td></tr></table></figure>
+
+<h1 id="Grafana-安装"><a href="#Grafana-安装" class="headerlink" title="Grafana 安装"></a>Grafana 安装</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.grafana.com/oss/release/grafana-6.7.2-1.x86_64.rpm</span><br><span class="line">sudo yum install grafana-6.7.2-1.x86_64.rpm</span><br><span class="line"></span><br><span class="line">systemctl start grafana-server.service</span><br></pre></td></tr></table></figure>
+
+<p>添加 Prometheus 作为数据源</p>
+<p><img src="https://img.nichijou.me/20200405141029.png" alt=""></p>
+<p>在 <a href="https://grafana.com/grafana/dashboards" target="_blank" rel="noopener">https://grafana.com/grafana/dashboards</a> 有相当多别人分享的 Dashboard，可以方便的导入使用</p>
+<h1 id="监控效果"><a href="#监控效果" class="headerlink" title="监控效果"></a>监控效果</h1><p><img src="https://img.nichijou.me/20200405141947.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/03/29/%E5%85%B3%E9%97%ADSELinux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/29/%E5%85%B3%E9%97%ADSELinux/" class="post-title-link" itemprop="url">关闭SELinux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-29 17:45:27 / 修改时间：20:03:09" itemprop="dateCreated datePublished" datetime="2020-03-29T17:45:27+08:00">2020-03-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>临时关闭：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>永久关闭：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/SELINUX=enforcing/SELINUX=disabled/'</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/02/11/%E9%98%B2%E6%AD%A2Mac%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/11/%E9%98%B2%E6%AD%A2Mac%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0/" class="post-title-link" itemprop="url">防止Mac合盖休眠</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-11 15:07:02" itemprop="dateCreated datePublished" datetime="2020-02-11T15:07:02+08:00">2020-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁止显示器睡眠</span></span><br><span class="line">caffeinate -d</span><br><span class="line"><span class="comment"># 禁止系统睡眠</span></span><br><span class="line">caffeinate -is</span><br><span class="line"><span class="comment"># 当1000号进程存在时不睡眠</span></span><br><span class="line">caffeinate -w 1000</span><br><span class="line"><span class="comment"># 1小时内不睡眠</span></span><br><span class="line">caffeinate -t 3600</span><br></pre></td></tr></table></figure>
+
+<h2 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># man caffeinate</span></span><br><span class="line"></span><br><span class="line">CAFFEINATE(8)             BSD System Manager<span class="string">'s Manual            CAFFEINATE(8)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">NAME</span></span><br><span class="line"><span class="string">     caffeinate -- prevent the system from sleeping on behalf of a utility</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SYNOPSIS</span></span><br><span class="line"><span class="string">     caffeinate [-disu] [-t timeout] [-w pid] [utility arguments...]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">DESCRIPTION</span></span><br><span class="line"><span class="string">     caffeinate creates assertions to alter system sleep behavior.  If no assertion flags are specified, caffeinate creates an assertion to prevent idle sleep.  If a utility is specified, caffeinate creates the assertions on the utility'</span>s behalf, and those assertions will persist <span class="keyword">for</span> the duration of the</span><br><span class="line">     utility<span class="string">'s execution. Otherwise, caffeinate creates the assertions directly, and those assertions will persist until caffeinate exits.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Available options:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -d      Create an assertion to prevent the display from sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -i      Create an assertion to prevent the system from idle sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -m      Create an assertion to prevent the disk from idle sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -s      Create an assertion to prevent the system from sleeping. This assertion is valid only when system is running on AC power.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -u      Create an assertion to declare that user is active. If the display is off, this option turns the display on and prevents the display from going into idle sleep. If a timeout is not specified with '</span>-t<span class="string">' option, then this assertion is taken with a default of 5 second timeout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -t      Specifies the timeout value in seconds for which this assertion has to be valid. The assertion is dropped after the specified timeout. Timeout value is not used when an utility is invoked with this command.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -w      Waits for the process with the specified pid to exit. Once the the process exits, the assertion is also released.  This option is ignored when used with utility option.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EXAMPLE</span></span><br><span class="line"><span class="string">     caffeinate -i make</span></span><br><span class="line"><span class="string">        caffeinate forks a process, execs "make" in it, and holds an assertion that prevents idle sleep as long as that process is running.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SEE ALSO</span></span><br><span class="line"><span class="string">     pmset(1)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">LOCATION</span></span><br><span class="line"><span class="string">     /usr/bin/caffeinate</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Darwin                         November 9, 2012                         Darwin</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/12/31/MySQL%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -231,7 +499,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -287,7 +555,7 @@
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/12/31/Linux%E4%B8%8B%E5%90%84%E9%A1%B9%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -315,7 +583,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -365,264 +633,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/12/22/Golang%E4%B8%AD%E4%BD%BF%E7%94%A8Protobuf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/22/Golang%E4%B8%AD%E4%BD%BF%E7%94%A8Protobuf/" class="post-title-link" itemprop="url">Golang中使用Protobuf</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-22 15:58:46" itemprop="dateCreated datePublished" datetime="2019-12-22T15:58:46+08:00">2019-12-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="安装protoc"><a href="#安装protoc" class="headerlink" title="安装protoc"></a>安装protoc</h2><p><code>https://github.com/protocolbuffers/protobuf/releases</code> 下载对应版本的protoc</p>
-<h2 id="安装protoc-gen-go"><a href="#安装protoc-gen-go" class="headerlink" title="安装protoc-gen-go"></a>安装protoc-gen-go</h2><blockquote>
-<p><a href="https://godoc.org/github.com/golang/protobuf/protoc-gen-go" target="_blank" rel="noopener">https://godoc.org/github.com/golang/protobuf/protoc-gen-go</a></p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/golang/protobuf/protoc-gen-go</span><br></pre></td></tr></table></figure>
-
-<h2 id="生成go文件"><a href="#生成go文件" class="headerlink" title="生成go文件"></a>生成go文件</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --go_out=output_directory input_directory/file.proto</span><br></pre></td></tr></table></figure>
-
-<h2 id="proto文件编写"><a href="#proto文件编写" class="headerlink" title="proto文件编写"></a>proto文件编写</h2><p><a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="noopener">原文</a><br><a href="https://blog.csdn.net/u011518120/article/details/54604615" target="_blank" rel="noopener">译文</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/10/30/%E9%80%9A%E8%BF%87%E7%A7%81%E9%92%A5%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/30/%E9%80%9A%E8%BF%87%E7%A7%81%E9%92%A5%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/" class="post-title-link" itemprop="url">公钥私钥对生成</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-30 21:31:50" itemprop="dateCreated datePublished" datetime="2019-10-30T21:31:50+08:00">2019-10-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="生成公钥私钥对"><a href="#生成公钥私钥对" class="headerlink" title="生成公钥私钥对"></a>生成公钥私钥对</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-
-<h2 id="通过私钥生成公钥"><a href="#通过私钥生成公钥" class="headerlink" title="通过私钥生成公钥"></a>通过私钥生成公钥</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -y -f id_rsa &gt; id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/05/13/PHP%E8%B0%83%E7%94%A8curl%E8%AE%BE%E7%BD%AECURLOPT-TIMEOUT-MS%E5%B0%8F%E4%BA%8E1%E7%A7%92%E6%97%B6%E6%97%A0%E6%95%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2202852">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/13/PHP%E8%B0%83%E7%94%A8curl%E8%AE%BE%E7%BD%AECURLOPT-TIMEOUT-MS%E5%B0%8F%E4%BA%8E1%E7%A7%92%E6%97%B6%E6%97%A0%E6%95%88/" class="post-title-link" itemprop="url">PHP调用curl设置CURLOPT_TIMEOUT_MS小于1秒时无效</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-13 16:41:04" itemprop="dateCreated datePublished" datetime="2019-05-13T16:41:04+08:00">2019-05-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 18:51:42" itemprop="dateModified" datetime="2020-03-29T18:51:42+08:00">2020-03-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天使用php调用curl时碰到一个奇怪的问题，现象为当CURLOPT_TIMEOUT_MS小于1000时，直接返回错误</p>
-<p>代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$ch = curl_init(<span class="string">'https://nichijou.me/'</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">// curl_setopt($ch, CURLOPT_NOSIGNAL, 1);</span></span><br><span class="line">curl_setopt($ch, CURLOPT_TIMEOUT_MS, <span class="number">200</span>);</span><br><span class="line">$data = curl_exec($ch);</span><br><span class="line">$curl_errno = curl_errno($ch);</span><br><span class="line">$curl_error = curl_error($ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($curl_errno &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"cURL Error ($curl_errno): $curl_error\n"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Data received: $data\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// cURL Error (28): Timeout was reached</span></span><br></pre></td></tr></table></figure>
-
-<p>翻了一下文档</p>
-<blockquote>
-<p><a href="https://www.php.net/manual/zh/function.curl-setopt.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/function.curl-setopt.php</a></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>选项</strong></th>
-<th>将 <code>value</code> 设置为</th>
-<th><strong>备注</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CURLOPT_TIMEOUT_MS</td>
-<td>设置cURL允许执行的最长毫秒数。 如果 libcurl 编译时使用系统标准的名称解析器（ standard system name resolver），那部分的连接仍旧使用以秒计的超时解决方案，最小超时时间还是一秒钟。</td>
-<td>在 cURL 7.16.2 中被加入。从 PHP 5.2.3 起可使用。</td>
-</tr>
-</tbody></table>
-<p>查解决办法的时候发现鸟哥早在14年就描述过这个问题</p>
-<blockquote>
-<p><a href="http://www.laruence.com/2014/01/21/2939.html" target="_blank" rel="noopener">http://www.laruence.com/2014/01/21/2939.html</a></p>
-</blockquote>
-<p>解决这个问题的几种方式: </p>
-<ol>
-<li>设置 <code>curl_setopt($ch, CURLOPT_NOSIGNAL, 1);</code>，但是会导致DNS解析不受控，万一DNS服务器出问题，可能会导致服务超时</li>
-<li>升级libcurl版本到7.19及以上</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -681,7 +696,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Sinute"
-      src="https://avatars1.githubusercontent.com/u/2202852">
+      src="https://img.nichijou.me/20200420001227.png">
   <p class="site-author-name" itemprop="name">Sinute</p>
   <div class="site-description" itemprop="description">- 碎碎念。</div>
 </div>
@@ -690,7 +705,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -703,7 +718,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -859,7 +874,6 @@ window.addEventListener('pjax:success', () => {
   
 
   
-
 
     </div>
 </body>
