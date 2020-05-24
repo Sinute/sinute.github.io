@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nichijou.me/2020/05/24/%E6%9B%B4%E6%94%B9windows%E9%94%AE%E4%BD%8D/</loc>
+    
+    <lastmod>2020-05-24T09:20:48.038Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://nichijou.me/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/</loc>
     
     <lastmod>2020-05-21T17:23:57.118Z</lastmod>

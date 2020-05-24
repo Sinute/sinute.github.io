@@ -198,6 +198,73 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/20/2019-04-20-Golang%E4%B8%AD%E7%9A%84break-label/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/20/2019-04-20-Golang%E4%B8%AD%E7%9A%84break-label/" class="post-title-link" itemprop="url">Golang中的break label</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-20 14:33:21" itemprop="dateCreated datePublished" datetime="2019-04-20T14:33:21+08:00">2019-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Golang中，支持通过 <code>break</code> 的方式跳出循环。如果需要跳出多层循环，可以使用 <code>break label</code> 的方式实现。</p>
+<p>不同于 <code>goto label</code>， <code>break label</code> 会在循环的下一条语句处开始继续执行，而 <code>goto label</code> 则会从 <code>label</code> 处继续往下执行。如果在下面的例子中把 <code>break label</code> 换成 <code>goto label</code>，则会导致再次进入循环。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">TestLabelBreak:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">		<span class="keyword">if</span> i == <span class="number">3</span> &#123;</span><br><span class="line">			<span class="keyword">break</span> TestLabelBreak</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"end for"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// end for</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2019/04/17/2019-04-17-PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -512,71 +579,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2018/04/04/2018-04-04-MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/04/2018-04-04-MySQL%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">MySQL自定义函数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-04 10:28:00" itemprop="dateCreated datePublished" datetime="2018-04-04T10:28:00+08:00">2018-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 20:03:09" itemprop="dateModified" datetime="2020-03-29T20:03:09+08:00">2020-03-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> myFunc $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> myFunc(<span class="keyword">str</span> <span class="built_in">varchar</span>(<span class="number">255</span>),<span class="built_in">number</span> <span class="built_in">bigint</span> <span class="keyword">unsigned</span>)</span><br><span class="line"><span class="keyword">RETURNS</span> <span class="built_in">bigint</span>(<span class="number">20</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DECLARE</span> x <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">SET</span> x = (</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'test'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">1</span> <span class="keyword">THEN</span> <span class="number">233</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">str</span>=<span class="string">'hello'</span> <span class="keyword">and</span> <span class="built_in">number</span> = <span class="number">2</span> <span class="keyword">THEN</span> <span class="number">123</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="built_in">number</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">);</span><br><span class="line">RETURN x;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line"></span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> myFunc(<span class="string">'test'</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -648,7 +650,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
