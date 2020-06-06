@@ -223,7 +223,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2019/12/31/2019-12-31-MySQL%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8/" itemprop="url">
+          <a class="post-title-link" href="/2019/12/31/MySQL%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8/" itemprop="url">
             <span itemprop="name">MySQL分区使用</span>
           </a>
       </div>
@@ -563,6 +563,32 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     var GUEST = ['nick', 'mail', 'link'];
     var guest = 'nick,mail';
     guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '7jKAfy26dEVxN6hTdlRIg6Xp-MdYXbMMI',
+      appKey     : 'xM6RtIiwxoW3MJVlm0Ju1d8F',
+      placeholder: "",
+      avatar     : 'mp',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
+r(item => {
       return GUEST.includes(item);
     });
     new Valine({
