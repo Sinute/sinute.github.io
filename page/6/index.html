@@ -229,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-06 19:37:25" itemprop="dateModified" datetime="2020-06-06T19:37:25+08:00">2020-06-06</time>
+                <time title="修改时间：2020-06-06 19:51:50" itemprop="dateModified" datetime="2020-06-06T19:51:50+08:00">2020-06-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,20 +277,14 @@
 <p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础 &gt; <a href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3.html">PHP-5.3.13开发环境编译</a></strong></p>
 </blockquote>
 <p>推荐的教程 <a href="https://github.com/walu/phpbook" target="_blank" rel="noopener">https://github.com/walu/phpbook</a></p>
-<h1 id="编写第一个扩展"><a href="#编写第一个扩展" class="headerlink" title="编写第一个扩展"></a>编写第一个扩展</h1><h3 id="创建文件config-m4"><a href="#创建文件config-m4" class="headerlink" title="创建文件config.m4"></a>创建文件config.m4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PHP_ARG_ENABLE(</span><br><span class="line">    helloworld,</span><br><span class="line">    [Whether to enable the &quot;helloworld&quot; extension],</span><br><span class="line">    [enable-helloworld        Enable &quot;helloworld&quot; extension support]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if test $PHP_HELLOWORLD !&#x3D; &quot;no&quot;; then</span><br><span class="line">    PHP_SUBST(HELLOWORLD_SHARED_LIBADD)</span><br><span class="line">    PHP_NEW_EXTENSION(helloworld, helloworld.c, $ext_shared)</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建helloworld-h"><a href="#创建helloworld-h" class="headerlink" title="创建helloworld.h"></a>创建helloworld.h</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HELLOWORLD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HELLOWORLD_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载config.h，如果配置了的话</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> HAVE_CONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"config.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载php头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"php.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> phpext_helloworld_ptr &amp;helloworld_module_entry</span></span><br><span class="line"><span class="keyword">extern</span> zend_module_entry helloworld_module_entry;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="创建helloworld-c"><a href="#创建helloworld-c" class="headerlink" title="创建helloworld.c"></a>创建helloworld.c</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"helloworld.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这边定义了hello_world</span></span><br><span class="line">ZEND_FUNCTION(hello_world)</span><br><span class="line">&#123;</span><br><span class="line">    php_printf(<span class="string">"Hello World!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> zend_function_entry helloworld_functions[] = &#123;</span><br><span class="line">    ZEND_FE(hello_world, <span class="literal">NULL</span>) <span class="comment">// 第一个参数为函数名, 第二个参数为arg_info</span></span><br><span class="line">    <span class="comment">// 可以继续添加</span></span><br><span class="line">    &#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//module entry</span></span><br><span class="line">zend_module_entry helloworld_module_entry = &#123;</span><br><span class="line">#<span class="keyword">if</span> ZEND_MODULE_API_NO &gt;= <span class="number">20010901</span></span><br><span class="line">     STANDARD_MODULE_HEADER,</span><br><span class="line">#endif</span><br><span class="line">    <span class="string">"helloworld"</span>, <span class="comment">//这个地方是扩展名称，往往我们会在这个地方使用一个宏。</span></span><br><span class="line">    helloworld_functions, <span class="comment">/* Functions */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MINIT */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MSHUTDOWN */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* RINIT */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* RSHUTDOWN */</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">/* MINFO */</span></span><br><span class="line">#<span class="keyword">if</span> ZEND_MODULE_API_NO &gt;= <span class="number">20010901</span></span><br><span class="line">    <span class="string">"1.0"</span>, <span class="comment">//这个地方是我们扩展的版本</span></span><br><span class="line">#endif</span><br><span class="line">    STANDARD_MODULE_PROPERTIES</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> COMPILE_DL_HELLOWORLD</span></span><br><span class="line">ZEND_GET_MODULE(helloworld)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<h1 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h1><blockquote>
-<p>phpize<br>./configure<br>make</p>
-</blockquote>
-<p>然后就可以在 modules 目录下找到对应的 <code>helloworld.so</code></p>
-<h1 id="加载扩展"><a href="#加载扩展" class="headerlink" title="加载扩展"></a>加载扩展</h1><p>在 <code>php.ini</code> 中加入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extension_dir&#x3D;PATH&#x2F;TO&#x2F;EXTENSION</span><br><span class="line">extension&#x3D;helloworld.so</span><br></pre></td></tr></table></figure>
-
-<h1 id="检查是否成功"><a href="#检查是否成功" class="headerlink" title="检查是否成功"></a>检查是否成功</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">'hello_world();'</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/01/24/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AAPHP%E6%89%A9%E5%B1%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -340,7 +334,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-06 19:37:15" itemprop="dateModified" datetime="2020-06-06T19:37:15+08:00">2020-06-06</time>
+                <time title="修改时间：2020-06-06 19:51:43" itemprop="dateModified" datetime="2020-06-06T19:51:43+08:00">2020-06-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -391,37 +385,14 @@
 <blockquote>
 <p>autoconf: 2.13+ (for PHP &lt; 5.4.0), 2.59+ (for PHP &gt;= 5.4.0)<br>automake: 1.4+<br>libtool: 1.4.x+ (except 1.4.2)<br>re2c: Version 0.13.4 or newer<br>flex: Version 2.5.4 (for PHP &lt;= 5.2)<br>bison:<br>PHP 5.4: 1.28, 1.35, 1.75, 1.875, 2.0, 2.1, 2.2, 2.3, 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.4<br>PHP 5.5: 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.3, 2.6.4, 2.6.5, 2.7<br>PHP 5.6: 2.4 or later, excluding 3.0 only (3.0.1 and later are OK)<br>PHP 7.0: 2.4 or later</p>
 </blockquote>
-<p>本次使用:</p>
-<ul>
-<li><a href="https://ftp.gnu.org/gnu/autoconf/" target="_blank" rel="noopener">autoconf 2.13</a></li>
-<li><a href="https://ftp.gnu.org/gnu/automake/" target="_blank" rel="noopener">automake 1.4</a></li>
-<li><a href="https://ftp.gnu.org/gnu/libtool/" target="_blank" rel="noopener">libtool 1.4</a></li>
-<li><a href="http://re2c.org/install/install.html" target="_blank" rel="noopener">re2c 0.13.6</a></li>
-</ul>
-<h3 id="安装autoconf"><a href="#安装autoconf" class="headerlink" title="安装autoconf"></a>安装autoconf</h3><blockquote>
-<p>wget <a href="https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz</a><br>tar -zxvf autoconf-2.13.tar.gz<br>cd autoconf-2.13<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<h3 id="安装automake"><a href="#安装automake" class="headerlink" title="安装automake"></a>安装automake</h3><blockquote>
-<p>wget <a href="https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/automake/automake-1.4.tar.gz</a><br>tar -zxvf automake-1.4.tar.gz<br>cd automake-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<h3 id="安装libtool"><a href="#安装libtool" class="headerlink" title="安装libtool"></a>安装libtool</h3><blockquote>
-<p>wget <a href="https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz" target="_blank" rel="noopener">https://ftp.gnu.org/gnu/libtool/libtool-1.4.tar.gz</a><br>tar -zxvf libtool-1.4.tar.gz<br>cd libtool-1.4<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<h3 id="安装re2c"><a href="#安装re2c" class="headerlink" title="安装re2c"></a>安装re2c</h3><blockquote>
-<p>wget <a href="https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz" target="_blank" rel="noopener">https://github.com/skvadrik/re2c/releases/download/0.13.6/re2c-0.13.6.tar.gz</a><br>tar -zxvf re2c-0.13.6.tar.gz<br>cd re2c-0.13.6<br>./configure –prefix=/Users/Sinute/local<br>make<br>make install</p>
-</blockquote>
-<p>最后 export PATH=/Users/Sinute/local:$PATH</p>
-<h1 id="编译PHP"><a href="#编译PHP" class="headerlink" title="编译PHP"></a>编译PHP</h1><p>从 <a href="http://php.net/releases/" target="_blank" rel="noopener">http://php.net/releases/</a> 下载PHP源代码</p>
-<blockquote>
-<p>wget <a href="http://museum.php.net/php5/php-5.3.13.tar.gz" target="_blank" rel="noopener">http://museum.php.net/php5/php-5.3.13.tar.gz</a><br>tar -zxvf php-5.3.13.tar.gz<br>cd php-5.3.13<br>./configure –prefix=/Users/Sinute/local –enable-debug –enable-maintainer-zts –enable-fpm<br>make<br>make install</p>
-</blockquote>
-<p><em>这里带上了–enable-debug, 便于后续开发</em></p>
-<p>编译的时候会报 <code>make: *** [ext/dom/node.lo] Error 1</code></p>
-<p>解决方法:</p>
-<blockquote>
-<p>curl -o php-5.3.13.patch <a href="https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt" target="_blank" rel="noopener">https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt</a><br>patch -p0 -b &lt; php-5.3.13.patch</p>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -570,7 +541,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-06 19:37:41" itemprop="dateModified" datetime="2020-06-06T19:37:41+08:00">2020-06-06</time>
+                <time title="修改时间：2020-06-06 19:52:05" itemprop="dateModified" datetime="2020-06-06T19:52:05+08:00">2020-06-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -617,21 +588,14 @@
           <blockquote>
 <p>在 <a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">上一篇</a> 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据<br>在本篇中, 我们将会使用DataImport来构建我们的数据</p>
 </blockquote>
-<h1 id="solrconfig-xml"><a href="#solrconfig-xml" class="headerlink" title="solrconfig.xml"></a>solrconfig.xml</h1><p>还记得上一篇 <code>conf</code> 中另一个配置文件 <code>solrconfig.xml</code> 吗<br>在其中加入</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入dataimporthandler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lib</span> <span class="attr">dir</span>=<span class="string">"$&#123;solr.install.dir:../../../..&#125;/dist/"</span> <span class="attr">regex</span>=<span class="string">"solr-dataimporthandler-.*\.jar"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="data-config-xml"><a href="#data-config-xml" class="headerlink" title="data-config.xml"></a>data-config.xml</h1><p>在 <code>conf</code> 目录下, 创建 <code>data-config.xml</code>, 写入数据源信息, 以及如何构建数据</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span> <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span> <span class="attr">url</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/dmhy"</span> <span class="attr">user</span>=<span class="string">"root"</span> <span class="attr">password</span>=<span class="string">"admin"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">document</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"publish"</span> <span class="attr">transformer</span>=<span class="string">"DateFormatTransformer"</span> <span class="attr">query</span>=<span class="string">"SELECT publish.id, publish.title, fansub.name as fansub_name, fansub.id as fansub_id FROM publish LEFT JOIN fansub ON (publish.fansub_id = fansub.id) WHERE publish.id &gt;= $&#123;dataimporter.request.id&#125;"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_name"</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"fansub_id"</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"title"</span> <span class="attr">name</span>=<span class="string">"title"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">entity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">document</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>对应数据表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 动画记录表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`publish`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`category_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`fansub_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`link`</span> <span class="built_in">varchar</span>(<span class="number">250</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span>,</span><br><span class="line">  <span class="string">`download_link`</span> <span class="built_in">varchar</span>(<span class="number">20000</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`file_size`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publisher_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`publish_time`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`link`</span> (<span class="string">`link`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字幕组表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`fansub`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`created_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`updated_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`deleted_at`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci;</span><br></pre></td></tr></table></figure>
-
-<p><strong>重启core</strong></p>
-<h1 id="DataImport"><a href="#DataImport" class="headerlink" title="DataImport"></a>DataImport</h1><p>在solrAdmin中, 打开DataImport, 点击执行</p>
-<p><img src="//ww3.sinaimg.cn/large/6ca13d2cgw1f7hs1rim28j20ue0dcacv.jpg" alt=""></p>
-<p>导入成功后, 应该可以正常搜索</p>
-<p><img src="//ww4.sinaimg.cn/large/6ca13d2cgw1f7hs5bgbrkj20wm0nfgsw.jpg" alt=""></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%973-%E4%BD%BF%E7%94%A8DataImport%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -681,7 +645,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-06 19:37:47" itemprop="dateModified" datetime="2020-06-06T19:37:47+08:00">2020-06-06</time>
+                <time title="修改时间：2020-06-06 19:52:10" itemprop="dateModified" datetime="2020-06-06T19:52:10+08:00">2020-06-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -728,34 +692,14 @@
           <blockquote>
 <p>在 <a href="/2016/09/03/solr入门系列1-安装.html">上一篇</a> 中, 我们安装并启动了solr服务器, 在这一篇中, 我们将从0开始创建我们自己的搜索服务<br>在本篇中, 将会介绍如何创建自己的搜索引擎, 并往其中插入索引数据</p>
 </blockquote>
-<h1 id="假设情景"><a href="#假设情景" class="headerlink" title="假设情景"></a>假设情景</h1><p>我们从动漫花园爬取了所有的动画分类数据, 然后需要一个搜索引擎, 来帮助我们索引数据</p>
-<h1 id="创建core"><a href="#创建core" class="headerlink" title="创建core"></a>创建core</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ./bin/solr create_core -c my_core</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在创建完core之后, 可以在 <code>server/solr</code> 下看到生成了一个名为 <code>my_core</code> 的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── conf</span><br><span class="line">│   ├── currency.xml</span><br><span class="line">│   ├── elevate.xml</span><br><span class="line">│   ├── lang</span><br><span class="line">│   ├── managed-schema</span><br><span class="line">│   ├── params.json</span><br><span class="line">│   ├── protwords.txt</span><br><span class="line">│   ├── solrconfig.xml</span><br><span class="line">│   ├── stopwords.txt</span><br><span class="line">│   └── synonyms.txt</span><br><span class="line">├── core.properties</span><br><span class="line">└── data</span><br><span class="line">    ├── index</span><br><span class="line">    ├── snapshot_metadata</span><br><span class="line">    └── tlog</span><br></pre></td></tr></table></figure>
-
-<p>其中最关键的2个文件为 <code>conf/managed-schema</code> 和 <code>conf/solrconfig.xml</code></p>
-<h3 id="managed-schema"><a href="#managed-schema" class="headerlink" title="managed-schema"></a>managed-schema</h3><p>在 <code>managed-schema</code> 中, 定义我们的数据类型, 记得 <strong>保存后重启core</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 记录id --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"int"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"true"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 字幕组名称 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"fansub_name"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 字幕组id --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"fansub_id"</span> <span class="attr">type</span>=<span class="string">"int"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 动画标题 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">required</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"fansub_name"</span> <span class="attr">dest</span>=<span class="string">"_text_"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"title"</span> <span class="attr">dest</span>=<span class="string">"_text_"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>几种属性解释</p>
-<ul>
-<li>type 对应字段类型</li>
-<li>indexed 是否需要索引数据, 如果为false则无法通过该字段检索</li>
-<li>stored 是否在solr中保存该值, 如果为false则搜索结果中不会返回该字段</li>
-<li>multiValued 是否为多值</li>
-</ul>
-<blockquote>
-<p>其中 <code>copyField</code> 字段的意思是将 <code>fansub_name</code> 和 <code>title</code> 放到 <code>_text_</code> 字段中去, 使得查询 <code>_text_</code> 字段时可以同时检索 <code>fansub_name</code> 和 <code>title</code></p>
-</blockquote>
-<h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "add": &#123;</span></span><br><span class="line"><span class="string">    "doc": &#123;</span></span><br><span class="line"><span class="string">      "id": 11243,</span></span><br><span class="line"><span class="string">      "title": "[澄空学园&amp;华盟字幕社] 四月是你的谎言 第01-22话 MKV 720p 简体外挂 合集 特典付",</span></span><br><span class="line"><span class="string">      "fansub_name": "澄空学园",</span></span><br><span class="line"><span class="string">      "fansub_id": 58</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "commitWithin": 1000,</span></span><br><span class="line"><span class="string">    "overwrite": true</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;'</span> <span class="string">"http://localhost:8983/solr/my_core/update/?wt=json"</span></span><br></pre></td></tr></table></figure>
-
-<p>使用solrAdmin查看, 应该可以看到刚才创建的记录</p>
-<p><img src="//ww1.sinaimg.cn/large/6ca13d2cgw1f7hr4os9m1j20v10h2adt.jpg" alt=""></p>
-<blockquote>
-<p><a href="/2016/09/03/solr入门系列3-使用DataImport构建索引.html">下一篇</a> 将介绍如何使用DataImport来构建索引</p>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/09/03/solr%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%972-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

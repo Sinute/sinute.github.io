@@ -7,6 +7,8 @@
 
 <h4 id="3-运行portal-得到ACTIVE-CODE"><a href="#3-运行portal-得到ACTIVE-CODE" class="headerlink" title="3. 运行portal, 得到ACTIVE CODE"></a>3. 运行portal, 得到ACTIVE CODE</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/thunder/portal</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <h4 id="4-根据上一步得到的ACTIVE-CODE去-http-yuancheng-xunlei-com-添加设备"><a href="#4-根据上一步得到的ACTIVE-CODE去-http-yuancheng-xunlei-com-添加设备" class="headerlink" title="4. 根据上一步得到的ACTIVE CODE去 http://yuancheng.xunlei.com/ 添加设备"></a>4. 根据上一步得到的ACTIVE CODE去 <a href="http://yuancheng.xunlei.com/" target="_blank" rel="noopener">http://yuancheng.xunlei.com/</a> 添加设备</h4><p>至此远程下载部分安装完毕<br>但是这时候点击新建任务会发现提示”没有检测到外接存储设备”<br>这是因为下载目录需要检测外部挂载设备</p>
 <hr>
 <h2 id="自动挂载USB设备"><a href="#自动挂载USB设备" class="headerlink" title="自动挂载USB设备"></a>自动挂载USB设备</h2><h4 id="1-编辑文件"><a href="#1-编辑文件" class="headerlink" title="1. 编辑文件"></a>1. 编辑文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/udev/rules.d/10-usbstorage.rules</span><br></pre></td></tr></table></figure>
@@ -34,6 +36,8 @@
     <url>/2014/10/31/rsync%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>当A上的<code>/your/source/dir</code>内的文件发生改动时，自动从A上的<code>/your/source/dir</code>同步修改到B的<code>/your/destination/dir</code></p>
 <h3 id="一-安装inotify-tools用于检测文件变动"><a href="#一-安装inotify-tools用于检测文件变动" class="headerlink" title="一. 安装inotify-tools用于检测文件变动"></a>一. 安装inotify-tools用于检测文件变动</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install inotify-tools</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h3 id="二-同步脚本"><a href="#二-同步脚本" class="headerlink" title="二. 同步脚本"></a>二. 同步脚本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># rsync.sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">SRC=/your/<span class="built_in">source</span>/dir</span><br><span class="line">DST=username@host:/your/destination/dir</span><br><span class="line"></span><br><span class="line">inotifywait -mrq --exclude <span class="string">'.git*'</span> -e modify,delete,create,move <span class="variable">$&#123;SRC&#125;</span> | <span class="keyword">while</span> <span class="built_in">read</span> DIR EVENT FILE</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    /usr/bin/rsync -ahqzt --delete <span class="variable">$SRC</span> <span class="variable">$DST</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
@@ -72,6 +76,8 @@
     <title>Composer自动加载原理</title>
     <url>/2015/05/19/Composer%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<h2 id="Composer自动加载原理"><a href="#Composer自动加载原理" class="headerlink" title="Composer自动加载原理"></a>Composer自动加载原理</h2><h3 id="autoload-php"><a href="#autoload-php" class="headerlink" title="autoload.php"></a>autoload.php</h3><p>入口文件autoload.php中非常简单, 引入了autoload_real.php并调用了ComposerAutoloaderInitXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX::getLoader()</p>
+<a id="more"></a>
+
 <h3 id="autoload-real-php"><a href="#autoload-real-php" class="headerlink" title="autoload_real.php"></a>autoload_real.php</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">spl_autoload_register(<span class="keyword">array</span>(<span class="string">'ComposerAutoloaderInitXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'</span>, <span class="string">'loadClassLoader'</span>), <span class="keyword">true</span>, <span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">self</span>::$loader = $loader = <span class="keyword">new</span> \Composer\Autoload\ClassLoader();</span><br><span class="line">spl_autoload_unregister(<span class="keyword">array</span>(<span class="string">'ComposerAutoloaderInitXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'</span>, <span class="string">'loadClassLoader'</span>));</span><br></pre></td></tr></table></figure>
 <p>getLoader中首先注册了自身的loadClassLoader方法用于自动加载ClassLoader.php, 在加载完成后马上注销了该自动加载</p>
 <p>然后分别注册autoload_namespaces, autoload_psr4, autoload_classmap<br>可以看到这几个文件中保存的都是类似 <code>类名 =&gt; 位置</code>的键值对<br>接着<code>$loader-&gt;register(true);</code>进行注册<br>最后引入autoload_files</p>
@@ -92,6 +98,8 @@
     <title>Raspberry Pi 安装 Golang 1.6</title>
     <url>/2016/05/11/Raspberry-Pi-%E5%AE%89%E8%A3%85Golang-1.6/</url>
     <content><![CDATA[<p>由于树莓派性能的关系, 蛋疼的编译时间想必大家也都知道了<em>:(´ཀ`」 ∠):</em><br>因此推荐使用官网提供的armv6l包直接安装</p>
+<a id="more"></a>
+
 <p>在 <code>https://golang.org/dl/</code> 找到 <code>armv6l</code> 包下载</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; cd &#x2F;usr&#x2F;local</span><br><span class="line">&gt; wget https:&#x2F;&#x2F;storage.googleapis.com&#x2F;golang&#x2F;go1.6.linux-armv6l.tar.gz</span><br></pre></td></tr></table></figure>
 
@@ -192,6 +200,8 @@
     <content><![CDATA[<p>记录之前在使用laravel5的验证时踩到的一个坑</p>
 <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Validator::make(</span><br><span class="line">    [<span class="string">'name'</span> =&gt; <span class="string">'Dayle'</span>],</span><br><span class="line">    [<span class="string">'name'</span> =&gt; <span class="string">'in:Peter, Dayle'</span>]</span><br><span class="line">);</span><br><span class="line"><span class="comment">// The selected name is invalid.</span></span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="in的实现"><a href="#in的实现" class="headerlink" title="in的实现"></a>in的实现</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in的实现</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validateIn</span><span class="params">($attribute, $value, $parameters)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> in_array((string) $value, $parameters);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// $parameters的获取</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseParameters</span><span class="params">($rule, $parameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (strtolower($rule) == <span class="string">'regex'</span>) <span class="keyword">return</span> <span class="keyword">array</span>($parameter);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> str_getcsv($parameter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以看到in的验证就是简单的调用了in_array方法</p>
@@ -254,6 +264,8 @@
 </blockquote>
 <h1 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h1><p><a href="http://php.net/manual/en/class.error.php" target="_blank" rel="noopener">Error</a> 是PHP7中新增的一个基础类</p>
 <p>它的方法以及行为和 <a href="http://php.net/manual/en/class.exception.php" target="_blank" rel="noopener">Exception</a> 非常相似</p>
+<a id="more"></a>
+
 <h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> NOTEXISTSCLASS;</span><br><span class="line">&#125; <span class="keyword">catch</span> (Throwable $e) &#123;</span><br><span class="line">    <span class="keyword">echo</span> get_class($e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 5.6: Fatal error: Class 'NOTEXISTSCLASS' not found</span></span><br><span class="line"><span class="comment">// 7.0: Error</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="可能产生的影响"><a href="#可能产生的影响" class="headerlink" title="可能产生的影响"></a>可能产生的影响</h1><ol>
@@ -276,6 +288,8 @@
     <url>/2016/08/02/%E4%BD%BF%E7%94%A8Behat%E8%BF%9B%E8%A1%8C%E8%A1%8C%E4%B8%BA%E9%A9%B1%E5%8A%A8%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h1 id="什么是Behat"><a href="#什么是Behat" class="headerlink" title="什么是Behat"></a>什么是Behat</h1><p>Behat 是一个开源的行为驱动开发框架</p>
 <h3 id="何为行为驱动"><a href="#何为行为驱动" class="headerlink" title="何为行为驱动"></a>何为行为驱动</h3><p>它提供了一个简单语意化的方式, 让非程序员也可以使用类似自然语言的方式编写测试用例来参与到测试过程中<br>另外行为驱动更偏向于描述软件的行为, 相对于单元测试来说, 它更关心整体功能是否可以交付而不关心代码的具体细节</p>
+<a id="more"></a>
+
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>clone源代码</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; git <span class="built_in">clone</span> https://github.com/Behat/Behat.git</span><br><span class="line">&gt; <span class="built_in">cd</span> Behat</span><br><span class="line">&gt; composer install -vvv</span><br></pre></td></tr></table></figure>
 
@@ -339,6 +353,8 @@
 <p>Solr（读作“solar”）是Apache Lucene项目的开源企业搜索平台。其主要功能包括全文检索、命中标示[1]、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。Solr是高度可扩展的，并提供了分布式搜索和索引复制。Solr是最流行的企业级搜索引擎，Solr 4还增加了NoSQL支持。<br>– 摘自维基百科</p>
 </blockquote>
 <p>一句话概括: 一个搜索引擎</p>
+<a id="more"></a>
+
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h3 id="下载solr"><a href="#下载solr" class="headerlink" title="下载solr"></a>下载solr</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; wget http://apache.fayea.com/lucene/solr/6.2.0/solr-6.2.0.tgz</span><br><span class="line">&gt; tar -xvf solr-6.2.0.tgz</span><br></pre></td></tr></table></figure>
 
 <h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> solr-6.2.0</span><br><span class="line">&gt; ./bin/solr start</span><br></pre></td></tr></table></figure>
@@ -362,6 +378,8 @@
     <content><![CDATA[<blockquote>
 <p>在 <a href="/2016/09/03/solr入门系列1-安装.html">上一篇</a> 中, 我们安装并启动了solr服务器, 在这一篇中, 我们将从0开始创建我们自己的搜索服务<br>在本篇中, 将会介绍如何创建自己的搜索引擎, 并往其中插入索引数据</p>
 </blockquote>
+<a id="more"></a>
+
 <h1 id="假设情景"><a href="#假设情景" class="headerlink" title="假设情景"></a>假设情景</h1><p>我们从动漫花园爬取了所有的动画分类数据, 然后需要一个搜索引擎, 来帮助我们索引数据</p>
 <h1 id="创建core"><a href="#创建core" class="headerlink" title="创建core"></a>创建core</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; ./bin/solr create_core -c my_core</span><br></pre></td></tr></table></figure>
 
@@ -404,6 +422,8 @@
     <content><![CDATA[<blockquote>
 <p>在 <a href="/2016/09/03/solr入门系列2-创建自己的搜索引擎.html">上一篇</a> 中, 我们创建了自己的搜索引擎, 并往其中手动插入了一条数据<br>在本篇中, 我们将会使用DataImport来构建我们的数据</p>
 </blockquote>
+<a id="more"></a>
+
 <h1 id="solrconfig-xml"><a href="#solrconfig-xml" class="headerlink" title="solrconfig.xml"></a>solrconfig.xml</h1><p>还记得上一篇 <code>conf</code> 中另一个配置文件 <code>solrconfig.xml</code> 吗<br>在其中加入</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入dataimporthandler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">lib</span> <span class="attr">dir</span>=<span class="string">"$&#123;solr.install.dir:../../../..&#125;/dist/"</span> <span class="attr">regex</span>=<span class="string">"solr-dataimporthandler-.*\.jar"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">lst</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -454,6 +474,8 @@
 <blockquote>
 <p>autoconf: 2.13+ (for PHP &lt; 5.4.0), 2.59+ (for PHP &gt;= 5.4.0)<br>automake: 1.4+<br>libtool: 1.4.x+ (except 1.4.2)<br>re2c: Version 0.13.4 or newer<br>flex: Version 2.5.4 (for PHP &lt;= 5.2)<br>bison:<br>PHP 5.4: 1.28, 1.35, 1.75, 1.875, 2.0, 2.1, 2.2, 2.3, 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.4<br>PHP 5.5: 2.4, 2.4.1, 2.4.2, 2.4.3, 2.5, 2.5.1, 2.6, 2.6.1, 2.6.2, 2.6.3, 2.6.4, 2.6.5, 2.7<br>PHP 5.6: 2.4 or later, excluding 3.0 only (3.0.1 and later are OK)<br>PHP 7.0: 2.4 or later</p>
 </blockquote>
+<a id="more"></a>
+
 <p>本次使用:</p>
 <ul>
 <li><a href="https://ftp.gnu.org/gnu/autoconf/" target="_blank" rel="noopener">autoconf 2.13</a></li>
@@ -500,6 +522,8 @@
 <p><strong>下面使用的工具和源码都以PHP-5.3.13作为基础 &gt; <a href="/2017/01/24/%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91php-5-3.html">PHP-5.3.13开发环境编译</a></strong></p>
 </blockquote>
 <p>推荐的教程 <a href="https://github.com/walu/phpbook" target="_blank" rel="noopener">https://github.com/walu/phpbook</a></p>
+<a id="more"></a>
+
 <h1 id="编写第一个扩展"><a href="#编写第一个扩展" class="headerlink" title="编写第一个扩展"></a>编写第一个扩展</h1><h3 id="创建文件config-m4"><a href="#创建文件config-m4" class="headerlink" title="创建文件config.m4"></a>创建文件config.m4</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PHP_ARG_ENABLE(</span><br><span class="line">    helloworld,</span><br><span class="line">    [Whether to enable the &quot;helloworld&quot; extension],</span><br><span class="line">    [enable-helloworld        Enable &quot;helloworld&quot; extension support]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">if test $PHP_HELLOWORLD !&#x3D; &quot;no&quot;; then</span><br><span class="line">    PHP_SUBST(HELLOWORLD_SHARED_LIBADD)</span><br><span class="line">    PHP_NEW_EXTENSION(helloworld, helloworld.c, $ext_shared)</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <h3 id="创建helloworld-h"><a href="#创建helloworld-h" class="headerlink" title="创建helloworld.h"></a>创建helloworld.h</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HELLOWORLD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HELLOWORLD_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载config.h，如果配置了的话</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> HAVE_CONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"config.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载php头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"php.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> phpext_helloworld_ptr &amp;helloworld_module_entry</span></span><br><span class="line"><span class="keyword">extern</span> zend_module_entry helloworld_module_entry;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
@@ -532,6 +556,8 @@
 <p>/etc/my.cnf.d/mariadb-server.cnf</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 开启binlog</span></span><br><span class="line">[mysqld]</span><br><span class="line">server-id = 1</span><br><span class="line">binlog_format = mixed</span><br><span class="line"><span class="built_in">log</span>-bin = mysql-bin</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h2 id="重启数据库"><a href="#重启数据库" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">service mariadb restart</span><br></pre></td></tr></table></figure>
 
@@ -609,6 +635,8 @@
     <url>/2019/04/02/SVN%E8%BF%81%E7%A7%BB%E5%88%B0GIT/</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一个使用svn做版本控制的老业务需要迁移到git，原有业务和其他多个业务一同放在一个大的svn仓库中，本次仅需要迁移该业务。目标是迁移到git后保留历史的提交信息，不需要保留svn分支，也不需要保留svn标签。</p>
 <p>网上查阅了一些资料后发现git官方已经提供了<a href="https://git-scm.com/book/zh/v1/Git-%E4%B8%8E%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F-%E8%BF%81%E7%A7%BB%E5%88%B0-Git" target="_blank" rel="noopener">迁移教程</a></p>
+<a id="more"></a>
+
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
 <p>以 <a href="https://sourceforge.net/p/keepass/code/HEAD/tree/" target="_blank" rel="noopener">https://sourceforge.net/p/keepass/code/HEAD/tree/</a> 这个项目为例，迁移 <code>trunk</code> 下 <code>Plugins</code> 仓库</p>
 </blockquote>
@@ -646,6 +674,8 @@
 
 <h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><h4 id="泛化"><a href="#泛化" class="headerlink" title="泛化"></a>泛化</h4><p>泛化（Generalization），即继承的反方向，指的是一个类（称为父类、父接口）具有另外的一个（或一些）类（称为子类、子接口）的共有功能。子类可视为其父类的特例，并可以增加新功能。用带空心三角形箭头的实线表示。</p>
 <p><img src="https://img.nichijou.me/20190417231427.png" alt=""></p>
+<a id="more"></a>
+
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>实现（Realization）指的是一个class类实现interface接口（可以是多个）的功能；在Java中此类关系通过关键字implements明确标识。用带空心三角形箭头的虚线表示。</p>
 <p><img src="https://img.nichijou.me/20190417231508.png" alt=""></p>
 <h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>依赖关系（Dependency）可以简单的理解为一个类A使用到了另一个类B，” … uses a …”，被依赖的对象只是作为一种工具在使用，而并不持有对它的引用。而这种使用关系是具有偶然性、临时性的、非常弱的，但是B类的变化会影响到A；表现在代码层面，为类B作为参数被类A在某个method（方法）中使用。用带燕尾箭头的虚线表示。表示一个类依赖于另外一个类的定义；依赖关系仅仅描述了类与类之间的一种使用与被使用的关系。</p>
@@ -670,6 +700,8 @@
     <url>/2019/04/17/PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/</url>
     <content><![CDATA[<h2 id="什么是社会统一信用码"><a href="#什么是社会统一信用码" class="headerlink" title="什么是社会统一信用码"></a>什么是社会统一信用码</h2><p><a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener"><strong>统一社会信用代码</strong></a>是中国的法人和其他组织，在全国范围内唯一的、终身不变的18位法定身份识别码，旨在统一过去各部门下发的不同机构代码，由全国组织机构统一社会信用代码数据服务中心（NACAO，隶属<a href="https://zh.wikipedia.org/wiki/%E5%9B%BD%E5%AE%B6%E5%B8%82%E5%9C%BA%E7%9B%91%E7%9D%A3%E7%AE%A1%E7%90%86%E6%80%BB%E5%B1%80" target="_blank" rel="noopener">国家市场监督管理总局</a>）负责管理。</p>
 <p>2015年6月11日国务院下发《国务院关于批转发展改革委等部门法人和其他组织统一社会信用代码制度建设总体方案的通知》（国发〔2015〕33号）后开始实施。</p>
+<a id="more"></a>
+
 <h2 id="信用码构成"><a href="#信用码构成" class="headerlink" title="信用码构成"></a>信用码构成</h2><p><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E5%AE%B6%E6%A0%87%E5%87%86" target="_blank" rel="noopener">中华人民共和国国家标准</a><a href="https://zh.wikisource.org/wiki/GB_32100-2015_%E6%B3%95%E4%BA%BA%E5%92%8C%E5%85%B6%E4%BB%96%E7%BB%84%E7%BB%87%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A0%81%E8%A7%84%E5%88%99" target="_blank" rel="noopener">GB 32100-2015 法人和其他组织统一社会信用代码编码规则</a>中规定：统一代码由十八位的阿拉伯数字或大写英文字母（不使用I、O、Z、S、V）组成。</p>
 <p>18位数字字母组合的方式是：</p>
 <p><img src="https://img.nichijou.me/20190417230234.png" alt=""></p>
@@ -707,6 +739,8 @@
     <url>/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/</url>
     <content><![CDATA[<p>在Golang中，支持通过 <code>break</code> 的方式跳出循环。如果需要跳出多层循环，可以使用 <code>break label</code> 的方式实现。</p>
 <p>不同于 <code>goto label</code>， <code>break label</code> 会在循环的下一条语句处开始继续执行，而 <code>goto label</code> 则会从 <code>label</code> 处继续往下执行。如果在下面的例子中把 <code>break label</code> 换成 <code>goto label</code>，则会导致再次进入循环。</p>
+<a id="more"></a>
+
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">TestLabelBreak:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">		<span class="keyword">if</span> i == <span class="number">3</span> &#123;</span><br><span class="line">			<span class="keyword">break</span> TestLabelBreak</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"end for"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// end for</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -722,6 +756,8 @@
     <url>/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在单元测试时，有时候会碰到代码中使用了 <code>time</code>， <code>date</code> 等函数，然后根据这些函数的返回执行不同的分支。</p>
 <p>这种情况下想要覆盖到所有分支，可以通过在相同命名空间下定义同名函数，来达到mock的目的</p>
+<a id="more"></a>
+
 <p>例：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 待测代码</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (time() &gt;= strtotime(<span class="string">'2019-01-01'</span>)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单元测试</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> strtotime(<span class="string">'2018-01-01'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -753,6 +789,8 @@
 <li>重启系统</li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">-bash-3.2<span class="comment"># csrutil disable</span></span><br><span class="line">Successfully disabled System Integrity Protection. Please restart the machine <span class="keyword">for</span> the changes to take effect.</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h2 id="获取显示器DisplayVendorID和DisplayProductID"><a href="#获取显示器DisplayVendorID和DisplayProductID" class="headerlink" title="获取显示器DisplayVendorID和DisplayProductID"></a>获取显示器DisplayVendorID和DisplayProductID</h2><p>终端执行</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ioreg -l | grep <span class="string">"DisplayVendorID"</span></span><br><span class="line">ioreg -l | grep <span class="string">"DisplayProductID"</span></span><br></pre></td></tr></table></figure>
@@ -793,6 +831,8 @@
     <url>/2019/05/13/PHP%E8%B0%83%E7%94%A8curl%E8%AE%BE%E7%BD%AECURLOPT-TIMEOUT-MS%E5%B0%8F%E4%BA%8E1%E7%A7%92%E6%97%B6%E6%97%A0%E6%95%88/</url>
     <content><![CDATA[<p>今天使用php调用curl时碰到一个奇怪的问题，现象为当CURLOPT_TIMEOUT_MS小于1000时，直接返回错误</p>
 <p>代码如下：</p>
+<a id="more"></a>
+
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$ch = curl_init(<span class="string">'https://nichijou.me/'</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">// curl_setopt($ch, CURLOPT_NOSIGNAL, 1);</span></span><br><span class="line">curl_setopt($ch, CURLOPT_TIMEOUT_MS, <span class="number">200</span>);</span><br><span class="line">$data = curl_exec($ch);</span><br><span class="line">$curl_errno = curl_errno($ch);</span><br><span class="line">$curl_error = curl_error($ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($curl_errno &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"cURL Error ($curl_errno): $curl_error\n"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Data received: $data\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// cURL Error (28): Timeout was reached</span></span><br></pre></td></tr></table></figure>
 
 <p>翻了一下文档</p>
@@ -872,6 +912,8 @@
     <content><![CDATA[<h2 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h2><p><strong>设置</strong></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 只对github生效</span></span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="comment"># 对所有生效</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:8118</span><br><span class="line">git config --global https.proxy http://127.0.0.1:8118</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <p><strong>取消</strong></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 只对github生效</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.https://github.com.proxy</span><br><span class="line"><span class="comment"># 对所有生效</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
 
@@ -896,6 +938,8 @@
     <content><![CDATA[<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p><strong>LIST分区</strong></p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'date'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`date`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">LIST</span> (<span class="string">`date`</span>)</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">PARTITION</span> P_20191201 <span class="keyword">VALUES</span> <span class="keyword">IN</span> (<span class="number">20191201</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <p><strong>RANGE分区</strong></p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'date'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`date`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COLLATE</span>=utf8_unicode_ci</span><br><span class="line"><span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="string">`date`</span>)</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">PARTITION</span> P_20191201 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THAN</span> (<span class="number">20191202</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
@@ -917,6 +961,8 @@
     <title>防止Mac合盖休眠</title>
     <url>/2020/02/11/%E9%98%B2%E6%AD%A2Mac%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0/</url>
     <content><![CDATA[<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 禁止显示器睡眠</span></span><br><span class="line">caffeinate -d</span><br><span class="line"><span class="comment"># 禁止系统睡眠</span></span><br><span class="line">caffeinate -is</span><br><span class="line"><span class="comment"># 当1000号进程存在时不睡眠</span></span><br><span class="line">caffeinate -w 1000</span><br><span class="line"><span class="comment"># 1小时内不睡眠</span></span><br><span class="line">caffeinate -t 3600</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h2 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># man caffeinate</span></span><br><span class="line"></span><br><span class="line">CAFFEINATE(8)             BSD System Manager<span class="string">'s Manual            CAFFEINATE(8)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">NAME</span></span><br><span class="line"><span class="string">     caffeinate -- prevent the system from sleeping on behalf of a utility</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SYNOPSIS</span></span><br><span class="line"><span class="string">     caffeinate [-disu] [-t timeout] [-w pid] [utility arguments...]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">DESCRIPTION</span></span><br><span class="line"><span class="string">     caffeinate creates assertions to alter system sleep behavior.  If no assertion flags are specified, caffeinate creates an assertion to prevent idle sleep.  If a utility is specified, caffeinate creates the assertions on the utility'</span>s behalf, and those assertions will persist <span class="keyword">for</span> the duration of the</span><br><span class="line">     utility<span class="string">'s execution. Otherwise, caffeinate creates the assertions directly, and those assertions will persist until caffeinate exits.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     Available options:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -d      Create an assertion to prevent the display from sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -i      Create an assertion to prevent the system from idle sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -m      Create an assertion to prevent the disk from idle sleeping.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -s      Create an assertion to prevent the system from sleeping. This assertion is valid only when system is running on AC power.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -u      Create an assertion to declare that user is active. If the display is off, this option turns the display on and prevents the display from going into idle sleep. If a timeout is not specified with '</span>-t<span class="string">' option, then this assertion is taken with a default of 5 second timeout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -t      Specifies the timeout value in seconds for which this assertion has to be valid. The assertion is dropped after the specified timeout. Timeout value is not used when an utility is invoked with this command.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     -w      Waits for the process with the specified pid to exit. Once the the process exits, the assertion is also released.  This option is ignored when used with utility option.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EXAMPLE</span></span><br><span class="line"><span class="string">     caffeinate -i make</span></span><br><span class="line"><span class="string">        caffeinate forks a process, execs "make" in it, and holds an assertion that prevents idle sleep as long as that process is running.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SEE ALSO</span></span><br><span class="line"><span class="string">     pmset(1)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">LOCATION</span></span><br><span class="line"><span class="string">     /usr/bin/caffeinate</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Darwin                         November 9, 2012                         Darwin</span></span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -945,7 +991,7 @@
   </entry>
   <entry>
     <title>CentOS关闭swap</title>
-    <url>/2020/04/05/2020-04-05-CentOS%E5%85%B3%E9%97%ADswap/</url>
+    <url>/2020/04/05/CentOS%E5%85%B3%E9%97%ADswap/</url>
     <content><![CDATA[<blockquote>
 <p><strong>环境</strong><br>CentOS 8</p>
 </blockquote>
@@ -971,11 +1017,13 @@
   </entry>
   <entry>
     <title>Prometheus+Grafana打造监控系统</title>
-    <url>/2020/04/05/2020-04-05-Prometheus-Grafana%E6%89%93%E9%80%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/</url>
+    <url>/2020/04/05/Prometheus-Grafana%E6%89%93%E9%80%A0%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<blockquote>
 <p><strong>环境</strong><br>CentOS 8</p>
 </blockquote>
 <h1 id="什么是-Prometheus"><a href="#什么是-Prometheus" class="headerlink" title="什么是 Prometheus"></a>什么是 Prometheus</h1><p>Prometheus 是一套开源的系统监控报警框架。它启发于 Google 的 borgmon 监控系统，由工作在 SoundCloud 的 google 前员工在 2012 年创建，作为社区开源项目进行开发，并于 2015 年正式发布。2016 年，Prometheus 正式加入 Cloud Native Computing Foundation，成为受欢迎度仅次于 Kubernetes 的项目。</p>
+<a id="more"></a>
+
 <p>作为新一代的监控框架，Prometheus 具有以下特点：</p>
 <p>强大的多维度数据模型：<br>时间序列数据通过 metric 名和键值对来区分。<br>所有的 metrics 都可以设置任意的多维标签。<br>数据模型更随意，不需要刻意设置为以点分隔的字符串。<br>可以对数据模型进行聚合，切割和切片操作。<br>支持双精度浮点类型，标签可以设为全 unicode。<br>灵活而强大的查询语句（PromQL）：在同一个查询语句，可以对多个 metrics 进行乘法、加法、连接、取分数位等操作。<br>易于管理： Prometheus server 是一个单独的二进制文件，可直接在本地工作，不依赖于分布式存储。<br>高效：平均每个采样点仅占 3.5 bytes，且一个 Prometheus server 可以处理数百万的 metrics。<br>使用 pull 模式采集时间序列数据，这样不仅有利于本机测试而且可以避免有问题的服务器推送坏的 metrics。<br>可以采用 push gateway 的方式把时间序列数据推送至 Prometheus server 端。<br>可以通过服务发现或者静态配置去获取监控的 targets。<br>有多种可视化图形界面。<br>易于伸缩。<br>需要指出的是，由于数据采集可能会有丢失，所以 Prometheus 不适用对采集数据要 100% 准确的情形。但如果用于记录时间序列数据，Prometheus 具有很大的查询优势，此外，Prometheus 适用于微服务的体系架构。</p>
 <h1 id="Prometheus-组成及架构"><a href="#Prometheus-组成及架构" class="headerlink" title="Prometheus 组成及架构"></a>Prometheus 组成及架构</h1><p>Prometheus 生态圈中包含了多个组件，其中许多组件是可选的：</p>
@@ -1046,7 +1094,7 @@
   </entry>
   <entry>
     <title>kubernetes安装</title>
-    <url>/2020/04/05/2020-04-05-kubernetes%E5%AE%89%E8%A3%85/</url>
+    <url>/2020/04/05/kubernetes%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<blockquote>
 <p><strong>环境</strong><br>CentOS 8<br>Kubernetes 1.18.0</p>
 </blockquote>
@@ -1054,6 +1102,8 @@
 <p><a href="https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/" target="_blank" rel="noopener">https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/</a></p>
 </blockquote>
 <h1 id="安装-kubeadm"><a href="#安装-kubeadm" class="headerlink" title="安装 kubeadm"></a>安装 kubeadm</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br><span class="line"></span><br><span class="line">modprobe br_netfilter</span><br><span class="line">cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h1 id="使用-kubeadm-创建单个控制面板节点"><a href="#使用-kubeadm-创建单个控制面板节点" class="headerlink" title="使用 kubeadm 创建单个控制面板节点"></a>使用 kubeadm 创建单个控制面板节点</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">kubeadm init \</span><br><span class="line">  --apiserver-advertise-address=&#123;your_host&#125; \</span><br><span class="line">  --apiserver-bind-port=6443 \</span><br><span class="line">  --pod-network-cidr=10.233.0.0/16 \</span><br><span class="line">  --service-cidr=10.96.0.0/12</span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
 
@@ -1107,7 +1157,7 @@
   </entry>
   <entry>
     <title>使用acme.sh申请letsencrypt泛域名证书</title>
-    <url>/2020/04/18/2020-04-18-%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/</url>
+    <url>/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/</url>
     <content><![CDATA[<blockquote>
 <p><strong>环境</strong><br>CentOS 8<br>nginx/1.14.1</p>
 </blockquote>
@@ -1115,6 +1165,8 @@
 <p>参考<br><a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E</a></p>
 </blockquote>
 <h1 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl  https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h1 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h1><blockquote>
 <p>以下3种选一种即可，通常直接使用 Http 验证</p>
@@ -1161,7 +1213,7 @@
   </entry>
   <entry>
     <title>安装istio</title>
-    <url>/2020/04/18/2020-04-18-%E5%AE%89%E8%A3%85istio/</url>
+    <url>/2020/04/18/%E5%AE%89%E8%A3%85istio/</url>
     <content><![CDATA[<blockquote>
 <p><strong>环境</strong><br>CentOS 8<br>Kubernetes 1.18.0<br>Istio 1.5.1</p>
 </blockquote>
@@ -1169,6 +1221,8 @@
 <p>参考<br><a href="https://istio.io/zh/docs/setup/getting-started/" target="_blank" rel="noopener">https://istio.io/zh/docs/setup/getting-started/</a></p>
 </blockquote>
 <h1 id="下载-Istio"><a href="#下载-Istio" class="headerlink" title="下载 Istio"></a>下载 Istio</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -L https:&#x2F;&#x2F;istio.io&#x2F;downloadIstio | sh -</span><br><span class="line">export PATH&#x3D;PATH&#x3D;$PWD&#x2F;istio-1.5.1&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装demo配置"><a href="#安装demo配置" class="headerlink" title="安装demo配置"></a>安装demo配置</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">istioctl manifest apply --<span class="built_in">set</span> profile=demo</span><br></pre></td></tr></table></figure>
 
@@ -1188,7 +1242,7 @@
   </entry>
   <entry>
     <title>创建NFS网络文件系统</title>
-    <url>/2020/04/18/2020-04-18-%E5%88%9B%E5%BB%BANFS%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</url>
+    <url>/2020/04/18/%E5%88%9B%E5%BB%BANFS%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<blockquote>
 <p><strong>环境</strong><br>CentOS 8</p>
 </blockquote>
@@ -1196,6 +1250,8 @@
 <p>参考<br><a href="https://wiki.archlinux.org/index.php/NFS_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/NFS_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></p>
 </blockquote>
 <h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="安装-nfs-utils"><a href="#安装-nfs-utils" class="headerlink" title="安装 nfs-utils"></a>安装 nfs-utils</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yum install nfs-utils</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> rpcbind.service</span><br><span class="line">systemctl <span class="built_in">enable</span> nfs-server.service</span><br><span class="line"></span><br><span class="line">systemctl start rpcbind.service</span><br><span class="line">systemctl start nfs-server.service</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h2 id="创建共享目录"><a href="#创建共享目录" class="headerlink" title="创建共享目录"></a>创建共享目录</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">mkdir /nfs</span><br><span class="line">chmod 755 /nfs</span><br></pre></td></tr></table></figure>
 
@@ -1248,6 +1304,8 @@
 <h4 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h4><p><a href="https://grafana.com/" target="_blank" rel="noopener">https://grafana.com/</a></p>
 <p>Grafana是一个多平台的数据分析解决方案</p>
 <p>在这里作为压测结果的可视化前端</p>
+<a id="more"></a>
+
 <h1 id="构建使用"><a href="#构建使用" class="headerlink" title="构建使用"></a>构建使用</h1><h4 id="InfluxDB-Grafana"><a href="#InfluxDB-Grafana" class="headerlink" title="InfluxDB + Grafana"></a>InfluxDB + Grafana</h4><p>官网提供了各自安装的详细方法，这边已经打包了一个开箱即用的环境，可以通过以下方式一键安装</p>
 <blockquote>
 <p>依赖<br>Docker Engine 17.06.0+<br>Docker Compose 1.14.0+</p>
@@ -1284,6 +1342,8 @@
 <p><strong>环境</strong><br>Windows 10</p>
 </blockquote>
 <p>最近发现 Windows Terminal 正式版发布了， ssh 到 linux 服务器试了下感觉还不错，至少不再有原来奇奇怪怪的快捷键和排版问题了，默认的字体样式也还阔以233。简单配置了一下打算把吃灰的 windows 当作备用开发机。然而发现习惯了 mac 下把 <code>CapsLock</code> 映射为 <code>Ctrl</code> ， windows 下老是按错，于是乎查了一下解决办法。</p>
+<a id="more"></a>
+
 <h2 id="先说解决方法"><a href="#先说解决方法" class="headerlink" title="先说解决方法"></a>先说解决方法</h2><p><code>win + r</code> ， 输入 <code>regedit</code> ， 打开注册表编辑器，找到 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout</code> ， 新建二进制值 <code>ScanCode Map</code></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">0000 0000 0000 0000</span><br><span class="line">0200 0000 1D00 3A00</span><br><span class="line">0000 0000</span><br></pre></td></tr></table></figure>
 
@@ -1874,6 +1934,8 @@
     <url>/2020/06/06/NUC8i5BEK%E5%BC%80%E7%AE%B1/</url>
     <content><![CDATA[<p>其实 NUC8 用了也有几个月了，原来配的 2 * 16G 的内存在4台虚拟机下稍显有点吃力。查了一下发现虽然 Intel 官方给出的规格中最大内存只支持到32G，但是网上有人试了下64G也完全没问题 ∑(ﾟДﾟ)。趁着618活动赶紧下单了2条32G，顺便补个开箱 ಥ_ಥ</p>
 <p><img src="https://img.nichijou.me/20200606181609.jpeg" alt=""></p>
+<a id="more"></a>
+
 <p>型号是 NUC8i5BEK ，2020-03-18于京东入手。其实本来是想等10代NUC的，结果一方面10代U提升不大，显卡对比8代不升反降，另一方面NUC8折扣实在太大 _(:з」∠)_ ，京东 2499 的价格只比闲鱼贵了 250 左右，多个京东保修还是挺香的。先用上车8代，希望 NUC11 的 Tiger Lake 给力吧。</p>
 <p><img src="https://img.nichijou.me/20200606181603.jpeg" alt=""></p>
 <p>正面最左边是硬盘灯，中间是2个 USB3.1 接口（黄色的口支持关机充电），USB 接口右边是 3.5mm 耳机插口，最右边是电源键。</p>
