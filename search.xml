@@ -1791,4 +1791,26 @@
         <category>coding</category>
       </categories>
   </entry>
+  <entry>
+    <title>NUC8i5BEK开箱</title>
+    <url>/2020/06/06/NUC8i5BEK%E5%BC%80%E7%AE%B1/</url>
+    <content><![CDATA[<p>其实 NUC8 用了也有几个月了，原来配的 2 * 16G 的内存在4台虚拟机下稍显有点吃力。查了一下发现虽然 Intel 官方给出的规格中最大内存只支持到32G，但是网上有人试了下64G也完全没问题 ∑(ﾟДﾟ)。趁着618活动赶紧下单了2条32G，顺便补个开箱 ಥ_ಥ</p>
+<p><img src="https://img.nichijou.me/20200606181609.jpeg" alt=""></p>
+<p>型号是 NUC8i5BEK ，2020-03-18于京东入手。其实本来是想等10代NUC的，结果一方面10代U提升不大，显卡对比8代不升反降，另一方面NUC8折扣实在太大 _(:з」∠)_ ，京东 2499 的价格只比闲鱼贵了 250 左右，多个京东保修还是挺香的。先用上车8代，希望 NUC11 的 Tiger Lake 给力吧。</p>
+<p><img src="https://img.nichijou.me/20200606181603.jpeg" alt=""></p>
+<p>正面最左边是硬盘灯，中间是2个 USB3.1 接口（黄色的口支持关机充电），USB 接口右边是 3.5mm 耳机插口，最右边是电源键。</p>
+<p><img src="https://img.nichijou.me/20200606181557.jpeg" alt=""></p>
+<p>背后1个 HDMI2.0a，1个千兆网口， 2个 USB3.1接口，1个雷电3接口。可惜雷电口不能作为电源输入，只能通过比 NUC 本体还大的DC电源输入。</p>
+<p><img src="https://img.nichijou.me/20200606181551.jpeg" alt=""></p>
+<p>内部构造。我买的是薄款，厚款在顶盖上还可以加装一块2.5英寸硬盘。</p>
+<p><img src="https://img.nichijou.me/20200606181542.png" alt=""></p>
+<p>最后，可以正常识别 64G 内存，使用也完全正常。最大频率被限制在2400MHz，京东3200频的32G内存比2666频的贵了50%，这边还是建议省点钱用2666，说不定等 NUC11 出来的时候32G也白菜价了呢 ಥ_ಥ</p>
+]]></content>
+      <categories>
+        <category>瞎折腾</category>
+      </categories>
+      <tags>
+        <tag>NUC8</tag>
+      </tags>
+  </entry>
 </search>

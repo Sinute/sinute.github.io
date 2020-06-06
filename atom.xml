@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://nichijou.me/"/>
-  <updated>2020-05-24T09:20:48.038Z</updated>
+  <updated>2020-06-06T10:20:10.316Z</updated>
   <id>https://nichijou.me/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>NUC8i5BEK开箱</title>
+    <link href="https://nichijou.me/2020/06/06/NUC8i5BEK%E5%BC%80%E7%AE%B1/"/>
+    <id>https://nichijou.me/2020/06/06/NUC8i5BEK%E5%BC%80%E7%AE%B1/</id>
+    <published>2020-06-06T05:42:02.000Z</published>
+    <updated>2020-06-06T10:20:10.316Z</updated>
+    
+    <content type="html"><![CDATA[<p>其实 NUC8 用了也有几个月了，原来配的 2 * 16G 的内存在4台虚拟机下稍显有点吃力。查了一下发现虽然 Intel 官方给出的规格中最大内存只支持到32G，但是网上有人试了下64G也完全没问题 ∑(ﾟДﾟ)。趁着618活动赶紧下单了2条32G，顺便补个开箱 ಥ_ಥ</p><p><img src="https://img.nichijou.me/20200606181609.jpeg" alt=""></p><p>型号是 NUC8i5BEK ，2020-03-18于京东入手。其实本来是想等10代NUC的，结果一方面10代U提升不大，显卡对比8代不升反降，另一方面NUC8折扣实在太大 _(:з」∠)_ ，京东 2499 的价格只比闲鱼贵了 250 左右，多个京东保修还是挺香的。先用上车8代，希望 NUC11 的 Tiger Lake 给力吧。</p><p><img src="https://img.nichijou.me/20200606181603.jpeg" alt=""></p><p>正面最左边是硬盘灯，中间是2个 USB3.1 接口（黄色的口支持关机充电），USB 接口右边是 3.5mm 耳机插口，最右边是电源键。</p><p><img src="https://img.nichijou.me/20200606181557.jpeg" alt=""></p><p>背后1个 HDMI2.0a，1个千兆网口， 2个 USB3.1接口，1个雷电3接口。可惜雷电口不能作为电源输入，只能通过比 NUC 本体还大的DC电源输入。</p><p><img src="https://img.nichijou.me/20200606181551.jpeg" alt=""></p><p>内部构造。我买的是薄款，厚款在顶盖上还可以加装一块2.5英寸硬盘。</p><p><img src="https://img.nichijou.me/20200606181542.png" alt=""></p><p>最后，可以正常识别 64G 内存，使用也完全正常。最大频率被限制在2400MHz，京东3200频的32G内存比2666频的贵了50%，这边还是建议省点钱用2666，说不定等 NUC11 出来的时候32G也白菜价了呢 ಥ_ಥ</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;其实 NUC8 用了也有几个月了，原来配的 2 * 16G 的内存在4台虚拟机下稍显有点吃力。查了一下发现虽然 Intel 官方给出的规格中最大内存只支持到32G，但是网上有人试了下64G也完全没问题 ∑(ﾟДﾟ)。趁着618活动赶紧下单了2条32G，顺便补个开箱 ಥ_ಥ&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="瞎折腾" scheme="https://nichijou.me/categories/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+      <category term="NUC8" scheme="https://nichijou.me/tags/NUC8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>更改windows键位</title>
     <link href="https://nichijou.me/2020/05/24/%E6%9B%B4%E6%94%B9windows%E9%94%AE%E4%BD%8D/"/>
     <id>https://nichijou.me/2020/05/24/%E6%9B%B4%E6%94%B9windows%E9%94%AE%E4%BD%8D/</id>
     <published>2020-05-24T08:01:40.000Z</published>
-    <updated>2020-05-24T09:20:48.038Z</updated>
+    <updated>2020-05-24T09:24:25.938Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p><strong>环境</strong><br>Windows 10</p></blockquote><p>最近发现 Windows Terminal 正式版发布了， ssh 到 linux 服务器试了下感觉还不错，至少不再有原来奇奇怪怪的快捷键和排版问题了，默认的字体样式也还阔以233。简单配置了一下打算把吃灰的 windows 当作备用开发机。然而发现习惯了 mac 下把 <code>CapsLock</code> 映射为 <code>Ctrl</code> ， windows 下老是按错，于是乎查了一下解决办法。</p><h2 id="先说解决方法"><a href="#先说解决方法" class="headerlink" title="先说解决方法"></a>先说解决方法</h2><p><code>win + r</code> ， 输入 <code>regedit</code> ， 打开注册表编辑器，找到 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout</code> ， 新建二进制值 <code>ScanCode Map</code></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 0000 0000</span><br><span class="line">0200 0000 1D00 3A00</span><br><span class="line">0000 0000</span><br></pre></td></tr></table></figure><p><img src="https://img.nichijou.me/20200524165207.PNG" alt=""></p><p>保存重启即可</p><h2 id="然后说说原理"><a href="#然后说说原理" class="headerlink" title="然后说说原理"></a>然后说说原理</h2><p><code>ScanCode Map</code> 的格式为</p><p><img src="https://img.nichijou.me/20200524170547.png" alt=""></p><blockquote><p>二进制值采用 <a href="https://zh.wikipedia.org/zh-hans/%E5%AD%97%E8%8A%82%E5%BA%8F" target="_blank" rel="noopener">小端序</a></p></blockquote><ul><li>前8个字节为版本信息</li><li>接着4个字节为需要映射的按键个数（从2开始，即映射1个此处为2，映射2个此处为3）</li><li>紧跟着就是N段4个字节的映射关系（N和上一步中填写的映射个数有关），前2个字节为映射后的键盘扫描码，后2个字节为映射前的键盘扫描码</li><li>最后4个字节全0结束</li></ul><p><del>至于为什么从2开始，我个人无责任猜测：因为最后还有4字节的结束符，因此这边的大小 * 4字节刚好就是整段大小</del></p><p>例：</p><p>在 <code>CapsLock</code> 映射为 <code>Ctrl</code> 的基础上，同时把 <code>Ctrl</code> 映射为 <code>CapsLock</code></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 0000 0000</span><br><span class="line">0300 0000 1D00 3A00</span><br><span class="line">3A00 1D00 0000 0000</span><br></pre></td></tr></table></figure><h2 id="最后是所有的键盘扫描码"><a href="#最后是所有的键盘扫描码" class="headerlink" title="最后是所有的键盘扫描码"></a>最后是所有的键盘扫描码</h2><table><thead><tr><th>#</th><th>X(Set 2)</th><th>keycap</th></tr></thead><tbody><tr><td>1</td><td>29</td><td>` ~</td></tr><tr><td>2</td><td>02</td><td>1 !</td></tr><tr><td>3</td><td>03</td><td>2 @</td></tr><tr><td>4</td><td>04</td><td>3 #</td></tr><tr><td>5</td><td>05</td><td>4 $</td></tr><tr><td>6</td><td>06</td><td>5 % E</td></tr><tr><td>7</td><td>07</td><td>6 ^</td></tr><tr><td>8</td><td>08</td><td>7 &amp;</td></tr><tr><td>9</td><td>09</td><td>8 *</td></tr><tr><td>10</td><td>0a</td><td>9 (</td></tr><tr><td>11</td><td>0b</td><td>0 )</td></tr><tr><td>12</td><td>0c</td><td>- _</td></tr><tr><td>13</td><td>0d</td><td>= +</td></tr><tr><td>15</td><td>0e</td><td>Backspace</td></tr><tr><td>16</td><td>0f</td><td>Tab</td></tr><tr><td>17</td><td>10</td><td>Q</td></tr><tr><td>18</td><td>11</td><td>W</td></tr><tr><td>19</td><td>12</td><td>E</td></tr><tr><td>20</td><td>13</td><td>R</td></tr><tr><td>21</td><td>14</td><td>T</td></tr><tr><td>22</td><td>15</td><td>Y</td></tr><tr><td>23</td><td>16</td><td>U</td></tr><tr><td>24</td><td>17</td><td>I</td></tr><tr><td>25</td><td>18</td><td>O</td></tr><tr><td>26</td><td>19</td><td>P</td></tr><tr><td>27</td><td>1a</td><td>[ {</td></tr><tr><td>28</td><td>1b</td><td>] }</td></tr><tr><td>29</td><td>2b</td><td>\ |</td></tr><tr><td>30</td><td>3a</td><td>CapsLock</td></tr><tr><td>31</td><td>1e</td><td>A</td></tr><tr><td>32</td><td>1f</td><td>S</td></tr><tr><td>33</td><td>20</td><td>D</td></tr><tr><td>34</td><td>21</td><td>F</td></tr><tr><td>35</td><td>22</td><td>G</td></tr><tr><td>36</td><td>23</td><td>H</td></tr><tr><td>37</td><td>24</td><td>J</td></tr><tr><td>38</td><td>25</td><td>K</td></tr><tr><td>39</td><td>26</td><td>L</td></tr><tr><td>40</td><td>27</td><td>; :</td></tr><tr><td>41</td><td>28</td><td>‘ “</td></tr><tr><td>42</td><td>ff</td><td>non-US-1</td></tr><tr><td>43</td><td>1c</td><td>Enter</td></tr><tr><td>44</td><td>2a</td><td>LShift</td></tr><tr><td>46</td><td>2c</td><td>Z</td></tr><tr><td>47</td><td>2d</td><td>X</td></tr><tr><td>48</td><td>2e</td><td>C</td></tr><tr><td>49</td><td>2f</td><td>V</td></tr><tr><td>50</td><td>30</td><td>B</td></tr><tr><td>51</td><td>31</td><td>N</td></tr><tr><td>52</td><td>32</td><td>M</td></tr><tr><td>53</td><td>33</td><td>, &lt;</td></tr><tr><td>54</td><td>34</td><td>. &gt;</td></tr><tr><td>55</td><td>35</td><td>/ ?</td></tr><tr><td>57</td><td>36</td><td>RShift</td></tr><tr><td>58</td><td>1d</td><td>LCtrl</td></tr><tr><td>60</td><td>38</td><td>LAlt</td></tr><tr><td>61</td><td>39</td><td>space</td></tr><tr><td>62</td><td>e0-38</td><td>RAlt</td></tr><tr><td>64</td><td>e0-1d</td><td>RCtrl</td></tr><tr><td>75</td><td>e0-52</td><td>Insert</td></tr><tr><td>76</td><td>e0-53</td><td>Delete</td></tr><tr><td>80</td><td>e0-47</td><td>Home</td></tr><tr><td>81</td><td>e0-4f</td><td>End</td></tr><tr><td>85</td><td>e0-49</td><td>PgUp</td></tr><tr><td>86</td><td>e0-51</td><td>PgDn</td></tr><tr><td>79</td><td>e0-4b</td><td>Left</td></tr><tr><td>83</td><td>e0-48</td><td>Up</td></tr><tr><td>84</td><td>e0-50</td><td>Down</td></tr><tr><td>89</td><td>e0-4d</td><td>Right</td></tr><tr><td>90</td><td>45</td><td>NumLock</td></tr><tr><td>91</td><td>47</td><td>KP-7 / Home</td></tr><tr><td>92</td><td>4b</td><td>KP-4 / Left</td></tr><tr><td>93</td><td>4f</td><td>KP-1 / End</td></tr><tr><td>95</td><td>e0-35</td><td>KP-/</td></tr><tr><td>96</td><td>48</td><td>KP-8 / Up</td></tr><tr><td>97</td><td>4c</td><td>KP-5</td></tr><tr><td>98</td><td>50</td><td>KP-2 / Down</td></tr><tr><td>99</td><td>52</td><td>KP-0 / Ins</td></tr><tr><td>100</td><td>37</td><td>KP-*</td></tr><tr><td>101</td><td>49</td><td>KP-9 / PgUp</td></tr><tr><td>102</td><td>4d</td><td>KP-6 / Right</td></tr><tr><td>103</td><td>51</td><td>KP-3 / PgDn</td></tr><tr><td>104</td><td>53</td><td>KP-. / Del</td></tr><tr><td>105</td><td>4a</td><td>KP–</td></tr><tr><td>106</td><td>4e</td><td>KP-+</td></tr><tr><td>108</td><td>e0-1c</td><td>KP-Enter</td></tr><tr><td>110</td><td>01</td><td>Esc</td></tr><tr><td>112</td><td>3b</td><td>F1</td></tr><tr><td>113</td><td>3c</td><td>F2</td></tr><tr><td>114</td><td>3d</td><td>F3</td></tr><tr><td>115</td><td>3e</td><td>F4</td></tr><tr><td>116</td><td>3f</td><td>F5</td></tr><tr><td>117</td><td>40</td><td>F6</td></tr><tr><td>118</td><td>41</td><td>F7</td></tr><tr><td>119</td><td>42</td><td>F8</td></tr><tr><td>120</td><td>43</td><td>F9</td></tr><tr><td>121</td><td>44</td><td>F10</td></tr><tr><td>122</td><td>57</td><td>F11</td></tr><tr><td>123</td><td>58</td><td>F12</td></tr><tr><td>124</td><td>e0-37</td><td>PrtScr</td></tr><tr><td>0</td><td>54</td><td>Alt+SysRq</td></tr><tr><td>125</td><td>46</td><td>ScrollLock</td></tr><tr><td>126</td><td>e1-1d-45</td><td>Pause</td></tr><tr><td>0</td><td>e0-46</td><td>Ctrl+Break</td></tr><tr><td>0</td><td>e0-5b</td><td>LWin (USB: LGUI)</td></tr><tr><td>0</td><td>e0-5c</td><td>RWin (USB: RGUI)</td></tr><tr><td>0</td><td>e0-5d</td><td>Menu</td></tr><tr><td>0</td><td>e0-5f</td><td>Sleep</td></tr><tr><td>0</td><td>e0-5e</td><td>Power</td></tr><tr><td>0</td><td>e0-63</td><td>Wake</td></tr></tbody></table>]]></content>
     
@@ -558,42 +584,6 @@
       <category term="分辨率" scheme="https://nichijou.me/tags/%E5%88%86%E8%BE%A8%E7%8E%87/"/>
     
       <category term="显示器" scheme="https://nichijou.me/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在PHP单元测试中Mock time 以及 date 等预置函数</title>
-    <link href="https://nichijou.me/2019/05/07/2019-05-07-%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
-    <id>https://nichijou.me/2019/05/07/2019-05-07-%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/</id>
-    <published>2019-05-07T06:04:36.000Z</published>
-    <updated>2020-03-29T12:03:09.514Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在单元测试时，有时候会碰到代码中使用了 <code>time</code>， <code>date</code> 等函数，然后根据这些函数的返回执行不同的分支。</p><p>这种情况下想要覆盖到所有分支，可以通过在相同命名空间下定义同名函数，来达到mock的目的</p><p>例：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 待测代码</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (time() &gt;= strtotime(<span class="string">'2019-01-01'</span>)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单元测试</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> strtotime(<span class="string">'2018-01-01'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>参考 <a href="https://stackoverflow.com/a/5337635" target="_blank" rel="noopener">https://stackoverflow.com/a/5337635</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在单元测试时，有时候会碰到代码中使用了 &lt;code&gt;time&lt;/code&gt;， &lt;code&gt;date&lt;/code&gt; 等函数，然后根据这些函数的
-      
-    
-    </summary>
-    
-    
-    
-      <category term="phpunit" scheme="https://nichijou.me/tags/phpunit/"/>
-    
-      <category term="单元测试" scheme="https://nichijou.me/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="mock" scheme="https://nichijou.me/tags/mock/"/>
-    
-      <category term="date" scheme="https://nichijou.me/tags/date/"/>
-    
-      <category term="time" scheme="https://nichijou.me/tags/time/"/>
-    
-      <category term="预置函数" scheme="https://nichijou.me/tags/%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="php" scheme="https://nichijou.me/tags/php/"/>
     
   </entry>
   
