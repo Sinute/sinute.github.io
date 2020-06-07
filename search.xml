@@ -981,6 +981,7 @@
 
 <p><strong>永久关闭：</strong></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/SELINUX=enforcing/SELINUX=disabled/'</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>coding</category>
@@ -1936,7 +1937,7 @@
 <p><img src="https://img.nichijou.me/20200606181609.jpeg" alt=""></p>
 <a id="more"></a>
 
-<p>型号是 NUC8i5BEK ，2020-03-18于京东入手。其实本来是想等10代NUC的，结果一方面10代U提升不大，显卡对比8代不升反降，另一方面NUC8折扣实在太大 _(:з」∠)_ ，京东 2499 的价格只比闲鱼贵了 250 左右，多个京东保修还是挺香的。先用上车8代，希望 NUC11 的 Tiger Lake 给力吧。</p>
+<p>型号是 NUC8i5BEK ，2020-03-18于京东入手。其实本来是想等10代NUC的，结果一方面10代U提升不大，显卡对比8代不升反降，另一方面NUC8折扣实在太大 _(:з」∠)_ ，京东 2499 的价格只比闲鱼贵了 250 左右，多个京东保修还是挺香的。先上车8代，希望 NUC11 的 Tiger Lake 给力吧。</p>
 <p><img src="https://img.nichijou.me/20200606181603.jpeg" alt=""></p>
 <p>正面最左边是硬盘灯，中间是2个 USB3.1 接口（黄色的口支持关机充电），USB 接口右边是 3.5mm 耳机插口，最右边是电源键。</p>
 <p><img src="https://img.nichijou.me/20200606181557.jpeg" alt=""></p>
