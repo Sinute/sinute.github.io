@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://nichijou.me/"/>
-  <updated>2020-06-07T07:44:26.259Z</updated>
+  <updated>2020-10-06T03:27:52.353Z</updated>
   <id>https://nichijou.me/</id>
   
   <author>
@@ -15,6 +15,109 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker代理配置</title>
+    <link href="https://nichijou.me/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/"/>
+    <id>https://nichijou.me/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</id>
+    <published>2020-10-02T14:03:36.000Z</published>
+    <updated>2020-10-06T03:27:52.353Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>环境</strong><br>CentOS 8</p></blockquote><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/systemd/system/docker.service.d/http-proxy.conf</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTP_PROXY=http://proxy.example.com:80"</span></span><br><span class="line">Environment=<span class="string">"HTTPS_PROXY=https://proxy.example.com:443"</span></span><br><span class="line">Environment=<span class="string">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span></span><br></pre></td></tr></table></figure><blockquote><p><a href="https://docs.docker.com/config/daemon/systemd/#httphttps-proxy" target="_blank" rel="noopener">https://docs.docker.com/config/daemon/systemd/#httphttps-proxy</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;&lt;br&gt;CentOS 8&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span clas
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="docker" scheme="https://nichijou.me/tags/docker/"/>
+    
+      <category term="systemd" scheme="https://nichijou.me/tags/systemd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux非root用户执行sudo免密码</title>
+    <link href="https://nichijou.me/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/"/>
+    <id>https://nichijou.me/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/</id>
+    <published>2020-10-01T08:15:42.000Z</published>
+    <updated>2020-10-02T14:06:00.345Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>环境</strong><br>CentOS 8</p></blockquote><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/sudoers.d/user</span></span><br><span class="line">username  ALL=(ALL:ALL)   NOPASSWD:ALL</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;&lt;br&gt;CentOS 8&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span clas
+      
+    
+    </summary>
+    
+    
+      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
+    
+    
+      <category term="sudo" scheme="https://nichijou.me/tags/sudo/"/>
+    
+      <category term="sudoer" scheme="https://nichijou.me/tags/sudoer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DELL 戴尔 TB15 Thunderbolt 扩展坞 MacBook Pro 解锁试用测评</title>
+    <link href="https://nichijou.me/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/"/>
+    <id>https://nichijou.me/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/</id>
+    <published>2020-06-13T06:56:32.000Z</published>
+    <updated>2020-10-01T08:14:29.207Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>环境</strong><br>Dell TB15<br>MacBook Pro (15-inch, 2019)</p></blockquote><p>朋友捡了台 DELL 的 TB15 洋垃圾，让我试试 Mac 下做雷电3扩展坞效果如何</p><p><img src="https://img.nichijou.me/20201001160708.png" alt="背面"></p><a id="more"></a><p><img src="https://img.nichijou.me/20201001160729.png" alt="正面"></p><p><img src="https://img.nichijou.me/20201001160721.png" alt="尺寸"></p><p>成色倒是还行…查了下这款在 Mac 下需要破解，总之先插上去看看</p><p><img src="https://img.nichijou.me/20201001160742.png" alt="显示为不支持"></p><p>可以看到设备正常识别，但是显示为 Unsupported (不支持)</p><p><img src="https://img.nichijou.me/20201001160749.png" alt="输出功率59w"></p><p>看到电源输出功率为 59w时，感觉基本已经凉了一半了，Mac自带的充电器额定功率为86w，也就是说满载时 TB15 很有可能带不动</p><p>接下来是破解过程，太长不看的可以直接拉到最下面看结论</p><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h4 id="1-关闭-SIP-System-Integrity-Protection"><a href="#1-关闭-SIP-System-Integrity-Protection" class="headerlink" title="1. 关闭 SIP(System Integrity Protection)"></a>1. 关闭 SIP(System Integrity Protection)</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrutil <span class="built_in">enable</span> --without kext &amp;&amp; reboot</span><br></pre></td></tr></table></figure><h4 id="2-下载-Thunderbolt3Unblocker-zip-并解压"><a href="#2-下载-Thunderbolt3Unblocker-zip-并解压" class="headerlink" title="2. 下载 Thunderbolt3Unblocker.zip 并解压"></a>2. 下载 <code>Thunderbolt3Unblocker.zip</code> 并解压</h4><p><a href="https://github.com/rgov/Thunderbolt3Unblocker" target="_blank" rel="noopener">Github仓库地址</a></p><p><a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/119975512/106eb400-c2c0-11e8-9b48-840596ef0a2d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200613T070027Z&X-Amz-Expires=300&X-Amz-Signature=c9cfc044c9bab32b991b1c9c397063ddd1087ee7725d1e4713ed1b128d7448eb&X-Amz-SignedHeaders=host&actor_id=2202852&repo_id=119975512&response-content-disposition=attachment%3B%20filename%3DThunderbolt3Unblocker.zip&response-content-type=application%2Foctet-stream" target="_blank" rel="noopener">Thunderbolt3Unblocker.zip</a></p><p>解压后得到 <code>Thunderbolt3Unblocker.kext</code></p><h4 id="3-复制-Thunderbolt3Unblocker-kext-到-Library-Extensions-目录"><a href="#3-复制-Thunderbolt3Unblocker-kext-到-Library-Extensions-目录" class="headerlink" title="3. 复制 Thunderbolt3Unblocker.kext 到 /Library/Extensions 目录"></a>3. 复制 <code>Thunderbolt3Unblocker.kext</code> 到 <code>/Library/Extensions</code> 目录</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp -r Thunderbolt3Unblocker.kext /Library/Extensions</span><br><span class="line">sudo chown -R root:wheel /Library/Extensions/Thunderbolt3Unblocker.kext</span><br><span class="line">ls -lh /Library/Extensions |grep Thunderbolt3Unblocker</span><br></pre></td></tr></table></figure><p><img src="https://img.nichijou.me/20201001160755.png" alt=""></p><h4 id="4-安装"><a href="#4-安装" class="headerlink" title="4. 安装"></a>4. 安装</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R g-w,o-w /Library/Extensions/Thunderbolt3Unblocker.kext</span><br><span class="line">sudo kextcache -i /</span><br><span class="line">sudo nvram -d t3u-incompatible</span><br><span class="line">sudo kextload -b es.govost.ryan.Thunderbolt3Unblocker</span><br></pre></td></tr></table></figure><p><img src="https://img.nichijou.me/20201001160801.png" alt=""></p><h2 id="验证效果"><a href="#验证效果" class="headerlink" title="验证效果"></a>验证效果</h2><p><img src="https://img.nichijou.me/20201001160808.png" alt="截屏2020-06-13 15.45.28"></p><p>Unsupported 已消失，可以正常识别设备</p><h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo kextunload -b es.govost.ryan.Thunderbolt3Unblocker</span><br><span class="line">sudo rm -Rf /Library/Extensions/Thunderbolt3Unblocker.kext</span><br></pre></td></tr></table></figure><h2 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h2><p>破解后输出功率依然只有可怜的59w。而且测试了HDMI和miniDP口外接显示器，均无反应，没有 Type-C 的显示器不知道 Type-C 口是否可以输出，估计不乐观，不知道是个体问题还是普遍问题，当然也有可能是破解补丁的问题。前后USB口正常使用。</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>除了USB口正常，最重要的显示器接口无法正常使用，且输出功率最大只有59w，光这一条基本就判了死刑。网上搜了一下其他人问题也不少，还是老老实实贝尔金或者 CalDigit 吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;&lt;br&gt;Dell TB15&lt;br&gt;MacBook Pro (15-inch, 2019)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;朋友捡了台 DELL 的 TB15 洋垃圾，让我试试 Mac 下做雷电3扩展坞效果如何&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.nichijou.me/20201001160708.png&quot; alt=&quot;背面&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="瞎折腾" scheme="https://nichijou.me/categories/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
+    
+    
+      <category term="DELL" scheme="https://nichijou.me/tags/DELL/"/>
+    
+      <category term="戴尔" scheme="https://nichijou.me/tags/%E6%88%B4%E5%B0%94/"/>
+    
+      <category term="TB15" scheme="https://nichijou.me/tags/TB15/"/>
+    
+      <category term="雷电" scheme="https://nichijou.me/tags/%E9%9B%B7%E7%94%B5/"/>
+    
+      <category term="Thunderbolt" scheme="https://nichijou.me/tags/Thunderbolt/"/>
+    
+      <category term="扩展坞" scheme="https://nichijou.me/tags/%E6%89%A9%E5%B1%95%E5%9D%9E/"/>
+    
+      <category term="Dock" scheme="https://nichijou.me/tags/Dock/"/>
+    
+      <category term="MacBook" scheme="https://nichijou.me/tags/MacBook/"/>
+    
+  </entry>
   
   <entry>
     <title>NUC8i5BEK开箱</title>
@@ -493,96 +596,6 @@
       <category term="分辨率" scheme="https://nichijou.me/tags/%E5%88%86%E8%BE%A8%E7%8E%87/"/>
     
       <category term="显示器" scheme="https://nichijou.me/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在PHP单元测试中Mock time 以及 date 等预置函数</title>
-    <link href="https://nichijou.me/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
-    <id>https://nichijou.me/2019/05/07/%E5%9C%A8PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%ADMock-time-%E4%BB%A5%E5%8F%8A-date-%E7%AD%89%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/</id>
-    <published>2019-05-07T06:04:36.000Z</published>
-    <updated>2020-06-07T07:44:00.380Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在单元测试时，有时候会碰到代码中使用了 <code>time</code>， <code>date</code> 等函数，然后根据这些函数的返回执行不同的分支。</p><p>这种情况下想要覆盖到所有分支，可以通过在相同命名空间下定义同名函数，来达到mock的目的</p><a id="more"></a><p>例：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 待测代码</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (time() &gt;= strtotime(<span class="string">'2019-01-01'</span>)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单元测试</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> strtotime(<span class="string">'2018-01-01'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>参考 <a href="https://stackoverflow.com/a/5337635" target="_blank" rel="noopener">https://stackoverflow.com/a/5337635</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在单元测试时，有时候会碰到代码中使用了 &lt;code&gt;time&lt;/code&gt;， &lt;code&gt;date&lt;/code&gt; 等函数，然后根据这些函数的返回执行不同的分支。&lt;/p&gt;
-&lt;p&gt;这种情况下想要覆盖到所有分支，可以通过在相同命名空间下定义同名函数，来达到mock的目的&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
-    
-    
-      <category term="phpunit" scheme="https://nichijou.me/tags/phpunit/"/>
-    
-      <category term="单元测试" scheme="https://nichijou.me/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="mock" scheme="https://nichijou.me/tags/mock/"/>
-    
-      <category term="date" scheme="https://nichijou.me/tags/date/"/>
-    
-      <category term="time" scheme="https://nichijou.me/tags/time/"/>
-    
-      <category term="预置函数" scheme="https://nichijou.me/tags/%E9%A2%84%E7%BD%AE%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="php" scheme="https://nichijou.me/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Golang中的break label</title>
-    <link href="https://nichijou.me/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/"/>
-    <id>https://nichijou.me/2019/04/20/Golang%E4%B8%AD%E7%9A%84break-label/</id>
-    <published>2019-04-20T06:33:21.000Z</published>
-    <updated>2020-06-07T07:43:59.016Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Golang中，支持通过 <code>break</code> 的方式跳出循环。如果需要跳出多层循环，可以使用 <code>break label</code> 的方式实现。</p><p>不同于 <code>goto label</code>， <code>break label</code> 会在循环的下一条语句处开始继续执行，而 <code>goto label</code> 则会从 <code>label</code> 处继续往下执行。如果在下面的例子中把 <code>break label</code> 换成 <code>goto label</code>，则会导致再次进入循环。</p><a id="more"></a><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">TestLabelBreak:</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">fmt.Println(i)</span><br><span class="line"><span class="keyword">if</span> i == <span class="number">3</span> &#123;</span><br><span class="line"><span class="keyword">break</span> TestLabelBreak</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">"end for"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// end for</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在Golang中，支持通过 &lt;code&gt;break&lt;/code&gt; 的方式跳出循环。如果需要跳出多层循环，可以使用 &lt;code&gt;break label&lt;/code&gt; 的方式实现。&lt;/p&gt;
-&lt;p&gt;不同于 &lt;code&gt;goto label&lt;/code&gt;， &lt;code&gt;break label&lt;/code&gt; 会在循环的下一条语句处开始继续执行，而 &lt;code&gt;goto label&lt;/code&gt; 则会从 &lt;code&gt;label&lt;/code&gt; 处继续往下执行。如果在下面的例子中把 &lt;code&gt;break label&lt;/code&gt; 换成 &lt;code&gt;goto label&lt;/code&gt;，则会导致再次进入循环。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
-    
-    
-      <category term="golang" scheme="https://nichijou.me/tags/golang/"/>
-    
-      <category term="label" scheme="https://nichijou.me/tags/label/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP实现18位社会统一信用码验证</title>
-    <link href="https://nichijou.me/2019/04/17/PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/"/>
-    <id>https://nichijou.me/2019/04/17/PHP%E5%AE%9E%E7%8E%B018%E4%BD%8D%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81%E9%AA%8C%E8%AF%81/</id>
-    <published>2019-04-17T07:05:35.000Z</published>
-    <updated>2020-06-07T07:43:57.456Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是社会统一信用码"><a href="#什么是社会统一信用码" class="headerlink" title="什么是社会统一信用码"></a>什么是社会统一信用码</h2><p><a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener"><strong>统一社会信用代码</strong></a>是中国的法人和其他组织，在全国范围内唯一的、终身不变的18位法定身份识别码，旨在统一过去各部门下发的不同机构代码，由全国组织机构统一社会信用代码数据服务中心（NACAO，隶属<a href="https://zh.wikipedia.org/wiki/%E5%9B%BD%E5%AE%B6%E5%B8%82%E5%9C%BA%E7%9B%91%E7%9D%A3%E7%AE%A1%E7%90%86%E6%80%BB%E5%B1%80" target="_blank" rel="noopener">国家市场监督管理总局</a>）负责管理。</p><p>2015年6月11日国务院下发《国务院关于批转发展改革委等部门法人和其他组织统一社会信用代码制度建设总体方案的通知》（国发〔2015〕33号）后开始实施。</p><a id="more"></a><h2 id="信用码构成"><a href="#信用码构成" class="headerlink" title="信用码构成"></a>信用码构成</h2><p><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%9B%BD%E5%AE%B6%E6%A0%87%E5%87%86" target="_blank" rel="noopener">中华人民共和国国家标准</a><a href="https://zh.wikisource.org/wiki/GB_32100-2015_%E6%B3%95%E4%BA%BA%E5%92%8C%E5%85%B6%E4%BB%96%E7%BB%84%E7%BB%87%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A0%81%E8%A7%84%E5%88%99" target="_blank" rel="noopener">GB 32100-2015 法人和其他组织统一社会信用代码编码规则</a>中规定：统一代码由十八位的阿拉伯数字或大写英文字母（不使用I、O、Z、S、V）组成。</p><p>18位数字字母组合的方式是：</p><p><img src="https://img.nichijou.me/20190417230234.png" alt=""></p><ul><li><strong>登记管理部门码</strong>表示登记管理部分，使用阿拉伯数字或大写英文字母表示，1代表机构编制、5代表民政、9代表工商、Y代表其他。</li><li><strong>机构类别码</strong>表示登记机构的类别。</li><li><strong>登记管理机关行政区划码</strong>指的是登记机构所地的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81" target="_blank" rel="noopener">行政区划代码</a>，如350100是福建省福州市。</li><li><strong>主体标识码（组织机构代码）</strong>是旧的组织机构代码，按照<a href="https://zh.wikisource.org/wiki/GB_11714-1997_%E5%85%A8%E5%9B%BD%E7%BB%84%E7%BB%87%E6%9C%BA%E6%9E%84%E4%BB%A3%E7%A0%81%E7%BC%96%E5%88%B6%E8%A7%84%E5%88%99" target="_blank" rel="noopener">GB 11714</a>编码。</li><li>最后一位是<strong>校验码</strong>，校验码计算方法参照GB/T 17710（采ISO 7064）。</li></ul><h2 id="编码规则"><a href="#编码规则" class="headerlink" title="编码规则"></a>编码规则</h2><p><a href="https://zh.wikisource.org/zh-hans/GB_32100-2015_法人和其他组织统一社会信用代码编码规则" target="_blank" rel="noopener">GB_32100-2015</a></p><h2 id="PHP实现"><a href="#PHP实现" class="headerlink" title="PHP实现"></a>PHP实现</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// https://zh.wikisource.org/zh-hans/GB_32100-2015_法人和其他组织统一社会信用代码编码规则</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validateUnifiedSocialCreditIdentifier</span><span class="params">($code)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'~^[0-9ABCDEFGHJKLMNPQRTUWXY]&#123;18&#125;$~'</span>, $code)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $code = strtoupper($code);</span><br><span class="line">    <span class="comment">// 18位统一社会信用代码不使用I、O、Z、S、V这五个英文字母</span></span><br><span class="line">    $alphaMap = [</span><br><span class="line">        <span class="string">'0'</span> =&gt; <span class="number">0</span>, <span class="string">'1'</span>  =&gt; <span class="number">1</span>, <span class="string">'2'</span>  =&gt; <span class="number">2</span>, <span class="string">'3'</span>  =&gt; <span class="number">3</span>, <span class="string">'4'</span>  =&gt; <span class="number">4</span>,</span><br><span class="line">        <span class="string">'5'</span> =&gt; <span class="number">5</span>, <span class="string">'6'</span>  =&gt; <span class="number">6</span>, <span class="string">'7'</span>  =&gt; <span class="number">7</span>, <span class="string">'8'</span>  =&gt; <span class="number">8</span>, <span class="string">'9'</span>  =&gt; <span class="number">9</span>,</span><br><span class="line">        <span class="string">'A'</span> =&gt; <span class="number">10</span>, <span class="string">'B'</span> =&gt; <span class="number">11</span>, <span class="string">'C'</span> =&gt; <span class="number">12</span>, <span class="string">'D'</span> =&gt; <span class="number">13</span>, <span class="string">'E'</span> =&gt; <span class="number">14</span>,</span><br><span class="line">        <span class="string">'F'</span> =&gt; <span class="number">15</span>, <span class="string">'G'</span> =&gt; <span class="number">16</span>, <span class="string">'H'</span> =&gt; <span class="number">17</span>, <span class="string">'J'</span> =&gt; <span class="number">18</span>, <span class="string">'K'</span> =&gt; <span class="number">19</span>,</span><br><span class="line">        <span class="string">'L'</span> =&gt; <span class="number">20</span>, <span class="string">'M'</span> =&gt; <span class="number">21</span>, <span class="string">'N'</span> =&gt; <span class="number">22</span>, <span class="string">'P'</span> =&gt; <span class="number">23</span>, <span class="string">'Q'</span> =&gt; <span class="number">24</span>,</span><br><span class="line">        <span class="string">'R'</span> =&gt; <span class="number">25</span>, <span class="string">'T'</span> =&gt; <span class="number">26</span>, <span class="string">'U'</span> =&gt; <span class="number">27</span>, <span class="string">'W'</span> =&gt; <span class="number">28</span>, <span class="string">'X'</span> =&gt; <span class="number">29</span>,</span><br><span class="line">        <span class="string">'Y'</span> =&gt; <span class="number">30</span>,</span><br><span class="line">    ];</span><br><span class="line">    $weight = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">27</span>, <span class="number">19</span>, <span class="number">26</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">20</span>, <span class="number">29</span>, <span class="number">25</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">24</span>, <span class="number">10</span>, <span class="number">30</span>, <span class="number">28</span>];</span><br><span class="line">    $chrs   = str_split($code);</span><br><span class="line">    $sum    = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (array_slice($chrs, <span class="number">0</span>, <span class="number">17</span>) <span class="keyword">as</span> $index =&gt; $chr) &#123;</span><br><span class="line">        $sum += $alphaMap[$chr] * $weight[$index];</span><br><span class="line">    &#125;</span><br><span class="line">    $checkNum     = <span class="number">31</span> - ($sum % <span class="number">31</span>);</span><br><span class="line">    $checkNum     = $checkNum == <span class="number">31</span> ? <span class="number">0</span> : $checkNum;</span><br><span class="line">    $flipAlphaMap = array_flip($alphaMap);</span><br><span class="line">    <span class="keyword">return</span> $chrs[<span class="number">17</span>] === (string) $flipAlphaMap[$checkNum];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310000736228569K')); // true</span></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310115MA1K3M5G6H')); // true</span></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310112MA1GBEGY17')); // true</span></span><br><span class="line"><span class="comment">// var_dump(true === validateUnifiedSocialCreditIdentifier('91310000MA1FL5DR4T')); // true</span></span><br><span class="line"><span class="comment">// var_dump(false === validateUnifiedSocialCreditIdentifier('11310000MA1FL5DR4T')); // true</span></span><br></pre></td></tr></table></figure><h2 id="错码问题"><a href="#错码问题" class="headerlink" title="错码问题"></a>错码问题</h2><p><strong>实际情况中存在少量社会统一信用码错码问题，比如：</strong></p><blockquote><p>福建思企互联网信息服务有限公司 (91350103M0001JFDX6)</p></blockquote><p><img src="https://img.nichijou.me/20190417230913.png" alt=""></p><blockquote><p>福州禾力顺电子商务有限公司 (91350102M0001PU72B)</p></blockquote><p><img src="https://img.nichijou.me/20190417231030.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;什么是社会统一信用码&quot;&gt;&lt;a href=&quot;#什么是社会统一信用码&quot; class=&quot;headerlink&quot; title=&quot;什么是社会统一信用码&quot;&gt;&lt;/a&gt;什么是社会统一信用码&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BF%A1%E7%94%A8%E4%BB%A3%E7%A0%81&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;统一社会信用代码&lt;/strong&gt;&lt;/a&gt;是中国的法人和其他组织，在全国范围内唯一的、终身不变的18位法定身份识别码，旨在统一过去各部门下发的不同机构代码，由全国组织机构统一社会信用代码数据服务中心（NACAO，隶属&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%9B%BD%E5%AE%B6%E5%B8%82%E5%9C%BA%E7%9B%91%E7%9D%A3%E7%AE%A1%E7%90%86%E6%80%BB%E5%B1%80&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;国家市场监督管理总局&lt;/a&gt;）负责管理。&lt;/p&gt;
-&lt;p&gt;2015年6月11日国务院下发《国务院关于批转发展改革委等部门法人和其他组织统一社会信用代码制度建设总体方案的通知》（国发〔2015〕33号）后开始实施。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="coding" scheme="https://nichijou.me/categories/coding/"/>
-    
-    
-      <category term="PHP" scheme="https://nichijou.me/tags/PHP/"/>
-    
-      <category term="社会统一信用码" scheme="https://nichijou.me/tags/%E7%A4%BE%E4%BC%9A%E7%BB%9F%E4%B8%80%E4%BF%A1%E7%94%A8%E7%A0%81/"/>
-    
-      <category term="验证" scheme="https://nichijou.me/tags/%E9%AA%8C%E8%AF%81/"/>
     
   </entry>
   

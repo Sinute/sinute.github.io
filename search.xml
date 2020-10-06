@@ -1954,4 +1954,90 @@
         <tag>NUC8</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux非root用户执行sudo免密码</title>
+    <url>/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>环境</strong><br>CentOS 8</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># /etc/sudoers.d/user</span></span><br><span class="line">username  ALL=(ALL:ALL)   NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>sudo</tag>
+        <tag>sudoer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DELL 戴尔 TB15 Thunderbolt 扩展坞 MacBook Pro 解锁试用测评</title>
+    <url>/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>环境</strong><br>Dell TB15<br>MacBook Pro (15-inch, 2019)</p>
+</blockquote>
+<p>朋友捡了台 DELL 的 TB15 洋垃圾，让我试试 Mac 下做雷电3扩展坞效果如何</p>
+<p><img src="https://img.nichijou.me/20201001160708.png" alt="背面"></p>
+<a id="more"></a>
+
+<p><img src="https://img.nichijou.me/20201001160729.png" alt="正面"></p>
+<p><img src="https://img.nichijou.me/20201001160721.png" alt="尺寸"></p>
+<p>成色倒是还行…查了下这款在 Mac 下需要破解，总之先插上去看看</p>
+<p><img src="https://img.nichijou.me/20201001160742.png" alt="显示为不支持"></p>
+<p>可以看到设备正常识别，但是显示为 Unsupported (不支持)</p>
+<p><img src="https://img.nichijou.me/20201001160749.png" alt="输出功率59w"></p>
+<p>看到电源输出功率为 59w时，感觉基本已经凉了一半了，Mac自带的充电器额定功率为86w，也就是说满载时 TB15 很有可能带不动</p>
+<p>接下来是破解过程，太长不看的可以直接拉到最下面看结论</p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h4 id="1-关闭-SIP-System-Integrity-Protection"><a href="#1-关闭-SIP-System-Integrity-Protection" class="headerlink" title="1. 关闭 SIP(System Integrity Protection)"></a>1. 关闭 SIP(System Integrity Protection)</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">csrutil <span class="built_in">enable</span> --without kext &amp;&amp; reboot</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-下载-Thunderbolt3Unblocker-zip-并解压"><a href="#2-下载-Thunderbolt3Unblocker-zip-并解压" class="headerlink" title="2. 下载 Thunderbolt3Unblocker.zip 并解压"></a>2. 下载 <code>Thunderbolt3Unblocker.zip</code> 并解压</h4><p><a href="https://github.com/rgov/Thunderbolt3Unblocker" target="_blank" rel="noopener">Github仓库地址</a></p>
+<p><a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/119975512/106eb400-c2c0-11e8-9b48-840596ef0a2d?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200613T070027Z&X-Amz-Expires=300&X-Amz-Signature=c9cfc044c9bab32b991b1c9c397063ddd1087ee7725d1e4713ed1b128d7448eb&X-Amz-SignedHeaders=host&actor_id=2202852&repo_id=119975512&response-content-disposition=attachment%3B%20filename%3DThunderbolt3Unblocker.zip&response-content-type=application%2Foctet-stream" target="_blank" rel="noopener">Thunderbolt3Unblocker.zip</a></p>
+<p>解压后得到 <code>Thunderbolt3Unblocker.kext</code></p>
+<h4 id="3-复制-Thunderbolt3Unblocker-kext-到-Library-Extensions-目录"><a href="#3-复制-Thunderbolt3Unblocker-kext-到-Library-Extensions-目录" class="headerlink" title="3. 复制 Thunderbolt3Unblocker.kext 到 /Library/Extensions 目录"></a>3. 复制 <code>Thunderbolt3Unblocker.kext</code> 到 <code>/Library/Extensions</code> 目录</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo cp -r Thunderbolt3Unblocker.kext /Library/Extensions</span><br><span class="line">sudo chown -R root:wheel /Library/Extensions/Thunderbolt3Unblocker.kext</span><br><span class="line">ls -lh /Library/Extensions |grep Thunderbolt3Unblocker</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.nichijou.me/20201001160755.png" alt=""></p>
+<h4 id="4-安装"><a href="#4-安装" class="headerlink" title="4. 安装"></a>4. 安装</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo chmod -R g-w,o-w /Library/Extensions/Thunderbolt3Unblocker.kext</span><br><span class="line">sudo kextcache -i /</span><br><span class="line">sudo nvram -d t3u-incompatible</span><br><span class="line">sudo kextload -b es.govost.ryan.Thunderbolt3Unblocker</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.nichijou.me/20201001160801.png" alt=""></p>
+<h2 id="验证效果"><a href="#验证效果" class="headerlink" title="验证效果"></a>验证效果</h2><p><img src="https://img.nichijou.me/20201001160808.png" alt="截屏2020-06-13 15.45.28"></p>
+<p>Unsupported 已消失，可以正常识别设备</p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo kextunload -b es.govost.ryan.Thunderbolt3Unblocker</span><br><span class="line">sudo rm -Rf /Library/Extensions/Thunderbolt3Unblocker.kext</span><br></pre></td></tr></table></figure>
+
+<h2 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h2><p>破解后输出功率依然只有可怜的59w。而且测试了HDMI和miniDP口外接显示器，均无反应，没有 Type-C 的显示器不知道 Type-C 口是否可以输出，估计不乐观，不知道是个体问题还是普遍问题，当然也有可能是破解补丁的问题。前后USB口正常使用。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>除了USB口正常，最重要的显示器接口无法正常使用，且输出功率最大只有59w，光这一条基本就判了死刑。网上搜了一下其他人问题也不少，还是老老实实贝尔金或者 CalDigit 吧。</p>
+]]></content>
+      <categories>
+        <category>瞎折腾</category>
+      </categories>
+      <tags>
+        <tag>DELL</tag>
+        <tag>戴尔</tag>
+        <tag>TB15</tag>
+        <tag>雷电</tag>
+        <tag>Thunderbolt</tag>
+        <tag>扩展坞</tag>
+        <tag>Dock</tag>
+        <tag>MacBook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker代理配置</title>
+    <url>/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>环境</strong><br>CentOS 8</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># /etc/systemd/system/docker.service.d/http-proxy.conf</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTP_PROXY=http://proxy.example.com:80"</span></span><br><span class="line">Environment=<span class="string">"HTTPS_PROXY=https://proxy.example.com:443"</span></span><br><span class="line">Environment=<span class="string">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="https://docs.docker.com/config/daemon/systemd/#httphttps-proxy" target="_blank" rel="noopener">https://docs.docker.com/config/daemon/systemd/#httphttps-proxy</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>systemd</tag>
+      </tags>
+  </entry>
 </search>

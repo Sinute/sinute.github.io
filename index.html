@@ -198,10 +198,316 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200614004109.jpeg">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Docker代理配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-02 22:03:36" itemprop="dateCreated datePublished" datetime="2020-10-02T22:03:36+08:00">2020-10-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-06 11:27:52" itemprop="dateModified" datetime="2020-10-06T11:27:52+08:00">2020-10-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/" class="post-meta-item leancloud_visitors" data-flag-title="Docker代理配置" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/02/Docker%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>环境</strong><br>CentOS 8</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/systemd/system/docker.service.d/http-proxy.conf</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTP_PROXY=http://proxy.example.com:80"</span></span><br><span class="line">Environment=<span class="string">"HTTPS_PROXY=https://proxy.example.com:443"</span></span><br><span class="line">Environment=<span class="string">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="https://docs.docker.com/config/daemon/systemd/#httphttps-proxy" target="_blank" rel="noopener">https://docs.docker.com/config/daemon/systemd/#httphttps-proxy</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200614004109.jpeg">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/" class="post-title-link" itemprop="url">Linux非root用户执行sudo免密码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-01 16:15:42" itemprop="dateCreated datePublished" datetime="2020-10-01T16:15:42+08:00">2020-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-02 22:06:00" itemprop="dateModified" datetime="2020-10-02T22:06:00+08:00">2020-10-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="Linux非root用户执行sudo免密码" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/01/Linux%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8Csudo%E5%85%8D%E5%AF%86%E7%A0%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>环境</strong><br>CentOS 8</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/sudoers.d/user</span></span><br><span class="line">username  ALL=(ALL:ALL)   NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.nichijou.me/20200614004109.jpeg">
+      <meta itemprop="name" content="Sinute">
+      <meta itemprop="description" content="- 碎碎念。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/" class="post-title-link" itemprop="url">DELL 戴尔 TB15 Thunderbolt 扩展坞 MacBook Pro 解锁试用测评</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-13 14:56:32" itemprop="dateCreated datePublished" datetime="2020-06-13T14:56:32+08:00">2020-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-01 16:14:29" itemprop="dateModified" datetime="2020-10-01T16:14:29+08:00">2020-10-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9E%8E%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">瞎折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/" class="post-meta-item leancloud_visitors" data-flag-title="DELL 戴尔 TB15 Thunderbolt 扩展坞 MacBook Pro 解锁试用测评" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>环境</strong><br>Dell TB15<br>MacBook Pro (15-inch, 2019)</p>
+</blockquote>
+<p>朋友捡了台 DELL 的 TB15 洋垃圾，让我试试 Mac 下做雷电3扩展坞效果如何</p>
+<p><img src="https://img.nichijou.me/20201001160708.png" alt="背面"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/13/DELL-%E6%88%B4%E5%B0%94-TB15-Thunderbolt-%E6%89%A9%E5%B1%95%E5%9D%9E-MacBook-Pro-%E8%A7%A3%E9%94%81%E8%AF%95%E7%94%A8%E6%B5%8B%E8%AF%84/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/06/06/NUC8i5BEK%E5%BC%80%E7%AE%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="image" content="https://img.nichijou.me/20200614004109.jpeg">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -304,7 +610,7 @@
     <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/05/24/%E6%9B%B4%E6%94%B9windows%E9%94%AE%E4%BD%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
+      <meta itemprop="image" content="https://img.nichijou.me/20200614004109.jpeg">
       <meta itemprop="name" content="Sinute">
       <meta itemprop="description" content="- 碎碎念。">
     </span>
@@ -402,339 +708,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/" class="post-title-link" itemprop="url">JMeter+InfluxDB+Grafana构建性能测试平台</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-21 08:52:38" itemprop="dateCreated datePublished" datetime="2020-05-21T08:52:38+08:00">2020-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 15:44:22" itemprop="dateModified" datetime="2020-06-07T15:44:22+08:00">2020-06-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/" class="post-meta-item leancloud_visitors" data-flag-title="JMeter+InfluxDB+Grafana构建性能测试平台" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><strong>环境</strong><br>CentOS 8<br>JMeter 5.3<br>InfluxDB 1.8.0<br>Grafana 7.0.0</p>
-</blockquote>
-<h1 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h1><p><img src="https://img.nichijou.me/20200521184841.png" alt=""></p>
-<h4 id="JMeter"><a href="#JMeter" class="headerlink" title="JMeter"></a>JMeter</h4><p><a href="https://jmeter.apache.org/" target="_blank" rel="noopener">https://jmeter.apache.org/</a></p>
-<p>JMeter是Apache组织开发的性能测试工具</p>
-<h4 id="InfluxDB"><a href="#InfluxDB" class="headerlink" title="InfluxDB"></a>InfluxDB</h4><p><a href="https://www.influxdata.com/" target="_blank" rel="noopener">https://www.influxdata.com/</a></p>
-<p>InfluxDB是一个由InfluxData开发的开源时序型数据库</p>
-<p>在这里用于存储JMeter产生的压测数据</p>
-<h4 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h4><p><a href="https://grafana.com/" target="_blank" rel="noopener">https://grafana.com/</a></p>
-<p>Grafana是一个多平台的数据分析解决方案</p>
-<p>在这里作为压测结果的可视化前端</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/21/JMeter-InfluxDB-Grafana%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/" class="post-title-link" itemprop="url">使用acme.sh申请letsencrypt泛域名证书</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-18 23:47:45" itemprop="dateCreated datePublished" datetime="2020-04-18T23:47:45+08:00">2020-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 15:44:21" itemprop="dateModified" datetime="2020-06-07T15:44:21+08:00">2020-06-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/" class="post-meta-item leancloud_visitors" data-flag-title="使用acme.sh申请letsencrypt泛域名证书" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><strong>环境</strong><br>CentOS 8<br>nginx/1.14.1</p>
-</blockquote>
-<blockquote>
-<p>参考<br><a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E</a></p>
-</blockquote>
-<h1 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/18/%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7letsencrypt%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nichijou.me/2020/04/18/%E5%AE%89%E8%A3%85istio/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://img.nichijou.me/20200420001227.png">
-      <meta itemprop="name" content="Sinute">
-      <meta itemprop="description" content="- 碎碎念。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/%E5%AE%89%E8%A3%85istio/" class="post-title-link" itemprop="url">安装istio</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-18 17:44:02" itemprop="dateCreated datePublished" datetime="2020-04-18T17:44:02+08:00">2020-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 15:44:18" itemprop="dateModified" datetime="2020-06-07T15:44:18+08:00">2020-06-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/04/18/%E5%AE%89%E8%A3%85istio/" class="post-meta-item leancloud_visitors" data-flag-title="安装istio" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/18/%E5%AE%89%E8%A3%85istio/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/%E5%AE%89%E8%A3%85istio/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><strong>环境</strong><br>CentOS 8<br>Kubernetes 1.18.0<br>Istio 1.5.1</p>
-</blockquote>
-<blockquote>
-<p>参考<br><a href="https://istio.io/zh/docs/setup/getting-started/" target="_blank" rel="noopener">https://istio.io/zh/docs/setup/getting-started/</a></p>
-</blockquote>
-<h1 id="下载-Istio"><a href="#下载-Istio" class="headerlink" title="下载 Istio"></a>下载 Istio</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L https:&#x2F;&#x2F;istio.io&#x2F;downloadIstio | sh -</span><br><span class="line">export PATH&#x3D;PATH&#x3D;$PWD&#x2F;istio-1.5.1&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/18/%E5%AE%89%E8%A3%85istio/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -793,7 +770,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Sinute"
-      src="https://img.nichijou.me/20200420001227.png">
+      src="https://img.nichijou.me/20200614004109.jpeg">
   <p class="site-author-name" itemprop="name">Sinute</p>
   <div class="site-description" itemprop="description">- 碎碎念。</div>
 </div>
@@ -802,7 +779,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -815,7 +792,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">81</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
